@@ -74,7 +74,7 @@ class ApiClient:
       'lang': 'python',
       'lang_version': platform.python_version(),
       'publisher': 'digitalfemsa',
-      'bindings_version': '1.0.0',
+      'bindings_version': '1.0.1',
       'uname': platform.uname()
     }
     _pool = None

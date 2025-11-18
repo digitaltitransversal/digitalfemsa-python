@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "digitalfemsa"
-version = "1.0.0"
+version = "1.0.1"
 description = "Femsa API"
 authors = ["Engineering Femsa <engineering@femsa.com>"]
 license = "MIT-LICENSE"
