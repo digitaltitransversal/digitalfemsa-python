@@ -73,9 +73,8 @@ class ApiClient:
     data = {
       'lang': 'python',
       'lang_version': platform.python_version(),
-      'publisher': 'digitalfemsa',
-      'bindings_version': '1.0.1',
-      'uname': platform.uname()
+      'uname': platform.uname(),
+      'bindings_version': '1.0.2',
     }
     _pool = None
 
@@ -119,11 +118,11 @@ class ApiClient:
     @property
     def digitialfemsa_user_agent(self):
         """User digitialfemsa agent for this API client"""
-        return self.default_headers['X-DigitalFemsa-Client-User-Agent']
+        return self.default_headers['Spin-Client-User-Agent']
 
     @digitialfemsa_user_agent.setter
     def digitialfemsa_user_agent(self, value):
-        self.default_headers['X-DigitalFemsa-Client-User-Agent'] = value
+        self.default_headers['Spin-Client-User-Agent'] = value
 
     def set_default_header(self, header_name, header_value):
         self.default_headers[header_name] = header_value
