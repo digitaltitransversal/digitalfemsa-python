@@ -74,7 +74,7 @@ class ApiClient:
       'lang': 'python',
       'lang_version': platform.python_version(),
       'uname': platform.uname(),
-      'bindings_version': '1.0.2',
+      'bindings_version': '1.0.3',
     }
     _pool = None
 
