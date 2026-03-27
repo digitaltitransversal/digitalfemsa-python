@@ -1,5 +1,6 @@
 # ShippingRequest
 
+Shipping line request payload.
 
 ## Properties
 
@@ -9,6 +10,7 @@ Name | Type | Description | Notes
 **carrier** | **str** | Carrier name for the shipment | [optional] 
 **tracking_number** | **str** | Tracking number can be used to track the shipment | [optional] 
 **method** | **str** | Method of shipment | [optional] 
+**description** | **str** | Shipping line description | [optional] 
 **metadata** | **Dict[str, object]** | Hash where the user can send additional information for each &#39;shipping&#39;. | [optional] 
 
 ## Example

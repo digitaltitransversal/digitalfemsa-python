@@ -26,14 +26,15 @@ from typing_extensions import Self
 
 class ShippingRequest(BaseModel):
     """
-    ShippingRequest
+    Shipping line request payload.
     """ # noqa: E501
     amount: Annotated[int, Field(strict=True, ge=0)] = Field(description="Shipping amount in cents")
     carrier: Optional[StrictStr] = Field(default=None, description="Carrier name for the shipment")
     tracking_number: Optional[StrictStr] = Field(default=None, description="Tracking number can be used to track the shipment")
     method: Optional[StrictStr] = Field(default=None, description="Method of shipment")
+    description: Optional[StrictStr] = Field(default=None, description="Shipping line description")
     metadata: Optional[Dict[str, Any]] = Field(default=None, description="Hash where the user can send additional information for each 'shipping'.")
-    __properties: ClassVar[List[str]] = ["amount", "carrier", "tracking_number", "method", "metadata"]
+    __properties: ClassVar[List[str]] = ["amount", "carrier", "tracking_number", "method", "description", "metadata"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,6 +91,7 @@ class ShippingRequest(BaseModel):
             "carrier": obj.get("carrier"),
             "tracking_number": obj.get("tracking_number"),
             "method": obj.get("method"),
+            "description": obj.get("description"),
             "metadata": obj.get("metadata")
         })
         return _obj

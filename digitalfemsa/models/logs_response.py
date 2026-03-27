@@ -26,7 +26,7 @@ from typing_extensions import Self
 
 class LogsResponse(BaseModel):
     """
-    logs model
+    Log model representing a recorded request/response cycle for troubleshooting and auditing.
     """ # noqa: E501
     has_more: Optional[StrictBool] = Field(default=None, description="True, if there are more pages.")
     object: Optional[StrictStr] = Field(default=None, description="The object type")

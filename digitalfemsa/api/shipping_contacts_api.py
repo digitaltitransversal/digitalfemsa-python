@@ -46,7 +46,7 @@ class ShippingContactsApi:
     def create_customer_shipping_contacts(
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
-        customer_shipping_contacts: Annotated[CustomerShippingContacts, Field(description="requested field for customer shippings contacts")],
+        customer_shipping_contacts: Annotated[CustomerShippingContacts, Field(description="Request body for creating or updating a customer shipping contact.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -62,13 +62,13 @@ class ShippingContactsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CustomerShippingContactsResponse:
-        """Create a shipping contacts
+        """Create a shipping contact
 
-        Create a shipping contacts for a customer.
+        Creates a new shipping contact for a customer. The shipping contact is associated with the customer identified by `id`.
 
         :param id: Identifier of the resource (required)
         :type id: str
-        :param customer_shipping_contacts: requested field for customer shippings contacts (required)
+        :param customer_shipping_contacts: Request body for creating or updating a customer shipping contact. (required)
         :type customer_shipping_contacts: CustomerShippingContacts
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -129,7 +129,7 @@ class ShippingContactsApi:
     def create_customer_shipping_contacts_with_http_info(
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
-        customer_shipping_contacts: Annotated[CustomerShippingContacts, Field(description="requested field for customer shippings contacts")],
+        customer_shipping_contacts: Annotated[CustomerShippingContacts, Field(description="Request body for creating or updating a customer shipping contact.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -145,13 +145,13 @@ class ShippingContactsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CustomerShippingContactsResponse]:
-        """Create a shipping contacts
+        """Create a shipping contact
 
-        Create a shipping contacts for a customer.
+        Creates a new shipping contact for a customer. The shipping contact is associated with the customer identified by `id`.
 
         :param id: Identifier of the resource (required)
         :type id: str
-        :param customer_shipping_contacts: requested field for customer shippings contacts (required)
+        :param customer_shipping_contacts: Request body for creating or updating a customer shipping contact. (required)
         :type customer_shipping_contacts: CustomerShippingContacts
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -212,7 +212,7 @@ class ShippingContactsApi:
     def create_customer_shipping_contacts_without_preload_content(
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
-        customer_shipping_contacts: Annotated[CustomerShippingContacts, Field(description="requested field for customer shippings contacts")],
+        customer_shipping_contacts: Annotated[CustomerShippingContacts, Field(description="Request body for creating or updating a customer shipping contact.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -228,13 +228,13 @@ class ShippingContactsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Create a shipping contacts
+        """Create a shipping contact
 
-        Create a shipping contacts for a customer.
+        Creates a new shipping contact for a customer. The shipping contact is associated with the customer identified by `id`.
 
         :param id: Identifier of the resource (required)
         :type id: str
-        :param customer_shipping_contacts: requested field for customer shippings contacts (required)
+        :param customer_shipping_contacts: Request body for creating or updating a customer shipping contact. (required)
         :type customer_shipping_contacts: CustomerShippingContacts
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -690,7 +690,7 @@ class ShippingContactsApi:
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
         shipping_contacts_id: Annotated[StrictStr, Field(description="identifier")],
-        customer_update_shipping_contacts: Annotated[CustomerUpdateShippingContacts, Field(description="requested field for customer update shippings contacts")],
+        customer_update_shipping_contacts: Annotated[CustomerUpdateShippingContacts, Field(description="Request body for updating a customer shipping contact.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -714,7 +714,7 @@ class ShippingContactsApi:
         :type id: str
         :param shipping_contacts_id: identifier (required)
         :type shipping_contacts_id: str
-        :param customer_update_shipping_contacts: requested field for customer update shippings contacts (required)
+        :param customer_update_shipping_contacts: Request body for updating a customer shipping contact. (required)
         :type customer_update_shipping_contacts: CustomerUpdateShippingContacts
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -777,7 +777,7 @@ class ShippingContactsApi:
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
         shipping_contacts_id: Annotated[StrictStr, Field(description="identifier")],
-        customer_update_shipping_contacts: Annotated[CustomerUpdateShippingContacts, Field(description="requested field for customer update shippings contacts")],
+        customer_update_shipping_contacts: Annotated[CustomerUpdateShippingContacts, Field(description="Request body for updating a customer shipping contact.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -801,7 +801,7 @@ class ShippingContactsApi:
         :type id: str
         :param shipping_contacts_id: identifier (required)
         :type shipping_contacts_id: str
-        :param customer_update_shipping_contacts: requested field for customer update shippings contacts (required)
+        :param customer_update_shipping_contacts: Request body for updating a customer shipping contact. (required)
         :type customer_update_shipping_contacts: CustomerUpdateShippingContacts
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -864,7 +864,7 @@ class ShippingContactsApi:
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
         shipping_contacts_id: Annotated[StrictStr, Field(description="identifier")],
-        customer_update_shipping_contacts: Annotated[CustomerUpdateShippingContacts, Field(description="requested field for customer update shippings contacts")],
+        customer_update_shipping_contacts: Annotated[CustomerUpdateShippingContacts, Field(description="Request body for updating a customer shipping contact.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -888,7 +888,7 @@ class ShippingContactsApi:
         :type id: str
         :param shipping_contacts_id: identifier (required)
         :type shipping_contacts_id: str
-        :param customer_update_shipping_contacts: requested field for customer update shippings contacts (required)
+        :param customer_update_shipping_contacts: Request body for updating a customer shipping contact. (required)
         :type customer_update_shipping_contacts: CustomerUpdateShippingContacts
         :param accept_language: Use for knowing which language to use
         :type accept_language: str

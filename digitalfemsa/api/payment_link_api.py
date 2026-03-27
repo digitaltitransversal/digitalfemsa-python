@@ -24,7 +24,6 @@ from digitalfemsa.models.checkout import Checkout
 from digitalfemsa.models.checkout_response import CheckoutResponse
 from digitalfemsa.models.checkouts_response import CheckoutsResponse
 from digitalfemsa.models.email_checkout_request import EmailCheckoutRequest
-from digitalfemsa.models.sms_checkout_request import SmsCheckoutRequest
 
 from digitalfemsa.api_client import ApiClient, RequestSerialized
 from digitalfemsa.api_response import ApiResponse
@@ -65,6 +64,7 @@ class PaymentLinkApi:
     ) -> CheckoutResponse:
         """Cancel Payment Link
 
+        Cancels an existing payment link. After cancellation, the link can no longer be used to generate new payments. This operation is idempotent: cancelling an already cancelled payment link returns the current resource representation.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -144,6 +144,7 @@ class PaymentLinkApi:
     ) -> ApiResponse[CheckoutResponse]:
         """Cancel Payment Link
 
+        Cancels an existing payment link. After cancellation, the link can no longer be used to generate new payments. This operation is idempotent: cancelling an already cancelled payment link returns the current resource representation.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -223,6 +224,7 @@ class PaymentLinkApi:
     ) -> RESTResponseType:
         """Cancel Payment Link
 
+        Cancels an existing payment link. After cancellation, the link can no longer be used to generate new payments. This operation is idempotent: cancelling an already cancelled payment link returns the current resource representation.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -363,8 +365,9 @@ class PaymentLinkApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CheckoutResponse:
-        """Create Unique Payment Link
+        """Create Payment Link
 
+        Creates a Payment Link: a shareable URL that lets your customer pay without you building a custom checkout. Configure the link type, allowed payment methods, and expiration. The request also includes an order_template (currency and line items) used to generate an Order when the customer completes a payment. Use recurrent=false for a single-use link, or recurrent=true to allow multiple payments (limited by payments_limit_count).
 
         :param checkout: requested field for checkout (required)
         :type checkout: Checkout
@@ -441,8 +444,9 @@ class PaymentLinkApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CheckoutResponse]:
-        """Create Unique Payment Link
+        """Create Payment Link
 
+        Creates a Payment Link: a shareable URL that lets your customer pay without you building a custom checkout. Configure the link type, allowed payment methods, and expiration. The request also includes an order_template (currency and line items) used to generate an Order when the customer completes a payment. Use recurrent=false for a single-use link, or recurrent=true to allow multiple payments (limited by payments_limit_count).
 
         :param checkout: requested field for checkout (required)
         :type checkout: Checkout
@@ -519,8 +523,9 @@ class PaymentLinkApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Create Unique Payment Link
+        """Create Payment Link
 
+        Creates a Payment Link: a shareable URL that lets your customer pay without you building a custom checkout. Configure the link type, allowed payment methods, and expiration. The request also includes an order_template (currency and line items) used to generate an Order when the customer completes a payment. Use recurrent=false for a single-use link, or recurrent=true to allow multiple payments (limited by payments_limit_count).
 
         :param checkout: requested field for checkout (required)
         :type checkout: Checkout
@@ -1003,6 +1008,7 @@ class PaymentLinkApi:
     ) -> CheckoutResponse:
         """Get a payment link by ID
 
+        Retrieves the details of a checkout by its ID.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -1047,7 +1053,6 @@ class PaymentLinkApi:
             '401': "Error",
             '402': "Error",
             '404': "Error",
-            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -1082,6 +1087,7 @@ class PaymentLinkApi:
     ) -> ApiResponse[CheckoutResponse]:
         """Get a payment link by ID
 
+        Retrieves the details of a checkout by its ID.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -1126,7 +1132,6 @@ class PaymentLinkApi:
             '401': "Error",
             '402': "Error",
             '404': "Error",
-            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -1161,6 +1166,7 @@ class PaymentLinkApi:
     ) -> RESTResponseType:
         """Get a payment link by ID
 
+        Retrieves the details of a checkout by its ID.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -1205,7 +1211,6 @@ class PaymentLinkApi:
             '401': "Error",
             '402': "Error",
             '404': "Error",
-            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -1306,7 +1311,7 @@ class PaymentLinkApi:
     ) -> CheckoutsResponse:
         """Get a list of payment links
 
-        Returns a list of links generated by the merchant
+        Returns a paginated list of payment links created by the merchant. Results can be navigated using the pagination parameters.
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -1397,7 +1402,7 @@ class PaymentLinkApi:
     ) -> ApiResponse[CheckoutsResponse]:
         """Get a list of payment links
 
-        Returns a list of links generated by the merchant
+        Returns a paginated list of payment links created by the merchant. Results can be navigated using the pagination parameters.
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -1488,7 +1493,7 @@ class PaymentLinkApi:
     ) -> RESTResponseType:
         """Get a list of payment links
 
-        Returns a list of links generated by the merchant
+        Returns a paginated list of payment links created by the merchant. Results can be navigated using the pagination parameters.
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -1620,334 +1625,6 @@ class PaymentLinkApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/checkouts',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def sms_checkout(
-        self,
-        id: Annotated[StrictStr, Field(description="Identifier of the resource")],
-        sms_checkout_request: Annotated[SmsCheckoutRequest, Field(description="requested field for sms checkout")],
-        accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
-        x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> CheckoutResponse:
-        """Send an sms
-
-
-        :param id: Identifier of the resource (required)
-        :type id: str
-        :param sms_checkout_request: requested field for sms checkout (required)
-        :type sms_checkout_request: SmsCheckoutRequest
-        :param accept_language: Use for knowing which language to use
-        :type accept_language: str
-        :param x_child_company_id: In the case of a holding company, the company id of the child company to which will process the request.
-        :type x_child_company_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._sms_checkout_serialize(
-            id=id,
-            sms_checkout_request=sms_checkout_request,
-            accept_language=accept_language,
-            x_child_company_id=x_child_company_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CheckoutResponse",
-            '401': "Error",
-            '402': "Error",
-            '404': "Error",
-            '422': "Error",
-            '500': "Error",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def sms_checkout_with_http_info(
-        self,
-        id: Annotated[StrictStr, Field(description="Identifier of the resource")],
-        sms_checkout_request: Annotated[SmsCheckoutRequest, Field(description="requested field for sms checkout")],
-        accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
-        x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[CheckoutResponse]:
-        """Send an sms
-
-
-        :param id: Identifier of the resource (required)
-        :type id: str
-        :param sms_checkout_request: requested field for sms checkout (required)
-        :type sms_checkout_request: SmsCheckoutRequest
-        :param accept_language: Use for knowing which language to use
-        :type accept_language: str
-        :param x_child_company_id: In the case of a holding company, the company id of the child company to which will process the request.
-        :type x_child_company_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._sms_checkout_serialize(
-            id=id,
-            sms_checkout_request=sms_checkout_request,
-            accept_language=accept_language,
-            x_child_company_id=x_child_company_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CheckoutResponse",
-            '401': "Error",
-            '402': "Error",
-            '404': "Error",
-            '422': "Error",
-            '500': "Error",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def sms_checkout_without_preload_content(
-        self,
-        id: Annotated[StrictStr, Field(description="Identifier of the resource")],
-        sms_checkout_request: Annotated[SmsCheckoutRequest, Field(description="requested field for sms checkout")],
-        accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
-        x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Send an sms
-
-
-        :param id: Identifier of the resource (required)
-        :type id: str
-        :param sms_checkout_request: requested field for sms checkout (required)
-        :type sms_checkout_request: SmsCheckoutRequest
-        :param accept_language: Use for knowing which language to use
-        :type accept_language: str
-        :param x_child_company_id: In the case of a holding company, the company id of the child company to which will process the request.
-        :type x_child_company_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._sms_checkout_serialize(
-            id=id,
-            sms_checkout_request=sms_checkout_request,
-            accept_language=accept_language,
-            x_child_company_id=x_child_company_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CheckoutResponse",
-            '401': "Error",
-            '402': "Error",
-            '404': "Error",
-            '422': "Error",
-            '500': "Error",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _sms_checkout_serialize(
-        self,
-        id,
-        sms_checkout_request,
-        accept_language,
-        x_child_company_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if id is not None:
-            _path_params['id'] = id
-        # process the query parameters
-        # process the header parameters
-        if accept_language is not None:
-            _header_params['Accept-Language'] = accept_language
-        if x_child_company_id is not None:
-            _header_params['X-Child-Company-Id'] = x_child_company_id
-        # process the form parameters
-        # process the body parameter
-        if sms_checkout_request is not None:
-            _body_params = sms_checkout_request
-
-
-        # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/vnd.app-v2.1.0+json'
-            ]
-        )
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'bearerAuth'
-        ]
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/checkouts/{id}/sms',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

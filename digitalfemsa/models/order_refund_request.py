@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,10 +27,18 @@ class OrderRefundRequest(BaseModel):
     """
     OrderRefundRequest
     """ # noqa: E501
-    amount: StrictInt
-    expires_at: Optional[StrictInt] = None
-    reason: StrictStr
-    __properties: ClassVar[List[str]] = ["amount", "expires_at", "reason"]
+    amount: StrictInt = Field(description="Amount to refund. If not provided, the API refunds the refundable amount of the selected charge.")
+    charge_id: Optional[StrictStr] = Field(default=None, description="Charge ID to refund. If not provided, the API selects a refundable charge from the order.")
+    reason: StrictStr = Field(description="Refund reason. If not provided, the API uses a default reason.")
+    expires_at: Optional[StrictInt] = Field(default=None, description="Expiration timestamp for cash refunds (must be within the allowed range configured by the API).")
+    __properties: ClassVar[List[str]] = ["amount", "charge_id", "reason", "expires_at"]
+
+    @field_validator('reason')
+    def reason_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['requested_by_client', 'cannot_be_fulfilled', 'duplicated_transaction', 'suspected_fraud', 'other']):
+            raise ValueError("must be one of enum values ('requested_by_client', 'cannot_be_fulfilled', 'duplicated_transaction', 'suspected_fraud', 'other')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -71,6 +79,11 @@ class OrderRefundRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if charge_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.charge_id is None and "charge_id" in self.model_fields_set:
+            _dict['charge_id'] = None
+
         # set to None if expires_at (nullable) is None
         # and model_fields_set contains the field
         if self.expires_at is None and "expires_at" in self.model_fields_set:
@@ -89,8 +102,9 @@ class OrderRefundRequest(BaseModel):
 
         _obj = cls.model_validate({
             "amount": obj.get("amount"),
-            "expires_at": obj.get("expires_at"),
-            "reason": obj.get("reason")
+            "charge_id": obj.get("charge_id"),
+            "reason": obj.get("reason"),
+            "expires_at": obj.get("expires_at")
         })
         return _obj
 

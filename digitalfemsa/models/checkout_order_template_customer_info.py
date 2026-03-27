@@ -28,7 +28,7 @@ CHECKOUTORDERTEMPLATECUSTOMERINFO_ONE_OF_SCHEMAS = ["CustomerInfo", "CustomerInf
 
 class CheckoutOrderTemplateCustomerInfo(BaseModel):
     """
-    It is the information of the customer who will be created when receiving a new payment.
+    Customer information used when creating the order.
     """
     # data type: CustomerInfo
     oneof_schema_1_validator: Optional[CustomerInfo] = None

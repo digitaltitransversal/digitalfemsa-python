@@ -5,10 +5,10 @@ All URIs are relative to *https://api.digitalfemsa.io*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_webhook_key**](WebhookKeysApi.md#create_webhook_key) | **POST** /webhook_keys | Create Webhook Key
-[**delete_webhook_key**](WebhookKeysApi.md#delete_webhook_key) | **DELETE** /webhook_keys/{id} | Delete Webhook key
-[**get_webhook_key**](WebhookKeysApi.md#get_webhook_key) | **GET** /webhook_keys/{id} | Get Webhook Key
+[**delete_webhook_key**](WebhookKeysApi.md#delete_webhook_key) | **DELETE** /webhook_keys/{id} | Delete webhook key
+[**get_webhook_key**](WebhookKeysApi.md#get_webhook_key) | **GET** /webhook_keys/{id} | Get webhook key
 [**get_webhook_keys**](WebhookKeysApi.md#get_webhook_keys) | **GET** /webhook_keys | Get List of Webhook Keys
-[**update_webhook_key**](WebhookKeysApi.md#update_webhook_key) | **PUT** /webhook_keys/{id} | Update Webhook Key
+[**update_webhook_key**](WebhookKeysApi.md#update_webhook_key) | **PUT** /webhook_keys/{id} | Update webhook key
 
 
 # **create_webhook_key**
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 Create Webhook Key
 
-Create a webhook key
+Creates a new webhook signing key for the current company.
 
 ### Example
 
@@ -97,7 +97,9 @@ Name | Type | Description  | Notes
 # **delete_webhook_key**
 > WebhookKeyDeleteResponse delete_webhook_key(id, accept_language=accept_language)
 
-Delete Webhook key
+Delete webhook key
+
+Deletes a webhook signing key.
 
 ### Example
 
@@ -133,7 +135,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     accept_language = 'es' # str | Use for knowing which language to use (optional) (default to 'es')
 
     try:
-        # Delete Webhook key
+        # Delete webhook key
         api_response = api_instance.delete_webhook_key(id, accept_language=accept_language)
         print("The response of WebhookKeysApi->delete_webhook_key:\n")
         pprint(api_response)
@@ -168,7 +170,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | successful |  * Date - The date and time that the response was sent <br>  * Content-Type - The format of the response body <br>  * Content-Length - The length of the response body in bytes <br>  * Connection - The type of connection used to transfer the response <br>  |
+**200** | successful |  -  |
 **401** | authentication error |  -  |
 **404** | not found entity |  -  |
 **500** | internal server error |  -  |
@@ -178,7 +180,9 @@ Name | Type | Description  | Notes
 # **get_webhook_key**
 > WebhookKeyResponse get_webhook_key(id, accept_language=accept_language, x_child_company_id=x_child_company_id)
 
-Get Webhook Key
+Get webhook key
+
+Retrieves the details of a webhook signing key by its ID.
 
 ### Example
 
@@ -215,7 +219,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     x_child_company_id = '6441b6376b60c3a638da80af' # str | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
     try:
-        # Get Webhook Key
+        # Get webhook key
         api_response = api_instance.get_webhook_key(id, accept_language=accept_language, x_child_company_id=x_child_company_id)
         print("The response of WebhookKeysApi->get_webhook_key:\n")
         pprint(api_response)
@@ -251,7 +255,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | successful |  * Date - The date and time that the response was sent <br>  * Content-Type - The format of the response body <br>  * Content-Length - The length of the response body in bytes <br>  * Connection - The type of connection used to transfer the response <br>  |
+**200** | successful operation |  -  |
 **401** | authentication error |  -  |
 **404** | not found entity |  -  |
 **500** | internal server error |  -  |
@@ -342,7 +346,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | successful |  * Date - The date and time that the response was sent <br>  * Content-Type - The format of the response body <br>  * Content-Length - The length of the response body in bytes <br>  * Connection - The type of connection used to transfer the response <br>  |
+**200** | successful operation |  -  |
 **401** | authentication error |  -  |
 **500** | internal server error |  -  |
 
@@ -351,9 +355,9 @@ Name | Type | Description  | Notes
 # **update_webhook_key**
 > WebhookKeyResponse update_webhook_key(id, accept_language=accept_language, webhook_key_update_request=webhook_key_update_request)
 
-Update Webhook Key
+Update webhook key
 
-updates an existing webhook key
+Activates or deactivates an existing webhook signing key.
 
 ### Example
 
@@ -391,7 +395,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     webhook_key_update_request = digitalfemsa.WebhookKeyUpdateRequest() # WebhookKeyUpdateRequest |  (optional)
 
     try:
-        # Update Webhook Key
+        # Update webhook key
         api_response = api_instance.update_webhook_key(id, accept_language=accept_language, webhook_key_update_request=webhook_key_update_request)
         print("The response of WebhookKeysApi->update_webhook_key:\n")
         pprint(api_response)

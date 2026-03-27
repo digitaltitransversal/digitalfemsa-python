@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class CheckoutRequest(BaseModel):
     """
-    [Checkout](https://developers.femsa.com/v2.1.0/reference/payment-link) details 
+    [Checkout](https://developers.digitalfemsa.io/docs/checkout-redireccionado) details 
     """ # noqa: E501
     allowed_payment_methods: List[StrictStr] = Field(description="Are the payment methods available for this link")
     expires_at: Optional[StrictInt] = Field(default=None, description="Unix timestamp of checkout expiration")

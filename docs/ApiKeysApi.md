@@ -4,19 +4,19 @@ All URIs are relative to *https://api.digitalfemsa.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_api_key**](ApiKeysApi.md#create_api_key) | **POST** /api_keys | Create Api Key
+[**create_api_key**](ApiKeysApi.md#create_api_key) | **POST** /api_keys | Create API key
 [**delete_api_key**](ApiKeysApi.md#delete_api_key) | **DELETE** /api_keys/{id} | Delete Api Key
 [**get_api_key**](ApiKeysApi.md#get_api_key) | **GET** /api_keys/{id} | Get Api Key
-[**get_api_keys**](ApiKeysApi.md#get_api_keys) | **GET** /api_keys | Get list of Api Keys
+[**get_api_keys**](ApiKeysApi.md#get_api_keys) | **GET** /api_keys | List API keys
 [**update_api_key**](ApiKeysApi.md#update_api_key) | **PUT** /api_keys/{id} | Update Api Key
 
 
 # **create_api_key**
 > ApiKeyCreateResponse create_api_key(api_key_request, accept_language=accept_language, x_child_company_id=x_child_company_id)
 
-Create Api Key
+Create API key
 
-Create a api key
+Creates a new API key.  The response includes an `authentication_token` that is shown only once (at creation time). Copy and store it securely. 
 
 ### Example
 
@@ -54,7 +54,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     x_child_company_id = '6441b6376b60c3a638da80af' # str | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
     try:
-        # Create Api Key
+        # Create API key
         api_response = api_instance.create_api_key(api_key_request, accept_language=accept_language, x_child_company_id=x_child_company_id)
         print("The response of ApiKeysApi->create_api_key:\n")
         pprint(api_response)
@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | successful operation |  * Content-Type - The format of the response body <br>  |
+**200** | successful operation |  -  |
 **401** | authentication error |  -  |
 **422** | parameter validation error |  -  |
 **500** | internal server error |  -  |
@@ -268,9 +268,9 @@ Name | Type | Description  | Notes
 # **get_api_keys**
 > GetApiKeysResponse get_api_keys(accept_language=accept_language, x_child_company_id=x_child_company_id, limit=limit, next=next, previous=previous, search=search)
 
-Get list of Api Keys
+List API keys
 
-Consume the list of api keys you have
+Retrieves a paginated list of API keys for the authenticated account.  Use the pagination parameters (`limit`, `next_page`, `previous_page`) to navigate through results. Use the `search` query parameter to perform a general search (for example by key `id` or description). 
 
 ### Example
 
@@ -310,7 +310,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     search = 'search_example' # str | General search, e.g. by id, description, prefix (optional)
 
     try:
-        # Get list of Api Keys
+        # List API keys
         api_response = api_instance.get_api_keys(accept_language=accept_language, x_child_company_id=x_child_company_id, limit=limit, next=next, previous=previous, search=search)
         print("The response of ApiKeysApi->get_api_keys:\n")
         pprint(api_response)
@@ -349,7 +349,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | successful |  * Content-Type - The format of the response body <br>  |
+**200** | successful |  -  |
 **401** | authentication error |  -  |
 **500** | internal server error |  -  |
 

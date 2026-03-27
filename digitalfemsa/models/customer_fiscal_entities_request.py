@@ -30,11 +30,11 @@ class CustomerFiscalEntitiesRequest(BaseModel):
     """ # noqa: E501
     address: CustomerAddress
     tax_id: Optional[StrictStr] = None
+    name: Optional[StrictStr] = None
     email: Optional[StrictStr] = None
     phone: Optional[StrictStr] = None
-    metadata: Optional[Dict[str, Dict[str, Any]]] = None
-    company_name: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["address", "tax_id", "email", "phone", "metadata", "company_name"]
+    metadata: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["address", "tax_id", "name", "email", "phone", "metadata"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,10 +92,10 @@ class CustomerFiscalEntitiesRequest(BaseModel):
         _obj = cls.model_validate({
             "address": CustomerAddress.from_dict(obj["address"]) if obj.get("address") is not None else None,
             "tax_id": obj.get("tax_id"),
+            "name": obj.get("name"),
             "email": obj.get("email"),
             "phone": obj.get("phone"),
-            "metadata": obj.get("metadata"),
-            "company_name": obj.get("company_name")
+            "metadata": obj.get("metadata")
         })
         return _obj
 

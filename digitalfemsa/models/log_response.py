@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class LogResponse(BaseModel):
     """
-    log model
+    Log model representing a recorded request/response cycle for troubleshooting and auditing.
     """ # noqa: E501
     created_at: StrictInt
     id: StrictStr

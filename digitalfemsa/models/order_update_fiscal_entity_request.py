@@ -31,7 +31,7 @@ class OrderUpdateFiscalEntityRequest(BaseModel):
     address: FiscalEntityAddress
     email: Optional[StrictStr] = Field(default=None, description="Email of the fiscal entity")
     name: Optional[StrictStr] = Field(default=None, description="Name of the fiscal entity")
-    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Metadata associated with the fiscal entity")
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Arbitrary key-value data associated with the fiscal entity for your internal use. Keys should be strings; values can be any JSON value. ")
     phone: Optional[StrictStr] = Field(default=None, description="Phone of the fiscal entity")
     tax_id: Optional[StrictStr] = Field(default=None, description="Tax ID of the fiscal entity")
     __properties: ClassVar[List[str]] = ["address", "email", "name", "metadata", "phone", "tax_id"]

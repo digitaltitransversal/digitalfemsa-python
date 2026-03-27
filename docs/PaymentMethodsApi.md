@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 Create Payment Method
 
-Create a payment method for a customer.
+Creates a new payment method for a customer. The payment method is associated with the customer identified by `id`. The accepted fields depend on the payment method `type`.
 
 ### Example
 
@@ -104,7 +104,7 @@ Name | Type | Description  | Notes
 
 Delete Payment Method
 
-Delete an existing payment method
+Deletes a specific payment method of a customer. After deletion, the payment method can no longer be used for future payments.
 
 ### Example
 
@@ -285,7 +285,7 @@ Name | Type | Description  | Notes
 
 Update Payment Method
 
-Gets a payment Method that corresponds to a customer ID.
+Updates a specific payment method of a customer. Use this endpoint to modify the payment method identified by `payment_method_id` for the customer identified by `id`. The fields that can be updated depend on the payment method `type`.
 
 ### Example
 
@@ -320,7 +320,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     api_instance = digitalfemsa.PaymentMethodsApi(api_client)
     id = '6307a60c41de27127515a575' # str | Identifier of the resource
     payment_method_id = 'src_2tQ974hSHcsdeSZHG' # str | Identifier of the payment method
-    update_payment_methods = digitalfemsa.UpdatePaymentMethods() # UpdatePaymentMethods | requested field for customer payment methods
+    update_payment_methods = digitalfemsa.UpdatePaymentMethods() # UpdatePaymentMethods | Request body for updating a customer payment method.
     accept_language = 'es' # str | Use for knowing which language to use (optional) (default to 'es')
     x_child_company_id = '6441b6376b60c3a638da80af' # str | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
@@ -342,7 +342,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**| Identifier of the resource | 
  **payment_method_id** | **str**| Identifier of the payment method | 
- **update_payment_methods** | [**UpdatePaymentMethods**](UpdatePaymentMethods.md)| requested field for customer payment methods | 
+ **update_payment_methods** | [**UpdatePaymentMethods**](UpdatePaymentMethods.md)| Request body for updating a customer payment method. | 
  **accept_language** | **str**| Use for knowing which language to use | [optional] [default to &#39;es&#39;]
  **x_child_company_id** | **str**| In the case of a holding company, the company id of the child company to which will process the request. | [optional] 
 

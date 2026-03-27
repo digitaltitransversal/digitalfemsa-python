@@ -26,7 +26,7 @@ from typing_extensions import Self
 
 class WebhookUpdateRequest(BaseModel):
     """
-    an updated webhook
+    Parameters used to update a webhook. All fields are optional; send only the fields you want to change.
     """ # noqa: E501
     url: Annotated[str, Field(strict=True)] = Field(description="Here you must place the URL of your Webhook remember that you must program what you will do with the events received. Also do not forget to handle the HTTPS protocol for greater security.")
     synchronous: Optional[StrictBool] = Field(default=False, description="It is a value that allows to decide if the events will be synchronous or asynchronous. We recommend asynchronous = false")

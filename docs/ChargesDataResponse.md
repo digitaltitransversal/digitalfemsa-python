@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **reference_id** | **str** | Reference ID of the charge | [optional] 
 **refunds** | [**ChargeResponseRefunds**](ChargeResponseRefunds.md) |  | [optional] 
 **status** | **str** |  | [optional] 
+**is_refundable** | **bool** |  | [optional] 
 
 ## Example
 

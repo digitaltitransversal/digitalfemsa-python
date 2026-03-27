@@ -32,7 +32,7 @@ class GetTransactionsResponse(BaseModel):
     object: StrictStr = Field(description="Object type, in this case is list")
     next_page_url: Optional[StrictStr] = Field(default=None, description="URL of the next page.")
     previous_page_url: Optional[StrictStr] = Field(default=None, description="Url of the previous page.")
-    data: Optional[List[TransactionResponse]] = Field(default=None, description="Transactions")
+    data: Optional[List[TransactionResponse]] = Field(default=None, description="Transactions (ledger movements)")
     __properties: ClassVar[List[str]] = ["has_more", "object", "next_page_url", "previous_page_url", "data"]
 
     model_config = ConfigDict(

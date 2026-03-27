@@ -64,9 +64,9 @@ class ApiKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiKeyCreateResponse:
-        """Create Api Key
+        """Create API key
 
-        Create a api key
+        Creates a new API key.  The response includes an `authentication_token` that is shown only once (at creation time). Copy and store it securely. 
 
         :param api_key_request: requested field for a api keys (required)
         :type api_key_request: ApiKeyRequest
@@ -142,9 +142,9 @@ class ApiKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ApiKeyCreateResponse]:
-        """Create Api Key
+        """Create API key
 
-        Create a api key
+        Creates a new API key.  The response includes an `authentication_token` that is shown only once (at creation time). Copy and store it securely. 
 
         :param api_key_request: requested field for a api keys (required)
         :type api_key_request: ApiKeyRequest
@@ -220,9 +220,9 @@ class ApiKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Create Api Key
+        """Create API key
 
-        Create a api key
+        Creates a new API key.  The response includes an `authentication_token` that is shown only once (at creation time). Copy and store it securely. 
 
         :param api_key_request: requested field for a api keys (required)
         :type api_key_request: ApiKeyRequest
@@ -956,9 +956,9 @@ class ApiKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetApiKeysResponse:
-        """Get list of Api Keys
+        """List API keys
 
-        Consume the list of api keys you have
+        Retrieves a paginated list of API keys for the authenticated account.  Use the pagination parameters (`limit`, `next_page`, `previous_page`) to navigate through results. Use the `search` query parameter to perform a general search (for example by key `id` or description). 
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -1045,9 +1045,9 @@ class ApiKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetApiKeysResponse]:
-        """Get list of Api Keys
+        """List API keys
 
-        Consume the list of api keys you have
+        Retrieves a paginated list of API keys for the authenticated account.  Use the pagination parameters (`limit`, `next_page`, `previous_page`) to navigate through results. Use the `search` query parameter to perform a general search (for example by key `id` or description). 
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -1134,9 +1134,9 @@ class ApiKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get list of Api Keys
+        """List API keys
 
-        Consume the list of api keys you have
+        Retrieves a paginated list of API keys for the authenticated account.  Use the pagination parameters (`limit`, `next_page`, `previous_page`) to navigate through results. Use the `search` query parameter to perform a general search (for example by key `id` or description). 
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str

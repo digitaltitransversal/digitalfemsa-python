@@ -32,13 +32,13 @@ class CustomerShippingContactsResponse(BaseModel):
     receiver: Optional[StrictStr] = None
     between_streets: Optional[StrictStr] = None
     address: Optional[CustomerShippingContactsResponseAddress] = None
-    parent_id: Optional[StrictStr] = None
+    parent_id: Optional[StrictStr] = Field(default=None, description="Customer ID that owns this shipping contact.")
     default: Optional[StrictBool] = None
     id: Optional[StrictStr] = None
     created_at: Optional[StrictInt] = None
     metadata: Optional[Dict[str, Any]] = Field(default=None, description="Metadata associated with the shipping contact")
     object: Optional[StrictStr] = None
-    deleted: Optional[StrictBool] = None
+    deleted: Optional[StrictBool] = Field(default=None, description="Present only when the shipping contact was deleted.")
     __properties: ClassVar[List[str]] = ["phone", "receiver", "between_streets", "address", "parent_id", "default", "id", "created_at", "metadata", "object", "deleted"]
 
     model_config = ConfigDict(

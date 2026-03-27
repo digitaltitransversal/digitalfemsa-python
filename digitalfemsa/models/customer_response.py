@@ -18,9 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from digitalfemsa.models.customer_antifraud_info_response import CustomerAntifraudInfoResponse
 from digitalfemsa.models.customer_fiscal_entities_response import CustomerFiscalEntitiesResponse
 from digitalfemsa.models.customer_payment_methods_response import CustomerPaymentMethodsResponse
 from digitalfemsa.models.customer_response_shipping_contacts import CustomerResponseShippingContacts
@@ -31,24 +30,29 @@ class CustomerResponse(BaseModel):
     """
     customer response
     """ # noqa: E501
-    antifraud_info: Optional[CustomerAntifraudInfoResponse] = None
+    id: StrictStr = Field(description="Customer's ID")
+    object: StrictStr
+    created_at: StrictInt = Field(description="Creation date of the object (Unix timestamp)")
+    livemode: StrictBool = Field(description="true if the object exists in live mode or false if the object exists in test mode")
+    name: Optional[StrictStr] = Field(default=None, description="Customer's name")
+    email: Optional[StrictStr] = None
+    phone: Optional[StrictStr] = Field(default=None, description="Customer's phone number")
     corporate: Optional[StrictBool] = Field(default=None, description="true if the customer is a company")
-    created_at: StrictInt = Field(description="Creation date of the object")
     custom_reference: Optional[StrictStr] = Field(default=None, description="Custom reference")
     default_fiscal_entity_id: Optional[StrictStr] = None
     default_shipping_contact_id: Optional[StrictStr] = None
-    default_payment_source_id: Optional[StrictStr] = None
-    email: Optional[StrictStr] = None
-    fiscal_entities: Optional[CustomerFiscalEntitiesResponse] = None
-    id: StrictStr = Field(description="Customer's ID")
-    livemode: StrictBool = Field(description="true if the object exists in live mode or the value false if the object exists in test mode")
-    name: StrictStr = Field(description="Customer's name")
-    metadata: Optional[Dict[str, Any]] = None
-    object: StrictStr
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Customer metadata (maps to contextual_data in backend)")
     payment_sources: Optional[CustomerPaymentMethodsResponse] = None
-    phone: Optional[StrictStr] = Field(default=None, description="Customer's phone number")
+    fiscal_entities: Optional[CustomerFiscalEntitiesResponse] = None
     shipping_contacts: Optional[CustomerResponseShippingContacts] = None
-    __properties: ClassVar[List[str]] = ["antifraud_info", "corporate", "created_at", "custom_reference", "default_fiscal_entity_id", "default_shipping_contact_id", "default_payment_source_id", "email", "fiscal_entities", "id", "livemode", "name", "metadata", "object", "payment_sources", "phone", "shipping_contacts"]
+    __properties: ClassVar[List[str]] = ["id", "object", "created_at", "livemode", "name", "email", "phone", "corporate", "custom_reference", "default_fiscal_entity_id", "default_shipping_contact_id", "metadata", "payment_sources", "fiscal_entities", "shipping_contacts"]
+
+    @field_validator('object')
+    def object_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['customer']):
+            raise ValueError("must be one of enum values ('customer')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,32 +93,44 @@ class CustomerResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of antifraud_info
-        if self.antifraud_info:
-            _dict['antifraud_info'] = self.antifraud_info.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of fiscal_entities
-        if self.fiscal_entities:
-            _dict['fiscal_entities'] = self.fiscal_entities.to_dict()
         # override the default output from pydantic by calling `to_dict()` of payment_sources
         if self.payment_sources:
             _dict['payment_sources'] = self.payment_sources.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of fiscal_entities
+        if self.fiscal_entities:
+            _dict['fiscal_entities'] = self.fiscal_entities.to_dict()
         # override the default output from pydantic by calling `to_dict()` of shipping_contacts
         if self.shipping_contacts:
             _dict['shipping_contacts'] = self.shipping_contacts.to_dict()
-        # set to None if antifraud_info (nullable) is None
+        # set to None if name (nullable) is None
         # and model_fields_set contains the field
-        if self.antifraud_info is None and "antifraud_info" in self.model_fields_set:
-            _dict['antifraud_info'] = None
+        if self.name is None and "name" in self.model_fields_set:
+            _dict['name'] = None
+
+        # set to None if email (nullable) is None
+        # and model_fields_set contains the field
+        if self.email is None and "email" in self.model_fields_set:
+            _dict['email'] = None
+
+        # set to None if phone (nullable) is None
+        # and model_fields_set contains the field
+        if self.phone is None and "phone" in self.model_fields_set:
+            _dict['phone'] = None
 
         # set to None if default_fiscal_entity_id (nullable) is None
         # and model_fields_set contains the field
         if self.default_fiscal_entity_id is None and "default_fiscal_entity_id" in self.model_fields_set:
             _dict['default_fiscal_entity_id'] = None
 
-        # set to None if default_payment_source_id (nullable) is None
+        # set to None if default_shipping_contact_id (nullable) is None
         # and model_fields_set contains the field
-        if self.default_payment_source_id is None and "default_payment_source_id" in self.model_fields_set:
-            _dict['default_payment_source_id'] = None
+        if self.default_shipping_contact_id is None and "default_shipping_contact_id" in self.model_fields_set:
+            _dict['default_shipping_contact_id'] = None
+
+        # set to None if metadata (nullable) is None
+        # and model_fields_set contains the field
+        if self.metadata is None and "metadata" in self.model_fields_set:
+            _dict['metadata'] = None
 
         return _dict
 
@@ -128,22 +144,20 @@ class CustomerResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "antifraud_info": CustomerAntifraudInfoResponse.from_dict(obj["antifraud_info"]) if obj.get("antifraud_info") is not None else None,
-            "corporate": obj.get("corporate"),
+            "id": obj.get("id"),
+            "object": obj.get("object"),
             "created_at": obj.get("created_at"),
+            "livemode": obj.get("livemode"),
+            "name": obj.get("name"),
+            "email": obj.get("email"),
+            "phone": obj.get("phone"),
+            "corporate": obj.get("corporate"),
             "custom_reference": obj.get("custom_reference"),
             "default_fiscal_entity_id": obj.get("default_fiscal_entity_id"),
             "default_shipping_contact_id": obj.get("default_shipping_contact_id"),
-            "default_payment_source_id": obj.get("default_payment_source_id"),
-            "email": obj.get("email"),
-            "fiscal_entities": CustomerFiscalEntitiesResponse.from_dict(obj["fiscal_entities"]) if obj.get("fiscal_entities") is not None else None,
-            "id": obj.get("id"),
-            "livemode": obj.get("livemode"),
-            "name": obj.get("name"),
             "metadata": obj.get("metadata"),
-            "object": obj.get("object"),
             "payment_sources": CustomerPaymentMethodsResponse.from_dict(obj["payment_sources"]) if obj.get("payment_sources") is not None else None,
-            "phone": obj.get("phone"),
+            "fiscal_entities": CustomerFiscalEntitiesResponse.from_dict(obj["fiscal_entities"]) if obj.get("fiscal_entities") is not None else None,
             "shipping_contacts": CustomerResponseShippingContacts.from_dict(obj["shipping_contacts"]) if obj.get("shipping_contacts") is not None else None
         })
         return _obj

@@ -1,5 +1,6 @@
 # OrderResponseCustomerInfo
 
+Customer information associated with the order.
 
 ## Properties
 

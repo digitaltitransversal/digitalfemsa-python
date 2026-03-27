@@ -59,7 +59,7 @@ class BalancesApi:
     ) -> BalanceResponse:
         """Get a company's balance
 
-        Get a company's balance
+        Retrieves the current balance information for the authenticated company.  Monetary fields are returned as arrays of amounts grouped by currency. 
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -96,6 +96,8 @@ class BalancesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BalanceResponse",
             '401': "Error",
+            '402': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -128,7 +130,7 @@ class BalancesApi:
     ) -> ApiResponse[BalanceResponse]:
         """Get a company's balance
 
-        Get a company's balance
+        Retrieves the current balance information for the authenticated company.  Monetary fields are returned as arrays of amounts grouped by currency. 
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -165,6 +167,8 @@ class BalancesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BalanceResponse",
             '401': "Error",
+            '402': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -197,7 +201,7 @@ class BalancesApi:
     ) -> RESTResponseType:
         """Get a company's balance
 
-        Get a company's balance
+        Retrieves the current balance information for the authenticated company.  Monetary fields are returned as arrays of amounts grouped by currency. 
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -234,6 +238,8 @@ class BalancesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BalanceResponse",
             '401': "Error",
+            '402': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(

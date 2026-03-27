@@ -1,21 +1,21 @@
 # BalanceResponse
 
-balance model
+Company balance summary.  Monetary fields are returned as arrays of amounts grouped by currency (see `balance_common_field` items). 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**available** | [**List[BalanceCommonField]**](BalanceCommonField.md) | The balance&#39;s available | [optional] 
+**available** | [**List[BalanceCommonField]**](BalanceCommonField.md) | Amounts currently available, grouped by currency. | [optional] 
 **cashout_retention_amount** | [**List[BalanceCommonField]**](BalanceCommonField.md) | The balance&#39;s cashout retention amount | [optional] 
 **conekta_retention** | [**List[BalanceCommonField]**](BalanceCommonField.md) | The balance&#39;s Femsa retention | [optional] 
-**gateway** | [**List[BalanceCommonField]**](BalanceCommonField.md) | The balance&#39;s gateway | [optional] 
-**pending** | [**List[BalanceCommonField]**](BalanceCommonField.md) | The balance&#39;s pending | [optional] 
-**retained** | [**List[BalanceCommonField]**](BalanceCommonField.md) | The balance&#39;s retained | [optional] 
-**retention_amount** | [**List[BalanceCommonField]**](BalanceCommonField.md) | The balance&#39;s retention amount | [optional] 
-**target_collateral_amount** | **object** | The balance&#39;s target collateral amount | [optional] 
-**target_retention_amount** | [**List[BalanceCommonField]**](BalanceCommonField.md) | The balance&#39;s target retention amount | [optional] 
-**temporarily_retained** | [**List[BalanceCommonField]**](BalanceCommonField.md) | The balance&#39;s temporarily retained | [optional] 
+**gateway** | [**List[BalanceCommonField]**](BalanceCommonField.md) | Gateway balance amounts, grouped by currency. | [optional] 
+**pending** | [**List[BalanceCommonField]**](BalanceCommonField.md) | Amounts pending settlement, grouped by currency. | [optional] 
+**retained** | [**List[BalanceCommonField]**](BalanceCommonField.md) | Amounts currently retained, grouped by currency. | [optional] 
+**retention_amount** | [**List[BalanceCommonField]**](BalanceCommonField.md) | Retention amount applied, grouped by currency. | [optional] 
+**target_collateral_amount** | **object** | Target collateral amount, grouped by currency. | [optional] 
+**target_retention_amount** | [**List[BalanceCommonField]**](BalanceCommonField.md) | Target retention amount, grouped by currency. | [optional] 
+**temporarily_retained** | [**List[BalanceCommonField]**](BalanceCommonField.md) | Amounts temporarily retained | [optional] 
 
 ## Example
 

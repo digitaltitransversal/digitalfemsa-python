@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **address** | [**CustomerAddress**](CustomerAddress.md) |  | 
 **tax_id** | **str** |  | [optional] 
+**name** | **str** |  | [optional] 
 **email** | **str** |  | [optional] 
 **phone** | **str** |  | [optional] 
 **metadata** | **Dict[str, object]** |  | [optional] 
-**company_name** | **str** |  | [optional] 
 **id** | **str** |  | 
 **object** | **str** |  | 
 **created_at** | **int** |  | 

@@ -65,7 +65,7 @@ class WebhookKeysApi:
     ) -> WebhookKeyCreateResponse:
         """Create Webhook Key
 
-        Create a webhook key
+        Creates a new webhook signing key for the current company.
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -138,7 +138,7 @@ class WebhookKeysApi:
     ) -> ApiResponse[WebhookKeyCreateResponse]:
         """Create Webhook Key
 
-        Create a webhook key
+        Creates a new webhook signing key for the current company.
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -211,7 +211,7 @@ class WebhookKeysApi:
     ) -> RESTResponseType:
         """Create Webhook Key
 
-        Create a webhook key
+        Creates a new webhook signing key for the current company.
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -355,8 +355,9 @@ class WebhookKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> WebhookKeyDeleteResponse:
-        """Delete Webhook key
+        """Delete webhook key
 
+        Deletes a webhook signing key.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -428,8 +429,9 @@ class WebhookKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[WebhookKeyDeleteResponse]:
-        """Delete Webhook key
+        """Delete webhook key
 
+        Deletes a webhook signing key.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -501,8 +503,9 @@ class WebhookKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Delete Webhook key
+        """Delete webhook key
 
+        Deletes a webhook signing key.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -635,8 +638,9 @@ class WebhookKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> WebhookKeyResponse:
-        """Get Webhook Key
+        """Get webhook key
 
+        Retrieves the details of a webhook signing key by its ID.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -712,8 +716,9 @@ class WebhookKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[WebhookKeyResponse]:
-        """Get Webhook Key
+        """Get webhook key
 
+        Retrieves the details of a webhook signing key by its ID.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -789,8 +794,9 @@ class WebhookKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get Webhook Key
+        """Get webhook key
 
+        Retrieves the details of a webhook signing key by its ID.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -1276,9 +1282,9 @@ class WebhookKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> WebhookKeyResponse:
-        """Update Webhook Key
+        """Update webhook key
 
-        updates an existing webhook key
+        Activates or deactivates an existing webhook signing key.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -1354,9 +1360,9 @@ class WebhookKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[WebhookKeyResponse]:
-        """Update Webhook Key
+        """Update webhook key
 
-        updates an existing webhook key
+        Activates or deactivates an existing webhook signing key.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -1432,9 +1438,9 @@ class WebhookKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Update Webhook Key
+        """Update webhook key
 
-        updates an existing webhook key
+        Activates or deactivates an existing webhook signing key.
 
         :param id: Identifier of the resource (required)
         :type id: str

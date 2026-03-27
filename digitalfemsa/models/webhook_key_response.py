@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class WebhookKeyResponse(BaseModel):
     """
-    webhook keys model
+    Represents a webhook signing key configuration for the company.
     """ # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="Unique identifier of the webhook key")
     active: Optional[StrictBool] = Field(default=None, description="Indicates if the webhook key is active")
