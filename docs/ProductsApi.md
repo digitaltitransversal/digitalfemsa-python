@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 Create Product
 
-Create a new product for an existing order.
+Creates a new product (line item) for an existing order. Use this endpoint to add an additional item to the order after it has been created.
 
 ### Example
 
@@ -48,7 +48,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = digitalfemsa.ProductsApi(api_client)
     id = '6307a60c41de27127515a575' # str | Identifier of the resource
-    product = digitalfemsa.Product() # Product | requested field for a product
+    product = digitalfemsa.Product() # Product | Fields required to create a new product (line item) for an existing order. This request adds a new item to the order.
     accept_language = 'es' # str | Use for knowing which language to use (optional) (default to 'es')
     x_child_company_id = '6441b6376b60c3a638da80af' # str | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
@@ -69,7 +69,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**| Identifier of the resource | 
- **product** | [**Product**](Product.md)| requested field for a product | 
+ **product** | [**Product**](Product.md)| Fields required to create a new product (line item) for an existing order. This request adds a new item to the order. | 
  **accept_language** | **str**| Use for knowing which language to use | [optional] [default to &#39;es&#39;]
  **x_child_company_id** | **str**| In the case of a holding company, the company id of the child company to which will process the request. | [optional] 
 
@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | successful |  -  |
+**200** | Successful operation |  -  |
 **401** | authentication error |  -  |
 **404** | not found entity |  -  |
 **500** | internal server error |  -  |
@@ -102,7 +102,7 @@ Name | Type | Description  | Notes
 
 Delete Product
 
-Delete product for an existing orden
+Deletes a product (line item) from an existing order. The API will validate whether the order can be modified before removing the item.
 
 ### Example
 
@@ -177,10 +177,10 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | successful |  -  |
+**200** | successful operation |  -  |
 **401** | authentication error |  -  |
-**422** | parameter validation error |  -  |
 **404** | not found entity |  -  |
+**422** | parameter validation error |  -  |
 **500** | internal server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -190,7 +190,7 @@ Name | Type | Description  | Notes
 
 Update Product
 
-Update an existing product for an existing orden
+Updates an existing product (line item) for an existing order. Use this endpoint to modify the details of a specific line item in the order.
 
 ### Example
 
@@ -225,7 +225,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     api_instance = digitalfemsa.ProductsApi(api_client)
     id = '6307a60c41de27127515a575' # str | Identifier of the resource
     line_item_id = 'line_item_2tQ8HkkfbauaKP9Ho' # str | identifier
-    update_product = digitalfemsa.UpdateProduct() # UpdateProduct | requested field for products
+    update_product = digitalfemsa.UpdateProduct() # UpdateProduct | Fields allowed to update an existing product (line item) in an order. All fields are optional; only the provided fields will be updated.
     accept_language = 'es' # str | Use for knowing which language to use (optional) (default to 'es')
     x_child_company_id = '6441b6376b60c3a638da80af' # str | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
@@ -247,7 +247,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**| Identifier of the resource | 
  **line_item_id** | **str**| identifier | 
- **update_product** | [**UpdateProduct**](UpdateProduct.md)| requested field for products | 
+ **update_product** | [**UpdateProduct**](UpdateProduct.md)| Fields allowed to update an existing product (line item) in an order. All fields are optional; only the provided fields will be updated. | 
  **accept_language** | **str**| Use for knowing which language to use | [optional] [default to &#39;es&#39;]
  **x_child_company_id** | **str**| In the case of a holding company, the company id of the child company to which will process the request. | [optional] 
 
@@ -268,10 +268,10 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | successful |  -  |
+**200** | successful operation |  -  |
 **401** | authentication error |  -  |
-**422** | parameter validation error |  -  |
 **404** | not found entity |  -  |
+**422** | parameter validation error |  -  |
 **500** | internal server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

@@ -69,6 +69,11 @@ class WebhookKeyRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if active (nullable) is None
+        # and model_fields_set contains the field
+        if self.active is None and "active" in self.model_fields_set:
+            _dict['active'] = None
+
         return _dict
 
     @classmethod

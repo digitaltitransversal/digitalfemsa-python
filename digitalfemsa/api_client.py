@@ -70,11 +70,14 @@ class ApiClient:
         'datetime': datetime.datetime,
         'object': object,
     }
+    
+    uname = platform.uname()
+
     data = {
-      'lang': 'python',
-      'lang_version': platform.python_version(),
-      'uname': platform.uname(),
-      'bindings_version': '1.0.3',
+        'lang': 'python',
+        'lang_version': platform.python_version(),
+        'uname': f"{uname.system} {uname.release} {uname.machine}",
+        'sdk_version': '1.1.0',
     }
     _pool = None
 
@@ -96,7 +99,7 @@ class ApiClient:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'App/v2 PythonBindings/6.0.3'
+        self.user_agent = 'App/v2 PythonBindings/1.1.0'
         self.digitialfemsa_user_agent = json.dumps(self.data)
         self.client_side_validation = configuration.client_side_validation
 

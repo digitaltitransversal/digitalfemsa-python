@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
@@ -32,6 +32,16 @@ class UpdateOrderDiscountLinesRequest(BaseModel):
     code: Optional[StrictStr] = Field(default=None, description="Discount code.")
     type: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["amount", "code", "type"]
+
+    @field_validator('type')
+    def type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['loyalty', 'campaign', 'coupon', 'sign']):
+            raise ValueError("must be one of enum values ('loyalty', 'campaign', 'coupon', 'sign')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

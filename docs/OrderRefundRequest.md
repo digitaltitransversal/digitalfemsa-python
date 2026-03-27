@@ -5,9 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount** | **int** |  | 
-**expires_at** | **int** |  | [optional] 
-**reason** | **str** |  | 
+**amount** | **int** | Amount to refund. If not provided, the API refunds the refundable amount of the selected charge. | 
+**charge_id** | **str** | Charge ID to refund. If not provided, the API selects a refundable charge from the order. | [optional] 
+**reason** | **str** | Refund reason. If not provided, the API uses a default reason. | 
+**expires_at** | **int** | Expiration timestamp for cash refunds (must be within the allowed range configured by the API). | [optional] 
 
 ## Example
 

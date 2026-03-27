@@ -65,7 +65,7 @@ class DiscountsApi:
     ) -> DiscountLinesResponse:
         """Create Discount
 
-        Create discount lines for an existing orden
+        Create discount lines for an existing order
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -147,7 +147,7 @@ class DiscountsApi:
     ) -> ApiResponse[DiscountLinesResponse]:
         """Create Discount
 
-        Create discount lines for an existing orden
+        Create discount lines for an existing order
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -229,7 +229,7 @@ class DiscountsApi:
     ) -> RESTResponseType:
         """Create Discount
 
-        Create discount lines for an existing orden
+        Create discount lines for an existing order
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -390,7 +390,7 @@ class DiscountsApi:
     ) -> DiscountLinesResponse:
         """Delete Discount
 
-        Delete an existing discount lines for an existing orden
+        Delete an existing discount line for an existing order
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -473,7 +473,7 @@ class DiscountsApi:
     ) -> ApiResponse[DiscountLinesResponse]:
         """Delete Discount
 
-        Delete an existing discount lines for an existing orden
+        Delete an existing discount line for an existing order
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -556,7 +556,7 @@ class DiscountsApi:
     ) -> RESTResponseType:
         """Delete Discount
 
-        Delete an existing discount lines for an existing orden
+        Delete an existing discount line for an existing order
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -705,7 +705,7 @@ class DiscountsApi:
     ) -> DiscountLinesResponse:
         """Get Discount
 
-        Get an existing discount lines for an existing orden
+        Get an existing discount line for an existing order
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -752,7 +752,6 @@ class DiscountsApi:
             '200': "DiscountLinesResponse",
             '401': "Error",
             '404': "Error",
-            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -788,7 +787,7 @@ class DiscountsApi:
     ) -> ApiResponse[DiscountLinesResponse]:
         """Get Discount
 
-        Get an existing discount lines for an existing orden
+        Get an existing discount line for an existing order
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -835,7 +834,6 @@ class DiscountsApi:
             '200': "DiscountLinesResponse",
             '401': "Error",
             '404': "Error",
-            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -871,7 +869,7 @@ class DiscountsApi:
     ) -> RESTResponseType:
         """Get Discount
 
-        Get an existing discount lines for an existing orden
+        Get an existing discount line for an existing order
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -918,7 +916,6 @@ class DiscountsApi:
             '200': "DiscountLinesResponse",
             '401': "Error",
             '404': "Error",
-            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -1021,9 +1018,9 @@ class DiscountsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetOrderDiscountLinesResponse:
-        """Get a List of Discount
+        """Get a List of Discounts
 
-        Get discount lines for an existing orden
+        Get discount lines for an existing order
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -1114,9 +1111,9 @@ class DiscountsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetOrderDiscountLinesResponse]:
-        """Get a List of Discount
+        """Get a List of Discounts
 
-        Get discount lines for an existing orden
+        Get discount lines for an existing order
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -1207,9 +1204,9 @@ class DiscountsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get a List of Discount
+        """Get a List of Discounts
 
-        Get discount lines for an existing orden
+        Get discount lines for an existing order
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -1383,7 +1380,7 @@ class DiscountsApi:
     ) -> DiscountLinesResponse:
         """Update Discount
 
-        Update an existing discount lines for an existing orden
+        Update an existing discount line for an existing order
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -1470,7 +1467,7 @@ class DiscountsApi:
     ) -> ApiResponse[DiscountLinesResponse]:
         """Update Discount
 
-        Update an existing discount lines for an existing orden
+        Update an existing discount line for an existing order
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -1557,7 +1554,7 @@ class DiscountsApi:
     ) -> RESTResponseType:
         """Update Discount
 
-        Update an existing discount lines for an existing orden
+        Update an existing discount line for an existing order
 
         :param id: Identifier of the resource (required)
         :type id: str

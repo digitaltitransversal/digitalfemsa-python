@@ -48,7 +48,8 @@ class ChargeResponse(BaseModel):
     reference_id: Optional[StrictStr] = Field(default=None, description="Reference ID of the charge")
     refunds: Optional[ChargeResponseRefunds] = None
     status: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["amount", "channel", "created_at", "currency", "customer_id", "description", "device_fingerprint", "failure_code", "failure_message", "id", "livemode", "object", "order_id", "paid_at", "payment_method", "reference_id", "refunds", "status"]
+    is_refundable: Optional[StrictBool] = None
+    __properties: ClassVar[List[str]] = ["amount", "channel", "created_at", "currency", "customer_id", "description", "device_fingerprint", "failure_code", "failure_message", "id", "livemode", "object", "order_id", "paid_at", "payment_method", "reference_id", "refunds", "status", "is_refundable"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -98,6 +99,16 @@ class ChargeResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of refunds
         if self.refunds:
             _dict['refunds'] = self.refunds.to_dict()
+        # set to None if failure_code (nullable) is None
+        # and model_fields_set contains the field
+        if self.failure_code is None and "failure_code" in self.model_fields_set:
+            _dict['failure_code'] = None
+
+        # set to None if failure_message (nullable) is None
+        # and model_fields_set contains the field
+        if self.failure_message is None and "failure_message" in self.model_fields_set:
+            _dict['failure_message'] = None
+
         # set to None if paid_at (nullable) is None
         # and model_fields_set contains the field
         if self.paid_at is None and "paid_at" in self.model_fields_set:
@@ -142,7 +153,8 @@ class ChargeResponse(BaseModel):
             "payment_method": ChargeResponsePaymentMethod.from_dict(obj["payment_method"]) if obj.get("payment_method") is not None else None,
             "reference_id": obj.get("reference_id"),
             "refunds": ChargeResponseRefunds.from_dict(obj["refunds"]) if obj.get("refunds") is not None else None,
-            "status": obj.get("status")
+            "status": obj.get("status"),
+            "is_refundable": obj.get("is_refundable")
         })
         return _obj
 

@@ -66,9 +66,9 @@ class CustomersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CustomerResponse:
-        """Create customer
+        """Create a customer
 
-        The purpose of business is to create and keep a customer, you will learn what elements you need to create a customer. 
+        Creates a new customer for the authenticated company.  Use customers to store and reuse buyer information (for example name, email, phone, and addresses). The created customer can be referenced later when creating orders and other resources. 
 
         :param customer: requested field for customer (required)
         :type customer: Customer
@@ -145,9 +145,9 @@ class CustomersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CustomerResponse]:
-        """Create customer
+        """Create a customer
 
-        The purpose of business is to create and keep a customer, you will learn what elements you need to create a customer. 
+        Creates a new customer for the authenticated company.  Use customers to store and reuse buyer information (for example name, email, phone, and addresses). The created customer can be referenced later when creating orders and other resources. 
 
         :param customer: requested field for customer (required)
         :type customer: Customer
@@ -224,9 +224,9 @@ class CustomersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Create customer
+        """Create a customer
 
-        The purpose of business is to create and keep a customer, you will learn what elements you need to create a customer. 
+        Creates a new customer for the authenticated company.  Use customers to store and reuse buyer information (for example name, email, phone, and addresses). The created customer can be referenced later when creating orders and other resources. 
 
         :param customer: requested field for customer (required)
         :type customer: Customer
@@ -382,7 +382,7 @@ class CustomersApi:
     ) -> CreateCustomerFiscalEntitiesResponse:
         """Create Fiscal Entity
 
-        Create Fiscal entity resource that corresponds to a customer ID.
+        Create a fiscal entity resource for a given customer ID.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -465,7 +465,7 @@ class CustomersApi:
     ) -> ApiResponse[CreateCustomerFiscalEntitiesResponse]:
         """Create Fiscal Entity
 
-        Create Fiscal entity resource that corresponds to a customer ID.
+        Create a fiscal entity resource for a given customer ID.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -548,7 +548,7 @@ class CustomersApi:
     ) -> RESTResponseType:
         """Create Fiscal Entity
 
-        Create Fiscal entity resource that corresponds to a customer ID.
+        Create a fiscal entity resource for a given customer ID.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -1309,7 +1309,7 @@ class CustomersApi:
     ) -> CustomersResponse:
         """Get a list of customers
 
-        The purpose of business is to create and maintain a client, you will learn what elements you need to obtain a list of clients, which can be paged.
+        Returns a paginated list of customers for the authenticated company.  Use the [search] parameter to filter results. 
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -1361,6 +1361,8 @@ class CustomersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomersResponse",
             '401': "Error",
+            '402': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -1398,7 +1400,7 @@ class CustomersApi:
     ) -> ApiResponse[CustomersResponse]:
         """Get a list of customers
 
-        The purpose of business is to create and maintain a client, you will learn what elements you need to obtain a list of clients, which can be paged.
+        Returns a paginated list of customers for the authenticated company.  Use the [search] parameter to filter results. 
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -1450,6 +1452,8 @@ class CustomersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomersResponse",
             '401': "Error",
+            '402': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -1487,7 +1491,7 @@ class CustomersApi:
     ) -> RESTResponseType:
         """Get a list of customers
 
-        The purpose of business is to create and maintain a client, you will learn what elements you need to obtain a list of clients, which can be paged.
+        Returns a paginated list of customers for the authenticated company.  Use the [search] parameter to filter results. 
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -1539,6 +1543,8 @@ class CustomersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomersResponse",
             '401': "Error",
+            '402': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -1965,7 +1971,7 @@ class CustomersApi:
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
         fiscal_entities_id: Annotated[StrictStr, Field(description="identifier")],
-        customer_update_fiscal_entities_request: Annotated[CustomerUpdateFiscalEntitiesRequest, Field(description="requested field for customer update fiscal entities")],
+        customer_update_fiscal_entities_request: Annotated[CustomerUpdateFiscalEntitiesRequest, Field(description="Request body for updating a customer fiscal entity.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -1981,7 +1987,7 @@ class CustomersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UpdateCustomerFiscalEntitiesResponse:
-        """Update  Fiscal Entity
+        """Update Fiscal Entity
 
         Update Fiscal Entity resource that corresponds to a customer ID.
 
@@ -1989,7 +1995,7 @@ class CustomersApi:
         :type id: str
         :param fiscal_entities_id: identifier (required)
         :type fiscal_entities_id: str
-        :param customer_update_fiscal_entities_request: requested field for customer update fiscal entities (required)
+        :param customer_update_fiscal_entities_request: Request body for updating a customer fiscal entity. (required)
         :type customer_update_fiscal_entities_request: CustomerUpdateFiscalEntitiesRequest
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -2052,7 +2058,7 @@ class CustomersApi:
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
         fiscal_entities_id: Annotated[StrictStr, Field(description="identifier")],
-        customer_update_fiscal_entities_request: Annotated[CustomerUpdateFiscalEntitiesRequest, Field(description="requested field for customer update fiscal entities")],
+        customer_update_fiscal_entities_request: Annotated[CustomerUpdateFiscalEntitiesRequest, Field(description="Request body for updating a customer fiscal entity.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -2068,7 +2074,7 @@ class CustomersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[UpdateCustomerFiscalEntitiesResponse]:
-        """Update  Fiscal Entity
+        """Update Fiscal Entity
 
         Update Fiscal Entity resource that corresponds to a customer ID.
 
@@ -2076,7 +2082,7 @@ class CustomersApi:
         :type id: str
         :param fiscal_entities_id: identifier (required)
         :type fiscal_entities_id: str
-        :param customer_update_fiscal_entities_request: requested field for customer update fiscal entities (required)
+        :param customer_update_fiscal_entities_request: Request body for updating a customer fiscal entity. (required)
         :type customer_update_fiscal_entities_request: CustomerUpdateFiscalEntitiesRequest
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -2139,7 +2145,7 @@ class CustomersApi:
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
         fiscal_entities_id: Annotated[StrictStr, Field(description="identifier")],
-        customer_update_fiscal_entities_request: Annotated[CustomerUpdateFiscalEntitiesRequest, Field(description="requested field for customer update fiscal entities")],
+        customer_update_fiscal_entities_request: Annotated[CustomerUpdateFiscalEntitiesRequest, Field(description="Request body for updating a customer fiscal entity.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -2155,7 +2161,7 @@ class CustomersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Update  Fiscal Entity
+        """Update Fiscal Entity
 
         Update Fiscal Entity resource that corresponds to a customer ID.
 
@@ -2163,7 +2169,7 @@ class CustomersApi:
         :type id: str
         :param fiscal_entities_id: identifier (required)
         :type fiscal_entities_id: str
-        :param customer_update_fiscal_entities_request: requested field for customer update fiscal entities (required)
+        :param customer_update_fiscal_entities_request: Request body for updating a customer fiscal entity. (required)
         :type customer_update_fiscal_entities_request: CustomerUpdateFiscalEntitiesRequest
         :param accept_language: Use for knowing which language to use
         :type accept_language: str

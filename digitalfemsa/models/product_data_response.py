@@ -28,19 +28,18 @@ class ProductDataResponse(BaseModel):
     """
     ProductDataResponse
     """ # noqa: E501
-    antifraud_info: Optional[Dict[str, Any]] = None
-    brand: Optional[StrictStr] = Field(default=None, description="The brand of the item.")
-    description: Optional[Annotated[str, Field(strict=True, max_length=250)]] = Field(default=None, description="Short description of the item")
-    metadata: Optional[Dict[str, StrictStr]] = Field(default=None, description="It is a key/value hash that can hold custom fields. Maximum 100 elements and allows special characters.")
     name: StrictStr = Field(description="The name of the item. It will be displayed in the order.")
+    unit_price: Annotated[int, Field(strict=True, ge=0)] = Field(description="The price of the item in cents.")
     quantity: Annotated[int, Field(strict=True, ge=1)] = Field(description="The quantity of the item in the order.")
     sku: Optional[StrictStr] = Field(default=None, description="The stock keeping unit for the item. It is used to identify the item in the order.")
-    tags: Optional[List[StrictStr]] = Field(default=None, description="List of tags for the item. It is used to identify the item in the order.")
-    unit_price: Annotated[int, Field(strict=True, ge=0)] = Field(description="The price of the item in cents.")
+    brand: Optional[StrictStr] = Field(default=None, description="The brand of the item.")
+    description: Optional[Annotated[str, Field(strict=True, max_length=250)]] = Field(default=None, description="Short description of the item")
+    tags: Optional[Annotated[List[Annotated[str, Field(min_length=2, strict=True, max_length=249)]], Field(min_length=1)]] = Field(default=None, description="List of tags for the item. It is used to identify the item in the order.")
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Arbitrary key-value data for your internal use. Keys should be strings; values can be any JSON value. ")
     id: Optional[StrictStr] = None
     object: Optional[StrictStr] = None
     parent_id: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["antifraud_info", "brand", "description", "metadata", "name", "quantity", "sku", "tags", "unit_price", "id", "object", "parent_id"]
+    __properties: ClassVar[List[str]] = ["name", "unit_price", "quantity", "sku", "brand", "description", "tags", "metadata", "id", "object", "parent_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,15 +92,14 @@ class ProductDataResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "antifraud_info": obj.get("antifraud_info"),
-            "brand": obj.get("brand"),
-            "description": obj.get("description"),
-            "metadata": obj.get("metadata"),
             "name": obj.get("name"),
+            "unit_price": obj.get("unit_price"),
             "quantity": obj.get("quantity"),
             "sku": obj.get("sku"),
+            "brand": obj.get("brand"),
+            "description": obj.get("description"),
             "tags": obj.get("tags"),
-            "unit_price": obj.get("unit_price"),
+            "metadata": obj.get("metadata"),
             "id": obj.get("id"),
             "object": obj.get("object"),
             "parent_id": obj.get("parent_id")

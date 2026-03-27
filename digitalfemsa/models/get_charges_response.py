@@ -28,12 +28,12 @@ class GetChargesResponse(BaseModel):
     """
     GetChargesResponse
     """ # noqa: E501
-    has_more: StrictBool = Field(description="Indicates if there are more pages to be requested")
-    object: StrictStr = Field(description="Object type, in this case is list")
     next_page_url: Optional[StrictStr] = Field(default=None, description="URL of the next page.")
     previous_page_url: Optional[StrictStr] = Field(default=None, description="Url of the previous page.")
+    has_more: StrictBool = Field(description="Indicates if there are more pages to be requested")
+    object: StrictStr = Field(description="Object type, in this case is list")
     data: Optional[List[ChargeResponse]] = None
-    __properties: ClassVar[List[str]] = ["has_more", "object", "next_page_url", "previous_page_url", "data"]
+    __properties: ClassVar[List[str]] = ["next_page_url", "previous_page_url", "has_more", "object", "data"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,10 +103,10 @@ class GetChargesResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "has_more": obj.get("has_more"),
-            "object": obj.get("object"),
             "next_page_url": obj.get("next_page_url"),
             "previous_page_url": obj.get("previous_page_url"),
+            "has_more": obj.get("has_more"),
+            "object": obj.get("object"),
             "data": [ChargeResponse.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None
         })
         return _obj

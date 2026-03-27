@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class OrderResponseCustomerInfo(BaseModel):
     """
-    OrderResponseCustomerInfo
+    Customer information associated with the order.
     """ # noqa: E501
     customer_custom_reference: Optional[StrictStr] = Field(default=None, description="Custom reference")
     name: Optional[StrictStr] = None

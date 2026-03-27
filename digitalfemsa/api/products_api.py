@@ -46,7 +46,7 @@ class ProductsApi:
     def orders_create_product(
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
-        product: Annotated[Product, Field(description="requested field for a product")],
+        product: Annotated[Product, Field(description="Fields required to create a new product (line item) for an existing order. This request adds a new item to the order.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -64,11 +64,11 @@ class ProductsApi:
     ) -> ProductOrderResponse:
         """Create Product
 
-        Create a new product for an existing order.
+        Creates a new product (line item) for an existing order. Use this endpoint to add an additional item to the order after it has been created.
 
         :param id: Identifier of the resource (required)
         :type id: str
-        :param product: requested field for a product (required)
+        :param product: Fields required to create a new product (line item) for an existing order. This request adds a new item to the order. (required)
         :type product: Product
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -128,7 +128,7 @@ class ProductsApi:
     def orders_create_product_with_http_info(
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
-        product: Annotated[Product, Field(description="requested field for a product")],
+        product: Annotated[Product, Field(description="Fields required to create a new product (line item) for an existing order. This request adds a new item to the order.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -146,11 +146,11 @@ class ProductsApi:
     ) -> ApiResponse[ProductOrderResponse]:
         """Create Product
 
-        Create a new product for an existing order.
+        Creates a new product (line item) for an existing order. Use this endpoint to add an additional item to the order after it has been created.
 
         :param id: Identifier of the resource (required)
         :type id: str
-        :param product: requested field for a product (required)
+        :param product: Fields required to create a new product (line item) for an existing order. This request adds a new item to the order. (required)
         :type product: Product
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -210,7 +210,7 @@ class ProductsApi:
     def orders_create_product_without_preload_content(
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
-        product: Annotated[Product, Field(description="requested field for a product")],
+        product: Annotated[Product, Field(description="Fields required to create a new product (line item) for an existing order. This request adds a new item to the order.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -228,11 +228,11 @@ class ProductsApi:
     ) -> RESTResponseType:
         """Create Product
 
-        Create a new product for an existing order.
+        Creates a new product (line item) for an existing order. Use this endpoint to add an additional item to the order after it has been created.
 
         :param id: Identifier of the resource (required)
         :type id: str
-        :param product: requested field for a product (required)
+        :param product: Fields required to create a new product (line item) for an existing order. This request adds a new item to the order. (required)
         :type product: Product
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -389,7 +389,7 @@ class ProductsApi:
     ) -> ProductOrderResponse:
         """Delete Product
 
-        Delete product for an existing orden
+        Deletes a product (line item) from an existing order. The API will validate whether the order can be modified before removing the item.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -435,8 +435,8 @@ class ProductsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductOrderResponse",
             '401': "Error",
-            '422': "Error",
             '404': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -472,7 +472,7 @@ class ProductsApi:
     ) -> ApiResponse[ProductOrderResponse]:
         """Delete Product
 
-        Delete product for an existing orden
+        Deletes a product (line item) from an existing order. The API will validate whether the order can be modified before removing the item.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -518,8 +518,8 @@ class ProductsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductOrderResponse",
             '401': "Error",
-            '422': "Error",
             '404': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -555,7 +555,7 @@ class ProductsApi:
     ) -> RESTResponseType:
         """Delete Product
 
-        Delete product for an existing orden
+        Deletes a product (line item) from an existing order. The API will validate whether the order can be modified before removing the item.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -601,8 +601,8 @@ class ProductsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductOrderResponse",
             '401': "Error",
-            '422': "Error",
             '404': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -687,7 +687,7 @@ class ProductsApi:
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
         line_item_id: Annotated[StrictStr, Field(description="identifier")],
-        update_product: Annotated[UpdateProduct, Field(description="requested field for products")],
+        update_product: Annotated[UpdateProduct, Field(description="Fields allowed to update an existing product (line item) in an order. All fields are optional; only the provided fields will be updated.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -705,13 +705,13 @@ class ProductsApi:
     ) -> ProductOrderResponse:
         """Update Product
 
-        Update an existing product for an existing orden
+        Updates an existing product (line item) for an existing order. Use this endpoint to modify the details of a specific line item in the order.
 
         :param id: Identifier of the resource (required)
         :type id: str
         :param line_item_id: identifier (required)
         :type line_item_id: str
-        :param update_product: requested field for products (required)
+        :param update_product: Fields allowed to update an existing product (line item) in an order. All fields are optional; only the provided fields will be updated. (required)
         :type update_product: UpdateProduct
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -754,8 +754,8 @@ class ProductsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductOrderResponse",
             '401': "Error",
-            '422': "Error",
             '404': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -774,7 +774,7 @@ class ProductsApi:
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
         line_item_id: Annotated[StrictStr, Field(description="identifier")],
-        update_product: Annotated[UpdateProduct, Field(description="requested field for products")],
+        update_product: Annotated[UpdateProduct, Field(description="Fields allowed to update an existing product (line item) in an order. All fields are optional; only the provided fields will be updated.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -792,13 +792,13 @@ class ProductsApi:
     ) -> ApiResponse[ProductOrderResponse]:
         """Update Product
 
-        Update an existing product for an existing orden
+        Updates an existing product (line item) for an existing order. Use this endpoint to modify the details of a specific line item in the order.
 
         :param id: Identifier of the resource (required)
         :type id: str
         :param line_item_id: identifier (required)
         :type line_item_id: str
-        :param update_product: requested field for products (required)
+        :param update_product: Fields allowed to update an existing product (line item) in an order. All fields are optional; only the provided fields will be updated. (required)
         :type update_product: UpdateProduct
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -841,8 +841,8 @@ class ProductsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductOrderResponse",
             '401': "Error",
-            '422': "Error",
             '404': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -861,7 +861,7 @@ class ProductsApi:
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
         line_item_id: Annotated[StrictStr, Field(description="identifier")],
-        update_product: Annotated[UpdateProduct, Field(description="requested field for products")],
+        update_product: Annotated[UpdateProduct, Field(description="Fields allowed to update an existing product (line item) in an order. All fields are optional; only the provided fields will be updated.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -879,13 +879,13 @@ class ProductsApi:
     ) -> RESTResponseType:
         """Update Product
 
-        Update an existing product for an existing orden
+        Updates an existing product (line item) for an existing order. Use this endpoint to modify the details of a specific line item in the order.
 
         :param id: Identifier of the resource (required)
         :type id: str
         :param line_item_id: identifier (required)
         :type line_item_id: str
-        :param update_product: requested field for products (required)
+        :param update_product: Fields allowed to update an existing product (line item) in an order. All fields are optional; only the provided fields will be updated. (required)
         :type update_product: UpdateProduct
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -928,8 +928,8 @@ class ProductsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductOrderResponse",
             '401': "Error",
-            '422': "Error",
             '404': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(

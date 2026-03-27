@@ -26,18 +26,19 @@ from typing_extensions import Self
 
 class Checkout(BaseModel):
     """
-    It is a sub-resource of the Order model that can be stipulated in order to configure its corresponding checkout
+    Creates a Payment Link. This is a sub-resource related to an Order template: each time a customer pays using the link, the API will create an Order using `order_template`. 
     """ # noqa: E501
-    allowed_payment_methods: List[StrictStr] = Field(description="Those are the payment methods that will be available for the link")
-    expires_at: StrictInt = Field(description="It is the time when the link will expire. It is expressed in seconds since the Unix epoch. The valid range is from 2 to 365 days (the valid range will be taken from the next day of the creation date at 00:01 hrs) ")
-    name: StrictStr = Field(description="Reason for charge")
-    needs_shipping_contact: Optional[StrictBool] = Field(default=None, description="This flag allows you to fill in the shipping information at checkout.")
-    on_demand_enabled: Optional[StrictBool] = Field(default=None, description="This flag allows you to specify if the link will be on demand.")
-    order_template: CheckoutOrderTemplate
-    payments_limit_count: Optional[StrictInt] = Field(default=None, description="It is the number of payments that can be made through the link.")
+    name: StrictStr = Field(description="Payment link name.")
+    type: StrictStr = Field(description="Checkout type.")
     recurrent: StrictBool = Field(description="false: single use. true: multiple payments")
-    type: StrictStr = Field(description="It is the type of link that will be created. It must be a valid type.")
-    __properties: ClassVar[List[str]] = ["allowed_payment_methods", "expires_at", "name", "needs_shipping_contact", "on_demand_enabled", "order_template", "payments_limit_count", "recurrent", "type"]
+    payments_limit_count: Optional[StrictInt] = Field(default=None, description="Required when `recurrent` is true. Maximum number of payments allowed through the link.")
+    allowed_payment_methods: List[StrictStr] = Field(description="Payment methods available in the payment link.")
+    needs_shipping_contact: StrictBool = Field(description="This flag allows you to fill in the shipping information at checkout.")
+    starts_at: Optional[StrictInt] = Field(default=None, description="Start time for the link. Unix timestamp in seconds.")
+    expires_at: StrictInt = Field(description="Expiration time for the link (Unix timestamp in seconds). Valid range is between 2 and 365 days (calculated from the next day of creation at 00:01). ")
+    can_not_expire: Optional[StrictBool] = Field(default=None, description="If true, the link does not expire.")
+    order_template: CheckoutOrderTemplate
+    __properties: ClassVar[List[str]] = ["name", "type", "recurrent", "payments_limit_count", "allowed_payment_methods", "needs_shipping_contact", "starts_at", "expires_at", "can_not_expire", "order_template"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,11 +82,6 @@ class Checkout(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of order_template
         if self.order_template:
             _dict['order_template'] = self.order_template.to_dict()
-        # set to None if on_demand_enabled (nullable) is None
-        # and model_fields_set contains the field
-        if self.on_demand_enabled is None and "on_demand_enabled" in self.model_fields_set:
-            _dict['on_demand_enabled'] = None
-
         return _dict
 
     @classmethod
@@ -98,15 +94,16 @@ class Checkout(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "allowed_payment_methods": obj.get("allowed_payment_methods"),
-            "expires_at": obj.get("expires_at"),
             "name": obj.get("name"),
-            "needs_shipping_contact": obj.get("needs_shipping_contact"),
-            "on_demand_enabled": obj.get("on_demand_enabled"),
-            "order_template": CheckoutOrderTemplate.from_dict(obj["order_template"]) if obj.get("order_template") is not None else None,
-            "payments_limit_count": obj.get("payments_limit_count"),
+            "type": obj.get("type"),
             "recurrent": obj.get("recurrent"),
-            "type": obj.get("type")
+            "payments_limit_count": obj.get("payments_limit_count"),
+            "allowed_payment_methods": obj.get("allowed_payment_methods"),
+            "needs_shipping_contact": obj.get("needs_shipping_contact"),
+            "starts_at": obj.get("starts_at"),
+            "expires_at": obj.get("expires_at"),
+            "can_not_expire": obj.get("can_not_expire"),
+            "order_template": CheckoutOrderTemplate.from_dict(obj["order_template"]) if obj.get("order_template") is not None else None
         })
         return _obj
 

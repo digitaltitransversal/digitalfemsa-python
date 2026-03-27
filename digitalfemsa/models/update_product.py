@@ -28,16 +28,15 @@ class UpdateProduct(BaseModel):
     """
     UpdateProduct
     """ # noqa: E501
-    antifraud_info: Optional[Dict[str, Dict[str, Any]]] = None
-    description: Optional[Annotated[str, Field(strict=True, max_length=250)]] = None
-    sku: Optional[StrictStr] = None
     name: Optional[StrictStr] = None
     unit_price: Optional[Annotated[int, Field(strict=True, ge=0)]] = None
     quantity: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
-    tags: Optional[List[StrictStr]] = None
+    sku: Optional[StrictStr] = None
     brand: Optional[StrictStr] = None
-    metadata: Optional[Dict[str, StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["antifraud_info", "description", "sku", "name", "unit_price", "quantity", "tags", "brand", "metadata"]
+    description: Optional[Annotated[str, Field(strict=True, max_length=250)]] = None
+    tags: Optional[Annotated[List[Annotated[str, Field(min_length=2, strict=True, max_length=249)]], Field(min_length=1)]] = None
+    metadata: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["name", "unit_price", "quantity", "sku", "brand", "description", "tags", "metadata"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,14 +89,13 @@ class UpdateProduct(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "antifraud_info": obj.get("antifraud_info"),
-            "description": obj.get("description"),
-            "sku": obj.get("sku"),
             "name": obj.get("name"),
             "unit_price": obj.get("unit_price"),
             "quantity": obj.get("quantity"),
-            "tags": obj.get("tags"),
+            "sku": obj.get("sku"),
             "brand": obj.get("brand"),
+            "description": obj.get("description"),
+            "tags": obj.get("tags"),
             "metadata": obj.get("metadata")
         })
         return _obj

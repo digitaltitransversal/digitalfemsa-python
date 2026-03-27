@@ -18,11 +18,11 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from digitalfemsa.models.charge_response_channel import ChargeResponseChannel
+from typing_extensions import Annotated
 from digitalfemsa.models.order_fiscal_entity_response import OrderFiscalEntityResponse
-from digitalfemsa.models.order_next_action_response import OrderNextActionResponse
+from digitalfemsa.models.order_response_channel import OrderResponseChannel
 from digitalfemsa.models.order_response_charges import OrderResponseCharges
 from digitalfemsa.models.order_response_checkout import OrderResponseCheckout
 from digitalfemsa.models.order_response_customer_info import OrderResponseCustomerInfo
@@ -34,30 +34,41 @@ from typing_extensions import Self
 
 class OrderResponse(BaseModel):
     """
-    order response
+    Order model. Some nested resources are returned as list previews (for example: `charges`, `line_items`), and may be `null` depending on the request/context. The `checkout` field is only present when the order is linked to a checkout (`channel.checkout_request_id`). 
     """ # noqa: E501
-    amount: Optional[StrictInt] = Field(default=None, description="The total amount to be collected in cents")
-    amount_refunded: Optional[StrictInt] = Field(default=None, description="The total amount refunded in cents")
-    channel: Optional[ChargeResponseChannel] = None
-    charges: Optional[OrderResponseCharges] = None
-    checkout: Optional[OrderResponseCheckout] = None
-    created_at: Optional[StrictInt] = Field(default=None, description="The time at which the object was created in seconds since the Unix epoch")
-    currency: Optional[StrictStr] = Field(default=None, description="The three-letter ISO 4217 currency code. The currency of the order.")
-    customer_info: Optional[OrderResponseCustomerInfo] = None
-    discount_lines: Optional[OrderResponseDiscountLines] = None
-    fiscal_entity: Optional[OrderFiscalEntityResponse] = None
     id: Optional[StrictStr] = None
-    is_refundable: Optional[StrictBool] = None
-    line_items: Optional[OrderResponseProducts] = None
-    livemode: Optional[StrictBool] = Field(default=None, description="Whether the object exists in live mode or test mode")
-    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.")
-    next_action: Optional[OrderNextActionResponse] = None
-    object: Optional[StrictStr] = Field(default=None, description="String representing the object’s type. Objects of the same type share the same value.")
-    payment_status: Optional[StrictStr] = Field(default=None, description="The payment status of the order.")
-    processing_mode: Optional[StrictStr] = Field(default=None, description="Indicates the processing mode for the order, either ecommerce, recurrent or validation.")
+    object: Optional[StrictStr] = None
+    livemode: Optional[StrictBool] = None
+    amount: Optional[StrictInt] = None
+    currency: Optional[Annotated[str, Field(strict=True, max_length=3)]] = None
+    payment_status: Optional[StrictStr] = Field(default=None, description="Current payment status of the order. It can be `null` for orders without payment information yet.")
+    amount_refunded: Optional[StrictInt] = None
+    split_payment: Optional[StrictBool] = Field(default=None, description="Indicates whether the order uses split payments (when available/configured).")
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Metadata attached to the order.")
+    is_refundable: Optional[StrictBool] = Field(default=None, description="Indicates whether the order is currently refundable.")
+    created_at: Optional[StrictInt] = None
+    updated_at: Optional[StrictInt] = None
+    customer_info: Optional[OrderResponseCustomerInfo] = None
     shipping_contact: Optional[OrderResponseShippingContact] = None
-    updated_at: Optional[StrictInt] = Field(default=None, description="The time at which the object was last updated in seconds since the Unix epoch")
-    __properties: ClassVar[List[str]] = ["amount", "amount_refunded", "channel", "charges", "checkout", "created_at", "currency", "customer_info", "discount_lines", "fiscal_entity", "id", "is_refundable", "line_items", "livemode", "metadata", "next_action", "object", "payment_status", "processing_mode", "shipping_contact", "updated_at"]
+    channel: Optional[OrderResponseChannel] = None
+    fiscal_entity: Optional[OrderFiscalEntityResponse] = None
+    checkout: Optional[OrderResponseCheckout] = None
+    line_items: Optional[OrderResponseProducts] = None
+    discount_lines: Optional[OrderResponseDiscountLines] = None
+    charges: Optional[OrderResponseCharges] = None
+    partial_reference: Optional[Dict[str, Any]] = Field(default=None, description="Partial reference information (when applicable). Structure may vary depending on the payment flow.")
+    payments_info: Optional[Dict[str, Any]] = Field(default=None, description="Additional payment information (when available). Structure may vary.")
+    __properties: ClassVar[List[str]] = ["id", "object", "livemode", "amount", "currency", "payment_status", "amount_refunded", "split_payment", "metadata", "is_refundable", "created_at", "updated_at", "customer_info", "shipping_contact", "channel", "fiscal_entity", "checkout", "line_items", "discount_lines", "charges", "partial_reference", "payments_info"]
+
+    @field_validator('object')
+    def object_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['order']):
+            raise ValueError("must be one of enum values ('order')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -98,37 +109,64 @@ class OrderResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of channel
-        if self.channel:
-            _dict['channel'] = self.channel.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of charges
-        if self.charges:
-            _dict['charges'] = self.charges.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of checkout
-        if self.checkout:
-            _dict['checkout'] = self.checkout.to_dict()
         # override the default output from pydantic by calling `to_dict()` of customer_info
         if self.customer_info:
             _dict['customer_info'] = self.customer_info.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of discount_lines
-        if self.discount_lines:
-            _dict['discount_lines'] = self.discount_lines.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of fiscal_entity
-        if self.fiscal_entity:
-            _dict['fiscal_entity'] = self.fiscal_entity.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of line_items
-        if self.line_items:
-            _dict['line_items'] = self.line_items.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of next_action
-        if self.next_action:
-            _dict['next_action'] = self.next_action.to_dict()
         # override the default output from pydantic by calling `to_dict()` of shipping_contact
         if self.shipping_contact:
             _dict['shipping_contact'] = self.shipping_contact.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of channel
+        if self.channel:
+            _dict['channel'] = self.channel.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of fiscal_entity
+        if self.fiscal_entity:
+            _dict['fiscal_entity'] = self.fiscal_entity.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of checkout
+        if self.checkout:
+            _dict['checkout'] = self.checkout.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of line_items
+        if self.line_items:
+            _dict['line_items'] = self.line_items.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of discount_lines
+        if self.discount_lines:
+            _dict['discount_lines'] = self.discount_lines.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of charges
+        if self.charges:
+            _dict['charges'] = self.charges.to_dict()
+        # set to None if payment_status (nullable) is None
+        # and model_fields_set contains the field
+        if self.payment_status is None and "payment_status" in self.model_fields_set:
+            _dict['payment_status'] = None
+
+        # set to None if split_payment (nullable) is None
+        # and model_fields_set contains the field
+        if self.split_payment is None and "split_payment" in self.model_fields_set:
+            _dict['split_payment'] = None
+
+        # set to None if shipping_contact (nullable) is None
+        # and model_fields_set contains the field
+        if self.shipping_contact is None and "shipping_contact" in self.model_fields_set:
+            _dict['shipping_contact'] = None
+
+        # set to None if channel (nullable) is None
+        # and model_fields_set contains the field
+        if self.channel is None and "channel" in self.model_fields_set:
+            _dict['channel'] = None
+
         # set to None if fiscal_entity (nullable) is None
         # and model_fields_set contains the field
         if self.fiscal_entity is None and "fiscal_entity" in self.model_fields_set:
             _dict['fiscal_entity'] = None
+
+        # set to None if partial_reference (nullable) is None
+        # and model_fields_set contains the field
+        if self.partial_reference is None and "partial_reference" in self.model_fields_set:
+            _dict['partial_reference'] = None
+
+        # set to None if payments_info (nullable) is None
+        # and model_fields_set contains the field
+        if self.payments_info is None and "payments_info" in self.model_fields_set:
+            _dict['payments_info'] = None
 
         return _dict
 
@@ -142,27 +180,28 @@ class OrderResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "amount": obj.get("amount"),
-            "amount_refunded": obj.get("amount_refunded"),
-            "channel": ChargeResponseChannel.from_dict(obj["channel"]) if obj.get("channel") is not None else None,
-            "charges": OrderResponseCharges.from_dict(obj["charges"]) if obj.get("charges") is not None else None,
-            "checkout": OrderResponseCheckout.from_dict(obj["checkout"]) if obj.get("checkout") is not None else None,
-            "created_at": obj.get("created_at"),
-            "currency": obj.get("currency"),
-            "customer_info": OrderResponseCustomerInfo.from_dict(obj["customer_info"]) if obj.get("customer_info") is not None else None,
-            "discount_lines": OrderResponseDiscountLines.from_dict(obj["discount_lines"]) if obj.get("discount_lines") is not None else None,
-            "fiscal_entity": OrderFiscalEntityResponse.from_dict(obj["fiscal_entity"]) if obj.get("fiscal_entity") is not None else None,
             "id": obj.get("id"),
-            "is_refundable": obj.get("is_refundable"),
-            "line_items": OrderResponseProducts.from_dict(obj["line_items"]) if obj.get("line_items") is not None else None,
-            "livemode": obj.get("livemode"),
-            "metadata": obj.get("metadata"),
-            "next_action": OrderNextActionResponse.from_dict(obj["next_action"]) if obj.get("next_action") is not None else None,
             "object": obj.get("object"),
+            "livemode": obj.get("livemode"),
+            "amount": obj.get("amount"),
+            "currency": obj.get("currency"),
             "payment_status": obj.get("payment_status"),
-            "processing_mode": obj.get("processing_mode"),
+            "amount_refunded": obj.get("amount_refunded"),
+            "split_payment": obj.get("split_payment"),
+            "metadata": obj.get("metadata"),
+            "is_refundable": obj.get("is_refundable"),
+            "created_at": obj.get("created_at"),
+            "updated_at": obj.get("updated_at"),
+            "customer_info": OrderResponseCustomerInfo.from_dict(obj["customer_info"]) if obj.get("customer_info") is not None else None,
             "shipping_contact": OrderResponseShippingContact.from_dict(obj["shipping_contact"]) if obj.get("shipping_contact") is not None else None,
-            "updated_at": obj.get("updated_at")
+            "channel": OrderResponseChannel.from_dict(obj["channel"]) if obj.get("channel") is not None else None,
+            "fiscal_entity": OrderFiscalEntityResponse.from_dict(obj["fiscal_entity"]) if obj.get("fiscal_entity") is not None else None,
+            "checkout": OrderResponseCheckout.from_dict(obj["checkout"]) if obj.get("checkout") is not None else None,
+            "line_items": OrderResponseProducts.from_dict(obj["line_items"]) if obj.get("line_items") is not None else None,
+            "discount_lines": OrderResponseDiscountLines.from_dict(obj["discount_lines"]) if obj.get("discount_lines") is not None else None,
+            "charges": OrderResponseCharges.from_dict(obj["charges"]) if obj.get("charges") is not None else None,
+            "partial_reference": obj.get("partial_reference"),
+            "payments_info": obj.get("payments_info")
         })
         return _obj
 

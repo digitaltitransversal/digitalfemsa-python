@@ -4,15 +4,17 @@ All URIs are relative to *https://api.digitalfemsa.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_charges**](ChargesApi.md#get_charges) | **GET** /charges | Get A List of Charges
-[**orders_create_charge**](ChargesApi.md#orders_create_charge) | **POST** /orders/{id}/charges | Create charge
+[**get_charges**](ChargesApi.md#get_charges) | **GET** /charges | List charges
+[**orders_create_charge**](ChargesApi.md#orders_create_charge) | **POST** /orders/{id}/charges | Create a charge for an order
 [**update_charge**](ChargesApi.md#update_charge) | **PUT** /charges/{id} | Update a charge
 
 
 # **get_charges**
-> GetChargesResponse get_charges(accept_language=accept_language, x_child_company_id=x_child_company_id, limit=limit, search=search, next=next, previous=previous)
+> GetChargesResponse get_charges(accept_language=accept_language, x_child_company_id=x_child_company_id, limit=limit, next=next, previous=previous, search=search)
 
-Get A List of Charges
+List charges
+
+Retrieves a paginated list of charges for the authenticated account.  Use the pagination parameters (`limit`, `next_page`, `previous_page`) to navigate through results. Use `search` to filter charges (for example by id or reference). 
 
 ### Example
 
@@ -47,13 +49,13 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     accept_language = 'es' # str | Use for knowing which language to use (optional) (default to 'es')
     x_child_company_id = '6441b6376b60c3a638da80af' # str | In the case of a holding company, the company id of the child company to which will process the request. (optional)
     limit = 20 # int | The numbers of items to return, the maximum value is 250 (optional) (default to 20)
-    search = 'search_example' # str | General order search, e.g. by mail, reference etc. (optional)
     next = 'next_example' # str | next page (optional)
     previous = 'previous_example' # str | previous page (optional)
+    search = 'search_example' # str | General order search, e.g. by mail, reference etc. (optional)
 
     try:
-        # Get A List of Charges
-        api_response = api_instance.get_charges(accept_language=accept_language, x_child_company_id=x_child_company_id, limit=limit, search=search, next=next, previous=previous)
+        # List charges
+        api_response = api_instance.get_charges(accept_language=accept_language, x_child_company_id=x_child_company_id, limit=limit, next=next, previous=previous, search=search)
         print("The response of ChargesApi->get_charges:\n")
         pprint(api_response)
     except Exception as e:
@@ -70,9 +72,9 @@ Name | Type | Description  | Notes
  **accept_language** | **str**| Use for knowing which language to use | [optional] [default to &#39;es&#39;]
  **x_child_company_id** | **str**| In the case of a holding company, the company id of the child company to which will process the request. | [optional] 
  **limit** | **int**| The numbers of items to return, the maximum value is 250 | [optional] [default to 20]
- **search** | **str**| General order search, e.g. by mail, reference etc. | [optional] 
  **next** | **str**| next page | [optional] 
  **previous** | **str**| previous page | [optional] 
+ **search** | **str**| General order search, e.g. by mail, reference etc. | [optional] 
 
 ### Return type
 
@@ -91,7 +93,8 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | successful |  * Date - The date and time that the response was sent <br>  * Content-Type - The format of the response body <br>  * Content-Length - The length of the response body in bytes <br>  * Connection - The type of connection used to transfer the response <br>  |
+**200** | successful operation |  -  |
+**401** | authentication error |  -  |
 **422** | whitelist validation error |  -  |
 **500** | internal server error |  -  |
 
@@ -100,9 +103,9 @@ Name | Type | Description  | Notes
 # **orders_create_charge**
 > ChargeOrderResponse orders_create_charge(id, charge_request, accept_language=accept_language, x_child_company_id=x_child_company_id)
 
-Create charge
+Create a charge for an order
 
-Create charge for an existing orden
+Creates a new charge associated with an existing order.  Notes: - The charge is created for the order identified by the path parameter `id`. - Depending on the payment method, the charge may be created in a non-final status (for example, pending). - If the order does not meet the required conditions, the API may respond with **428 Precondition Required**. 
 
 ### Example
 
@@ -141,7 +144,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     x_child_company_id = '6441b6376b60c3a638da80af' # str | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
     try:
-        # Create charge
+        # Create a charge for an order
         api_response = api_instance.orders_create_charge(id, charge_request, accept_language=accept_language, x_child_company_id=x_child_company_id)
         print("The response of ChargesApi->orders_create_charge:\n")
         pprint(api_response)
@@ -178,9 +181,10 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | successful |  -  |
+**200** | successful operation |  -  |
 **401** | authentication error |  -  |
 **404** | not found entity |  -  |
+**422** | parameter validation error |  -  |
 **428** | Precondition Required |  -  |
 **500** | internal server error |  -  |
 
@@ -190,6 +194,8 @@ Name | Type | Description  | Notes
 > ChargeResponse update_charge(id, charge_update_request, accept_language=accept_language, x_child_company_id=x_child_company_id)
 
 Update a charge
+
+Updates an existing charge. Only `reference_id` can be updated.
 
 ### Example
 
@@ -265,7 +271,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | successful |  * Date - The date and time that the response was sent <br>  * Content-Type - The format of the response body <br>  * Content-Length - The length of the response body in bytes <br>  * Connection - The type of connection used to transfer the response <br>  |
+**200** | successful operation |  -  |
 **422** | whitelist validation error |  -  |
 **404** | not found entity |  -  |
 **500** | internal server error |  -  |

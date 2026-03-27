@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**has_more** | **bool** | Indicates if there are more pages to be requested | 
-**object** | **str** | Object type, in this case is list | 
 **next_page_url** | **str** | URL of the next page. | [optional] 
 **previous_page_url** | **str** | Url of the previous page. | [optional] 
+**has_more** | **bool** | Indicates if there are more pages to be requested | 
+**object** | **str** | Object type, in this case is list | 
 **data** | [**List[ChargeResponse]**](ChargeResponse.md) |  | [optional] 
 
 ## Example

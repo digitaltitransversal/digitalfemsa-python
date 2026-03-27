@@ -60,9 +60,9 @@ class TransfersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> TransferResponse:
-        """Get Transfer
+        """Get transfer
 
-        Get the details of a Transfer
+        Retrieves the details of a transfer by its ID.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -105,7 +105,6 @@ class TransfersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TransferResponse",
             '401': "Error",
-            '404': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -138,9 +137,9 @@ class TransfersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[TransferResponse]:
-        """Get Transfer
+        """Get transfer
 
-        Get the details of a Transfer
+        Retrieves the details of a transfer by its ID.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -183,7 +182,6 @@ class TransfersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TransferResponse",
             '401': "Error",
-            '404': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -216,9 +214,9 @@ class TransfersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get Transfer
+        """Get transfer
 
-        Get the details of a Transfer
+        Retrieves the details of a transfer by its ID.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -261,7 +259,6 @@ class TransfersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TransferResponse",
             '401': "Error",
-            '404': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -360,9 +357,9 @@ class TransfersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetTransfersResponse:
-        """Get a list of transfers
+        """List transfers
 
-        Get transfers details in the form of a list
+        Returns a paginated list of transfers (payouts/dispersions).  A transfer represents a payout of funds to the merchant (where the money is sent and the payout status). Transfers typically aggregate multiple transactions.  If you need movement-level details (amount/fee/net per operation) or to reconcile charges, use GET /transactions. 
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -449,9 +446,9 @@ class TransfersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetTransfersResponse]:
-        """Get a list of transfers
+        """List transfers
 
-        Get transfers details in the form of a list
+        Returns a paginated list of transfers (payouts/dispersions).  A transfer represents a payout of funds to the merchant (where the money is sent and the payout status). Transfers typically aggregate multiple transactions.  If you need movement-level details (amount/fee/net per operation) or to reconcile charges, use GET /transactions. 
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -538,9 +535,9 @@ class TransfersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get a list of transfers
+        """List transfers
 
-        Get transfers details in the form of a list
+        Returns a paginated list of transfers (payouts/dispersions).  A transfer represents a payout of funds to the merchant (where the money is sent and the payout status). Transfers typically aggregate multiple transactions.  If you need movement-level details (amount/fee/net per operation) or to reconcile charges, use GET /transactions. 
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str

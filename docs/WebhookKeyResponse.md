@@ -1,6 +1,6 @@
 # WebhookKeyResponse
 
-webhook keys model
+Represents a webhook signing key configuration for the company.
 
 ## Properties
 

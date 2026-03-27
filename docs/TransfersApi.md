@@ -4,16 +4,16 @@ All URIs are relative to *https://api.digitalfemsa.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_transfer**](TransfersApi.md#get_transfer) | **GET** /transfers/{id} | Get Transfer
-[**get_transfers**](TransfersApi.md#get_transfers) | **GET** /transfers | Get a list of transfers
+[**get_transfer**](TransfersApi.md#get_transfer) | **GET** /transfers/{id} | Get transfer
+[**get_transfers**](TransfersApi.md#get_transfers) | **GET** /transfers | List transfers
 
 
 # **get_transfer**
 > TransferResponse get_transfer(id, accept_language=accept_language, x_child_company_id=x_child_company_id)
 
-Get Transfer
+Get transfer
 
-Get the details of a Transfer
+Retrieves the details of a transfer by its ID.
 
 ### Example
 
@@ -50,7 +50,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     x_child_company_id = '6441b6376b60c3a638da80af' # str | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
     try:
-        # Get Transfer
+        # Get transfer
         api_response = api_instance.get_transfer(id, accept_language=accept_language, x_child_company_id=x_child_company_id)
         print("The response of TransfersApi->get_transfer:\n")
         pprint(api_response)
@@ -86,9 +86,8 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | successful |  * Date - The date and time that the response was sent <br>  * Content-Type - The format of the response body <br>  * Content-Length - The length of the response body in bytes <br>  * Connection - The type of connection used to transfer the response <br>  |
+**200** | successful operation |  -  |
 **401** | authentication error |  -  |
-**404** | authentication error |  -  |
 **500** | internal server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -96,9 +95,9 @@ Name | Type | Description  | Notes
 # **get_transfers**
 > GetTransfersResponse get_transfers(accept_language=accept_language, x_child_company_id=x_child_company_id, limit=limit, search=search, next=next, previous=previous)
 
-Get a list of transfers
+List transfers
 
-Get transfers details in the form of a list
+Returns a paginated list of transfers (payouts/dispersions).  A transfer represents a payout of funds to the merchant (where the money is sent and the payout status). Transfers typically aggregate multiple transactions.  If you need movement-level details (amount/fee/net per operation) or to reconcile charges, use GET /transactions. 
 
 ### Example
 
@@ -138,7 +137,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     previous = 'previous_example' # str | previous page (optional)
 
     try:
-        # Get a list of transfers
+        # List transfers
         api_response = api_instance.get_transfers(accept_language=accept_language, x_child_company_id=x_child_company_id, limit=limit, search=search, next=next, previous=previous)
         print("The response of TransfersApi->get_transfers:\n")
         pprint(api_response)
@@ -177,7 +176,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | successful |  * Date - The date and time that the response was sent <br>  * Content-Type - The format of the response body <br>  * Content-Length - The length of the response body in bytes <br>  * Connection - The type of connection used to transfer the response <br>  |
+**200** | successful |  -  |
 **401** | authentication error |  -  |
 **500** | internal server error |  -  |
 

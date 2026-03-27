@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **amount** | **int** |  | [optional] 
-**channel** | [**ChargeResponseChannel**](ChargeResponseChannel.md) |  | [optional] 
+**channel** | [**ChargeOrderResponseChannel**](ChargeOrderResponseChannel.md) |  | [optional] 
 **created_at** | **int** |  | [optional] 
 **currency** | **str** |  | [optional] 
 **customer_id** | **str** |  | [optional] 

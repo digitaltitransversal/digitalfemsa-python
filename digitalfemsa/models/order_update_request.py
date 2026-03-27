@@ -18,11 +18,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from digitalfemsa.models.charge_request import ChargeRequest
-from digitalfemsa.models.checkout_request import CheckoutRequest
 from digitalfemsa.models.customer_shipping_contacts import CustomerShippingContacts
 from digitalfemsa.models.order_discount_lines_request import OrderDiscountLinesRequest
 from digitalfemsa.models.order_tax_request import OrderTaxRequest
@@ -35,21 +34,23 @@ from typing_extensions import Self
 
 class OrderUpdateRequest(BaseModel):
     """
-    a order
+    Order update payload. Only supported fields can be modified.
     """ # noqa: E501
-    charges: Optional[List[ChargeRequest]] = None
-    checkout: Optional[CheckoutRequest] = None
-    currency: Optional[Annotated[str, Field(strict=True, max_length=3)]] = Field(default=None, description="Currency with which the payment will be made. It uses the 3-letter code of the [International Standard ISO 4217.](https://es.wikipedia.org/wiki/ISO_4217)")
+    currency: Optional[Annotated[str, Field(strict=True, max_length=3)]] = Field(default=None, description="Currency code in ISO 4217 (3-letter uppercase).")
     customer_info: Optional[OrderUpdateRequestCustomerInfo] = None
-    discount_lines: Optional[List[OrderDiscountLinesRequest]] = Field(default=None, description="List of [discounts](https://developers.femsa.com/v2.1.0/reference/orderscreatediscountline) that are applied to the order. You must have at least one discount.")
-    fiscal_entity: Optional[OrderUpdateFiscalEntityRequest] = None
     line_items: Optional[List[Product]] = Field(default=None, description="List of [products](https://developers.femsa.com/v2.1.0/reference/orderscreateproduct) that are sold in the order. You must have at least one product.")
-    metadata: Optional[Dict[str, StrictStr]] = None
-    pre_authorize: Optional[StrictBool] = Field(default=False, description="Indicates whether the order charges must be preauthorized")
+    charges: Optional[List[ChargeRequest]] = None
+    discount_lines: Optional[List[OrderDiscountLinesRequest]] = Field(default=None, description="List of [discounts](https://developers.femsa.com/v2.1.0/reference/orderscreatediscountline) that are applied to the order. You must have at least one discount.")
+    tax_lines: Optional[List[OrderTaxRequest]] = None
+    shipping_contact_id: Optional[StrictStr] = Field(default=None, description="Existing shipping contact id from the customer to link to this order.")
     shipping_contact: Optional[CustomerShippingContacts] = None
     shipping_lines: Optional[List[ShippingRequest]] = Field(default=None, description="List of [shipping costs](https://developers.femsa.com/v2.1.0/reference/orderscreateshipping). If the online store offers digital products.")
-    tax_lines: Optional[List[OrderTaxRequest]] = None
-    __properties: ClassVar[List[str]] = ["charges", "checkout", "currency", "customer_info", "discount_lines", "fiscal_entity", "line_items", "metadata", "pre_authorize", "shipping_contact", "shipping_lines", "tax_lines"]
+    fiscal_entity_id: Optional[StrictStr] = Field(default=None, description="Existing fiscal entity id from the customer to link to this order.")
+    fiscal_entity: Optional[OrderUpdateFiscalEntityRequest] = None
+    return_url: Optional[StrictStr] = Field(default=None, description="URL where the customer should be redirected after completing a payment flow (if applicable).")
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Arbitrary key-value data that you can attach to the order for your internal use. It is not used for payment processing. Keys should be strings; values can be any JSON value. ")
+    status: Optional[StrictStr] = Field(default=None, description="Order status update (only allowed transitions will be accepted).")
+    __properties: ClassVar[List[str]] = ["currency", "customer_info", "line_items", "charges", "discount_lines", "tax_lines", "shipping_contact_id", "shipping_contact", "shipping_lines", "fiscal_entity_id", "fiscal_entity", "return_url", "metadata", "status"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,29 +91,9 @@ class OrderUpdateRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in charges (list)
-        _items = []
-        if self.charges:
-            for _item in self.charges:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['charges'] = _items
-        # override the default output from pydantic by calling `to_dict()` of checkout
-        if self.checkout:
-            _dict['checkout'] = self.checkout.to_dict()
         # override the default output from pydantic by calling `to_dict()` of customer_info
         if self.customer_info:
             _dict['customer_info'] = self.customer_info.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in discount_lines (list)
-        _items = []
-        if self.discount_lines:
-            for _item in self.discount_lines:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['discount_lines'] = _items
-        # override the default output from pydantic by calling `to_dict()` of fiscal_entity
-        if self.fiscal_entity:
-            _dict['fiscal_entity'] = self.fiscal_entity.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in line_items (list)
         _items = []
         if self.line_items:
@@ -120,6 +101,27 @@ class OrderUpdateRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['line_items'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in charges (list)
+        _items = []
+        if self.charges:
+            for _item in self.charges:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['charges'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in discount_lines (list)
+        _items = []
+        if self.discount_lines:
+            for _item in self.discount_lines:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['discount_lines'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in tax_lines (list)
+        _items = []
+        if self.tax_lines:
+            for _item in self.tax_lines:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['tax_lines'] = _items
         # override the default output from pydantic by calling `to_dict()` of shipping_contact
         if self.shipping_contact:
             _dict['shipping_contact'] = self.shipping_contact.to_dict()
@@ -130,13 +132,19 @@ class OrderUpdateRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['shipping_lines'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in tax_lines (list)
-        _items = []
-        if self.tax_lines:
-            for _item in self.tax_lines:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['tax_lines'] = _items
+        # override the default output from pydantic by calling `to_dict()` of fiscal_entity
+        if self.fiscal_entity:
+            _dict['fiscal_entity'] = self.fiscal_entity.to_dict()
+        # set to None if shipping_contact_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.shipping_contact_id is None and "shipping_contact_id" in self.model_fields_set:
+            _dict['shipping_contact_id'] = None
+
+        # set to None if fiscal_entity_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.fiscal_entity_id is None and "fiscal_entity_id" in self.model_fields_set:
+            _dict['fiscal_entity_id'] = None
+
         return _dict
 
     @classmethod
@@ -149,18 +157,20 @@ class OrderUpdateRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "charges": [ChargeRequest.from_dict(_item) for _item in obj["charges"]] if obj.get("charges") is not None else None,
-            "checkout": CheckoutRequest.from_dict(obj["checkout"]) if obj.get("checkout") is not None else None,
             "currency": obj.get("currency"),
             "customer_info": OrderUpdateRequestCustomerInfo.from_dict(obj["customer_info"]) if obj.get("customer_info") is not None else None,
-            "discount_lines": [OrderDiscountLinesRequest.from_dict(_item) for _item in obj["discount_lines"]] if obj.get("discount_lines") is not None else None,
-            "fiscal_entity": OrderUpdateFiscalEntityRequest.from_dict(obj["fiscal_entity"]) if obj.get("fiscal_entity") is not None else None,
             "line_items": [Product.from_dict(_item) for _item in obj["line_items"]] if obj.get("line_items") is not None else None,
-            "metadata": obj.get("metadata"),
-            "pre_authorize": obj.get("pre_authorize") if obj.get("pre_authorize") is not None else False,
+            "charges": [ChargeRequest.from_dict(_item) for _item in obj["charges"]] if obj.get("charges") is not None else None,
+            "discount_lines": [OrderDiscountLinesRequest.from_dict(_item) for _item in obj["discount_lines"]] if obj.get("discount_lines") is not None else None,
+            "tax_lines": [OrderTaxRequest.from_dict(_item) for _item in obj["tax_lines"]] if obj.get("tax_lines") is not None else None,
+            "shipping_contact_id": obj.get("shipping_contact_id"),
             "shipping_contact": CustomerShippingContacts.from_dict(obj["shipping_contact"]) if obj.get("shipping_contact") is not None else None,
             "shipping_lines": [ShippingRequest.from_dict(_item) for _item in obj["shipping_lines"]] if obj.get("shipping_lines") is not None else None,
-            "tax_lines": [OrderTaxRequest.from_dict(_item) for _item in obj["tax_lines"]] if obj.get("tax_lines") is not None else None
+            "fiscal_entity_id": obj.get("fiscal_entity_id"),
+            "fiscal_entity": OrderUpdateFiscalEntityRequest.from_dict(obj["fiscal_entity"]) if obj.get("fiscal_entity") is not None else None,
+            "return_url": obj.get("return_url"),
+            "metadata": obj.get("metadata"),
+            "status": obj.get("status")
         })
         return _obj
 

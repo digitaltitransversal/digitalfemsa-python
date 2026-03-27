@@ -20,8 +20,8 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from digitalfemsa.models.charge_order_response_channel import ChargeOrderResponseChannel
 from digitalfemsa.models.charge_order_response_payment_method import ChargeOrderResponsePaymentMethod
-from digitalfemsa.models.charge_response_channel import ChargeResponseChannel
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,7 +30,7 @@ class ChargeOrderResponse(BaseModel):
     ChargeOrderResponse
     """ # noqa: E501
     amount: Optional[StrictInt] = None
-    channel: Optional[ChargeResponseChannel] = None
+    channel: Optional[ChargeOrderResponseChannel] = None
     created_at: Optional[StrictInt] = None
     currency: Optional[StrictStr] = None
     customer_id: Optional[StrictStr] = None
@@ -122,7 +122,7 @@ class ChargeOrderResponse(BaseModel):
 
         _obj = cls.model_validate({
             "amount": obj.get("amount"),
-            "channel": ChargeResponseChannel.from_dict(obj["channel"]) if obj.get("channel") is not None else None,
+            "channel": ChargeOrderResponseChannel.from_dict(obj["channel"]) if obj.get("channel") is not None else None,
             "created_at": obj.get("created_at"),
             "currency": obj.get("currency"),
             "customer_id": obj.get("customer_id"),

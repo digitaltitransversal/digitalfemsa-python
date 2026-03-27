@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 Create Tax
 
-Create new taxes for an existing orden
+Creates a new tax line for an existing order. The tax line is added to the order identified by `id`. The response returns the created tax line.
 
 ### Example
 
@@ -48,7 +48,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = digitalfemsa.TaxesApi(api_client)
     id = '6307a60c41de27127515a575' # str | Identifier of the resource
-    order_tax_request = digitalfemsa.OrderTaxRequest() # OrderTaxRequest | requested field for a taxes
+    order_tax_request = digitalfemsa.OrderTaxRequest() # OrderTaxRequest | Request body for creating a tax line.
     accept_language = 'es' # str | Use for knowing which language to use (optional) (default to 'es')
     x_child_company_id = '6441b6376b60c3a638da80af' # str | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
@@ -69,7 +69,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**| Identifier of the resource | 
- **order_tax_request** | [**OrderTaxRequest**](OrderTaxRequest.md)| requested field for a taxes | 
+ **order_tax_request** | [**OrderTaxRequest**](OrderTaxRequest.md)| Request body for creating a tax line. | 
  **accept_language** | **str**| Use for knowing which language to use | [optional] [default to &#39;es&#39;]
  **x_child_company_id** | **str**| In the case of a holding company, the company id of the child company to which will process the request. | [optional] 
 
@@ -93,6 +93,7 @@ Name | Type | Description  | Notes
 **200** | successful |  -  |
 **401** | authentication error |  -  |
 **404** | not found entity |  -  |
+**422** | parameter validation error |  -  |
 **500** | internal server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -102,7 +103,7 @@ Name | Type | Description  | Notes
 
 Delete Tax
 
-Delete taxes for an existing orden
+Deletes an existing tax line from an order. The tax line identified by `tax_id` belongs to the order identified by `id`. The response includes the deleted resource with `deleted: true`.
 
 ### Example
 
@@ -179,8 +180,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | successful |  -  |
 **401** | authentication error |  -  |
-**422** | parameter validation error |  -  |
 **404** | not found entity |  -  |
+**422** | parameter validation error |  -  |
 **500** | internal server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -190,7 +191,7 @@ Name | Type | Description  | Notes
 
 Update Tax
 
-Update taxes for an existing orden
+Updates an existing tax line for an order. The tax line identified by `tax_id` belongs to the order identified by `id`. Only the fields provided in the request body are updated.
 
 ### Example
 
@@ -225,7 +226,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     api_instance = digitalfemsa.TaxesApi(api_client)
     id = '6307a60c41de27127515a575' # str | Identifier of the resource
     tax_id = 'tax_lin_2tQ974hSHcsdeSZHG' # str | identifier
-    update_order_tax_request = digitalfemsa.UpdateOrderTaxRequest() # UpdateOrderTaxRequest | requested field for taxes
+    update_order_tax_request = digitalfemsa.UpdateOrderTaxRequest() # UpdateOrderTaxRequest | Request body for updating a tax line.
     accept_language = 'es' # str | Use for knowing which language to use (optional) (default to 'es')
     x_child_company_id = '6441b6376b60c3a638da80af' # str | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
@@ -247,7 +248,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**| Identifier of the resource | 
  **tax_id** | **str**| identifier | 
- **update_order_tax_request** | [**UpdateOrderTaxRequest**](UpdateOrderTaxRequest.md)| requested field for taxes | 
+ **update_order_tax_request** | [**UpdateOrderTaxRequest**](UpdateOrderTaxRequest.md)| Request body for updating a tax line. | 
  **accept_language** | **str**| Use for knowing which language to use | [optional] [default to &#39;es&#39;]
  **x_child_company_id** | **str**| In the case of a holding company, the company id of the child company to which will process the request. | [optional] 
 
@@ -270,8 +271,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | successful |  -  |
 **401** | authentication error |  -  |
-**422** | parameter validation error |  -  |
 **404** | not found entity |  -  |
+**422** | parameter validation error |  -  |
 **500** | internal server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

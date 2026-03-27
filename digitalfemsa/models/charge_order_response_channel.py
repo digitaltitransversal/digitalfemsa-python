@@ -18,18 +18,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class OrderNextActionResponseRedirectToUrl(BaseModel):
+class ChargeOrderResponseChannel(BaseModel):
     """
-    contains the following attributes that will guide to continue the flow
+    ChargeOrderResponseChannel
     """ # noqa: E501
-    url: Optional[StrictStr] = Field(default=None, description="pay.femsa.com/{id} Indicates the url of the Femsa component to authenticate the flow through 3DS2.")
-    return_url: Optional[StrictStr] = Field(default=None, description="Indicates the url to which the 3DS2 flow returns at the end, when the integration is redirected.")
-    __properties: ClassVar[List[str]] = ["url", "return_url"]
+    segment: Optional[StrictStr] = None
+    checkout_request_id: Optional[StrictStr] = None
+    checkout_request_type: Optional[StrictStr] = None
+    id: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["segment", "checkout_request_id", "checkout_request_type", "id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -49,7 +51,7 @@ class OrderNextActionResponseRedirectToUrl(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of OrderNextActionResponseRedirectToUrl from a JSON string"""
+        """Create an instance of ChargeOrderResponseChannel from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -74,7 +76,7 @@ class OrderNextActionResponseRedirectToUrl(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of OrderNextActionResponseRedirectToUrl from a dict"""
+        """Create an instance of ChargeOrderResponseChannel from a dict"""
         if obj is None:
             return None
 
@@ -82,8 +84,10 @@ class OrderNextActionResponseRedirectToUrl(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "url": obj.get("url"),
-            "return_url": obj.get("return_url")
+            "segment": obj.get("segment"),
+            "checkout_request_id": obj.get("checkout_request_id"),
+            "checkout_request_type": obj.get("checkout_request_type"),
+            "id": obj.get("id")
         })
         return _obj
 

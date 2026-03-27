@@ -35,7 +35,7 @@ class CheckoutResponse(BaseModel):
     id: StrictStr
     livemode: StrictBool
     metadata: Optional[Dict[str, Any]] = None
-    name: StrictStr = Field(description="Reason for charge")
+    name: StrictStr = Field(description="Payment link name")
     needs_shipping_contact: Optional[StrictBool] = None
     object: StrictStr
     paid_payments_count: Optional[StrictInt] = None

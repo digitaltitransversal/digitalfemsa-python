@@ -5,7 +5,7 @@ All URIs are relative to *https://api.digitalfemsa.io*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_transaction**](TransactionsApi.md#get_transaction) | **GET** /transactions/{id} | Get transaction
-[**get_transactions**](TransactionsApi.md#get_transactions) | **GET** /transactions | Get List transactions
+[**get_transactions**](TransactionsApi.md#get_transactions) | **GET** /transactions | List transactions
 
 
 # **get_transaction**
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 Get transaction
 
-Get the details of a transaction
+Retrieves the details of a transaction by its ID.
 
 ### Example
 
@@ -86,9 +86,9 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | successful |  * Date - The date and time that the response was sent <br>  * Content-Type - The format of the response body <br>  * Content-Length - The length of the response body in bytes <br>  * Connection - The type of connection used to transfer the response <br>  |
+**200** | successful |  -  |
 **401** | authentication error |  -  |
-**404** | authentication error |  -  |
+**404** | not found entity |  -  |
 **500** | internal server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -96,9 +96,9 @@ Name | Type | Description  | Notes
 # **get_transactions**
 > GetTransactionsResponse get_transactions(accept_language=accept_language, x_child_company_id=x_child_company_id, limit=limit, next=next, previous=previous, id=id, charge_id=charge_id, type=type, currency=currency)
 
-Get List transactions
+List transactions
 
-Get transaction details in the form of a list
+Returns a paginated list of transactions (ledger movements).  A transaction is a movement that represents the financial impact of payment operations, including amounts, fees, and net values. Transactions can be linked to a charge and may be linked to a transfer (payout) when they are included in a payout.  If you need payout-level information (destination, statement reference/description, payout status), use GET /transfers. 
 
 ### Example
 
@@ -141,7 +141,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     currency = 'MXN' # str | currency of the object to be retrieved (optional)
 
     try:
-        # Get List transactions
+        # List transactions
         api_response = api_instance.get_transactions(accept_language=accept_language, x_child_company_id=x_child_company_id, limit=limit, next=next, previous=previous, id=id, charge_id=charge_id, type=type, currency=currency)
         print("The response of TransactionsApi->get_transactions:\n")
         pprint(api_response)
@@ -183,7 +183,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | successful |  * Date - The date and time that the response was sent <br>  * Content-Type - The format of the response body <br>  * Content-Length - The length of the response body in bytes <br>  * Connection - The type of connection used to transfer the response <br>  |
+**200** | successful operation |  -  |
 **401** | authentication error |  -  |
 **500** | internal server error |  -  |
 

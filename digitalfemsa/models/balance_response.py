@@ -26,18 +26,18 @@ from typing_extensions import Self
 
 class BalanceResponse(BaseModel):
     """
-    balance model
+    Company balance summary.  Monetary fields are returned as arrays of amounts grouped by currency (see `balance_common_field` items). 
     """ # noqa: E501
-    available: Optional[List[BalanceCommonField]] = Field(default=None, description="The balance's available")
+    available: Optional[List[BalanceCommonField]] = Field(default=None, description="Amounts currently available, grouped by currency.")
     cashout_retention_amount: Optional[List[BalanceCommonField]] = Field(default=None, description="The balance's cashout retention amount")
     conekta_retention: Optional[List[BalanceCommonField]] = Field(default=None, description="The balance's Femsa retention")
-    gateway: Optional[List[BalanceCommonField]] = Field(default=None, description="The balance's gateway")
-    pending: Optional[List[BalanceCommonField]] = Field(default=None, description="The balance's pending")
-    retained: Optional[List[BalanceCommonField]] = Field(default=None, description="The balance's retained")
-    retention_amount: Optional[List[BalanceCommonField]] = Field(default=None, description="The balance's retention amount")
-    target_collateral_amount: Optional[Dict[str, Any]] = Field(default=None, description="The balance's target collateral amount")
-    target_retention_amount: Optional[List[BalanceCommonField]] = Field(default=None, description="The balance's target retention amount")
-    temporarily_retained: Optional[List[BalanceCommonField]] = Field(default=None, description="The balance's temporarily retained")
+    gateway: Optional[List[BalanceCommonField]] = Field(default=None, description="Gateway balance amounts, grouped by currency.")
+    pending: Optional[List[BalanceCommonField]] = Field(default=None, description="Amounts pending settlement, grouped by currency.")
+    retained: Optional[List[BalanceCommonField]] = Field(default=None, description="Amounts currently retained, grouped by currency.")
+    retention_amount: Optional[List[BalanceCommonField]] = Field(default=None, description="Retention amount applied, grouped by currency.")
+    target_collateral_amount: Optional[Dict[str, Any]] = Field(default=None, description="Target collateral amount, grouped by currency.")
+    target_retention_amount: Optional[List[BalanceCommonField]] = Field(default=None, description="Target retention amount, grouped by currency.")
+    temporarily_retained: Optional[List[BalanceCommonField]] = Field(default=None, description="Amounts temporarily retained")
     __properties: ClassVar[List[str]] = ["available", "cashout_retention_amount", "conekta_retention", "gateway", "pending", "retained", "retention_amount", "target_collateral_amount", "target_retention_amount", "temporarily_retained"]
 
     model_config = ConfigDict(

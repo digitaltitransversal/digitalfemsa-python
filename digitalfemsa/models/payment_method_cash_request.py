@@ -27,8 +27,8 @@ class PaymentMethodCashRequest(BaseModel):
     """
     PaymentMethodCashRequest
     """ # noqa: E501
-    type: StrictStr = Field(description="Type of payment method")
-    expires_at: Optional[StrictInt] = None
+    type: StrictStr = Field(description="Type of payment method.")
+    expires_at: Optional[StrictInt] = Field(default=None, description="Expiration date as unix timestamp (seconds).")
     __properties: ClassVar[List[str]] = ["type", "expires_at"]
 
     model_config = ConfigDict(
