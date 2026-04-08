@@ -26,7 +26,7 @@ from typing_extensions import Self
 
 class OrderFiscalEntityResponse(BaseModel):
     """
-    Fiscal entity of the order, Currently it is a purely informative field
+    Fiscal entity information associated with the order. This field can be `null`.
     """ # noqa: E501
     address: OrderFiscalEntityAddressResponse
     email: Optional[StrictStr] = Field(default=None, description="Email of the fiscal entity")

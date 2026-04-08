@@ -30,16 +30,16 @@ class CustomerFiscalEntitiesDataResponse(BaseModel):
     """ # noqa: E501
     address: CustomerAddress
     tax_id: Optional[StrictStr] = None
+    name: Optional[StrictStr] = None
     email: Optional[StrictStr] = None
     phone: Optional[StrictStr] = None
-    metadata: Optional[Dict[str, Dict[str, Any]]] = None
-    company_name: Optional[StrictStr] = None
+    metadata: Optional[Dict[str, Any]] = None
     id: StrictStr
     object: StrictStr
     created_at: StrictInt
     parent_id: Optional[StrictStr] = None
     default: Optional[StrictBool] = None
-    __properties: ClassVar[List[str]] = ["address", "tax_id", "email", "phone", "metadata", "company_name", "id", "object", "created_at", "parent_id", "default"]
+    __properties: ClassVar[List[str]] = ["address", "tax_id", "name", "email", "phone", "metadata", "id", "object", "created_at", "parent_id", "default"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -97,10 +97,10 @@ class CustomerFiscalEntitiesDataResponse(BaseModel):
         _obj = cls.model_validate({
             "address": CustomerAddress.from_dict(obj["address"]) if obj.get("address") is not None else None,
             "tax_id": obj.get("tax_id"),
+            "name": obj.get("name"),
             "email": obj.get("email"),
             "phone": obj.get("phone"),
             "metadata": obj.get("metadata"),
-            "company_name": obj.get("company_name"),
             "id": obj.get("id"),
             "object": obj.get("object"),
             "created_at": obj.get("created_at"),

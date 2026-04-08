@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**customer_id** | **str** |  | [optional] 
 **name** | **str** |  | 
 **email** | **str** |  | 
-**phone** | **str** |  | 
+**phone** | **str** |  | [optional] 
 **corporate** | **bool** |  | [optional] 
-**object** | **str** |  | [optional] 
 
 ## Example
 

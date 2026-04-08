@@ -27,12 +27,12 @@ class CustomerInfo(BaseModel):
     """
     CustomerInfo
     """ # noqa: E501
+    customer_id: Optional[StrictStr] = None
     name: StrictStr
     email: StrictStr
-    phone: StrictStr
+    phone: Optional[StrictStr] = None
     corporate: Optional[StrictBool] = None
-    object: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["name", "email", "phone", "corporate", "object"]
+    __properties: ClassVar[List[str]] = ["customer_id", "name", "email", "phone", "corporate"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,11 +85,11 @@ class CustomerInfo(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "customer_id": obj.get("customer_id"),
             "name": obj.get("name"),
             "email": obj.get("email"),
             "phone": obj.get("phone"),
-            "corporate": obj.get("corporate"),
-            "object": obj.get("object")
+            "corporate": obj.get("corporate")
         })
         return _obj
 

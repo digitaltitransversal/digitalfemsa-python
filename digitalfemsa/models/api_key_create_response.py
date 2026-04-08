@@ -38,7 +38,7 @@ class ApiKeyCreateResponse(BaseModel):
     object: Optional[StrictStr] = Field(default=None, description="Object name, value is 'api_key'")
     prefix: Optional[StrictStr] = Field(default=None, description="The first few characters of the authentication_token")
     role: Optional[StrictStr] = Field(default=None, description="Indicates if the api key is private or public")
-    authentication_token: Optional[StrictStr] = Field(default=None, description="It is occupied as a user when authenticated with basic authentication, with a blank password. This value will only appear once, in the request to create a new key. Copy and save it in a safe place.")
+    authentication_token: Optional[StrictStr] = Field(default=None, description="Used as the username for Basic Authentication, with a blank password. This value is shown only once (when the key is created). Copy and store it securely. ")
     __properties: ClassVar[List[str]] = ["active", "created_at", "updated_at", "deactivated_at", "description", "id", "livemode", "deleted", "object", "prefix", "role", "authentication_token"]
 
     model_config = ConfigDict(

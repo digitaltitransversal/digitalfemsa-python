@@ -1,5 +1,6 @@
 # OrderResponseShippingContact
 
+Shipping contact associated with the order. It may be `null` when not provided/required.
 
 ## Properties
 
@@ -9,13 +10,13 @@ Name | Type | Description | Notes
 **receiver** | **str** |  | [optional] 
 **between_streets** | **str** |  | [optional] 
 **address** | [**CustomerShippingContactsResponseAddress**](CustomerShippingContactsResponseAddress.md) |  | [optional] 
-**parent_id** | **str** |  | [optional] 
+**parent_id** | **str** | Customer ID that owns this shipping contact. | [optional] 
 **default** | **bool** |  | [optional] 
 **id** | **str** |  | [optional] 
 **created_at** | **int** |  | [optional] 
 **metadata** | **Dict[str, object]** | Metadata associated with the shipping contact | [optional] 
 **object** | **str** |  | [optional] 
-**deleted** | **bool** |  | [optional] 
+**deleted** | **bool** | Present only when the shipping contact was deleted. | [optional] 
 
 ## Example
 

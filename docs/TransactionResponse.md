@@ -1,22 +1,25 @@
 # TransactionResponse
 
-The Transaction object represents the actions or steps of an order. Statuses can be: unprocessed, pending, available, owen, paid_out, voided, capture, capture_reversal, liquidation, liquidation_reversal, payout, payout_reversal, refund, refund_reversal, chargeback, chargeback_reversal, rounding_adjustment, won_chargeback, transferred, and transferred.
+Transaction object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount** | **int** | The amount of the transaction. | 
-**charge** | **str** | Randomly assigned unique order identifier associated with the charge. | 
-**created_at** | **int** | Date and time of creation of the transaction in Unix format. | 
-**currency** | **str** | The currency of the transaction. It uses the 3-letter code of the [International Standard ISO 4217.](https://es.wikipedia.org/wiki/ISO_4217) | 
-**fee** | **int** | The amount to be deducted for taxes and commissions. | 
 **id** | **str** | Unique identifier of the transaction. | 
-**livemode** | **bool** | Indicates whether the transaction was created in live mode or test mode. | 
-**net** | **int** | The net amount after deducting commissions and taxes. | 
 **object** | **str** | Object name, which is transaction. | 
+**amount** | **int** | The amount of the transaction. | 
+**fee** | **int** | The amount to be deducted for taxes and commissions. | 
+**net** | **int** | The net amount after deducting commissions and taxes. | 
+**currency** | **str** | The currency of the transaction. It uses the 3-letter code of ISO 4217. | 
 **status** | **str** | Code indicating transaction status. | 
-**type** | **str** | Transaction Type | 
+**type** | **str** | Transaction type. | 
+**created_at** | **int** | Date and time of creation of the transaction in Unix format. | 
+**livemode** | **bool** | Indicates whether the transaction was created in live mode or test mode. | 
+**charge** | **str** | Charge ID associated with the transaction (present only if the transaction belongs to a charge). | [optional] 
+**transfer** | **str** | Transfer ID associated with the transaction (present only if the transaction belongs to a transfer). | [optional] 
+**transferred_at** | **int** | Date and time when the transaction was transferred, in Unix format. | [optional] 
+**formula** | **str** | Transaction fee formula identifier (if available). | [optional] 
 
 ## Example
 

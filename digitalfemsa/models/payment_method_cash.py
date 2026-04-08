@@ -29,7 +29,7 @@ class PaymentMethodCash(BaseModel):
     """ # noqa: E501
     type: Optional[StrictStr] = None
     object: StrictStr
-    auth_code: Optional[StrictInt] = None
+    auth_code: Optional[StrictStr] = None
     cashier_id: Optional[StrictStr] = None
     reference: Optional[StrictStr] = None
     barcode_url: Optional[StrictStr] = None

@@ -25,11 +25,11 @@ from typing_extensions import Self
 
 class ChargeRequestPaymentMethod(BaseModel):
     """
-    Payment method used in the charge. Go to the [payment methods](https://developers.femsa.com/reference/m%C3%A9todos-de-pago) section for more details 
+    Payment method used in the charge. 
     """ # noqa: E501
-    expires_at: Optional[StrictInt] = Field(default=None, description="Method expiration date as unix timestamp")
+    expires_at: Optional[StrictInt] = Field(default=None, description="Method expiration date as unix timestamp (applies to some payment methods, e.g. cash).")
     type: StrictStr
-    payment_source_id: Optional[StrictStr] = None
+    payment_source_id: Optional[StrictStr] = Field(default=None, description="Identifier of a saved payment source to be used for this charge (if applicable).")
     __properties: ClassVar[List[str]] = ["expires_at", "type", "payment_source_id"]
 
     model_config = ConfigDict(

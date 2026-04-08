@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class EventsResendResponse(BaseModel):
     """
-    event model
+    Webhook log model returned after resending an event webhook delivery.
     """ # noqa: E501
     failed_attempts: Optional[StrictInt] = None
     id: Optional[StrictStr] = None

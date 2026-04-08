@@ -34,7 +34,9 @@ class ChargeResponseRefundsData(BaseModel):
     id: StrictStr
     object: StrictStr
     status: Optional[StrictStr] = Field(default=None, description="refund status")
-    __properties: ClassVar[List[str]] = ["amount", "auth_code", "created_at", "expires_at", "id", "object", "status"]
+    payout_id: Optional[StrictStr] = None
+    reference: Optional[StrictStr] = Field(default=None, description="payout reference for oxxo stores")
+    __properties: ClassVar[List[str]] = ["amount", "auth_code", "created_at", "expires_at", "id", "object", "status", "payout_id", "reference"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,7 +95,9 @@ class ChargeResponseRefundsData(BaseModel):
             "expires_at": obj.get("expires_at"),
             "id": obj.get("id"),
             "object": obj.get("object"),
-            "status": obj.get("status")
+            "status": obj.get("status"),
+            "payout_id": obj.get("payout_id"),
+            "reference": obj.get("reference")
         })
         return _obj
 

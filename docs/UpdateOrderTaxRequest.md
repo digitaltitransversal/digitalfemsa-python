@@ -1,13 +1,13 @@
 # UpdateOrderTaxRequest
 
-create new taxes for an existing order
+Create a new tax line for an existing order.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **amount** | **int** | The amount to be collected for tax in cents | [optional] 
-**description** | **str** | description or tax&#39;s name | [optional] 
+**description** | **str** | Description or tax name | [optional] 
 **metadata** | **Dict[str, object]** |  | [optional] 
 
 ## Example

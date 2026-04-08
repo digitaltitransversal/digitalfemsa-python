@@ -1,32 +1,33 @@
 # OrderResponse
 
-order response
+Order model. Some nested resources are returned as list previews (for example: `charges`, `line_items`), and may be `null` depending on the request/context. The `checkout` field is only present when the order is linked to a checkout (`channel.checkout_request_id`). 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount** | **int** | The total amount to be collected in cents | [optional] 
-**amount_refunded** | **int** | The total amount refunded in cents | [optional] 
-**channel** | [**ChargeResponseChannel**](ChargeResponseChannel.md) |  | [optional] 
-**charges** | [**OrderResponseCharges**](OrderResponseCharges.md) |  | [optional] 
-**checkout** | [**OrderResponseCheckout**](OrderResponseCheckout.md) |  | [optional] 
-**created_at** | **int** | The time at which the object was created in seconds since the Unix epoch | [optional] 
-**currency** | **str** | The three-letter ISO 4217 currency code. The currency of the order. | [optional] 
-**customer_info** | [**OrderResponseCustomerInfo**](OrderResponseCustomerInfo.md) |  | [optional] 
-**discount_lines** | [**OrderResponseDiscountLines**](OrderResponseDiscountLines.md) |  | [optional] 
-**fiscal_entity** | [**OrderFiscalEntityResponse**](OrderFiscalEntityResponse.md) |  | [optional] 
 **id** | **str** |  | [optional] 
-**is_refundable** | **bool** |  | [optional] 
-**line_items** | [**OrderResponseProducts**](OrderResponseProducts.md) |  | [optional] 
-**livemode** | **bool** | Whether the object exists in live mode or test mode | [optional] 
-**metadata** | **Dict[str, object]** | Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format. | [optional] 
-**next_action** | [**OrderNextActionResponse**](OrderNextActionResponse.md) |  | [optional] 
-**object** | **str** | String representing the object’s type. Objects of the same type share the same value. | [optional] 
-**payment_status** | **str** | The payment status of the order. | [optional] 
-**processing_mode** | **str** | Indicates the processing mode for the order, either ecommerce, recurrent or validation. | [optional] 
+**object** | **str** |  | [optional] 
+**livemode** | **bool** |  | [optional] 
+**amount** | **int** |  | [optional] 
+**currency** | **str** |  | [optional] 
+**payment_status** | **str** | Current payment status of the order. It can be &#x60;null&#x60; for orders without payment information yet. | [optional] 
+**amount_refunded** | **int** |  | [optional] 
+**split_payment** | **bool** | Indicates whether the order uses split payments (when available/configured). | [optional] 
+**metadata** | **Dict[str, object]** | Metadata attached to the order. | [optional] 
+**is_refundable** | **bool** | Indicates whether the order is currently refundable. | [optional] 
+**created_at** | **int** |  | [optional] 
+**updated_at** | **int** |  | [optional] 
+**customer_info** | [**OrderResponseCustomerInfo**](OrderResponseCustomerInfo.md) |  | [optional] 
 **shipping_contact** | [**OrderResponseShippingContact**](OrderResponseShippingContact.md) |  | [optional] 
-**updated_at** | **int** | The time at which the object was last updated in seconds since the Unix epoch | [optional] 
+**channel** | [**OrderResponseChannel**](OrderResponseChannel.md) |  | [optional] 
+**fiscal_entity** | [**OrderFiscalEntityResponse**](OrderFiscalEntityResponse.md) |  | [optional] 
+**checkout** | [**OrderResponseCheckout**](OrderResponseCheckout.md) |  | [optional] 
+**line_items** | [**OrderResponseProducts**](OrderResponseProducts.md) |  | [optional] 
+**discount_lines** | [**OrderResponseDiscountLines**](OrderResponseDiscountLines.md) |  | [optional] 
+**charges** | [**OrderResponseCharges**](OrderResponseCharges.md) |  | [optional] 
+**partial_reference** | **Dict[str, object]** | Partial reference information (when applicable). Structure may vary depending on the payment flow. | [optional] 
+**payments_info** | **Dict[str, object]** | Additional payment information (when available). Structure may vary. | [optional] 
 
 ## Example
 

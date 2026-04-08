@@ -1,12 +1,12 @@
 # CustomerPaymentMethodRequest
 
-Contains details of the payment methods that the customer has active or has used in Femsa
+Payment method data to attach to a customer.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** | Type of payment method | 
+**type** | **str** | Type of payment method. | 
 
 ## Example
 

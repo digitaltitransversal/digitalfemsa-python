@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**orders_create_discount_line**](DiscountsApi.md#orders_create_discount_line) | **POST** /orders/{id}/discount_lines | Create Discount
 [**orders_delete_discount_lines**](DiscountsApi.md#orders_delete_discount_lines) | **DELETE** /orders/{id}/discount_lines/{discount_lines_id} | Delete Discount
 [**orders_get_discount_line**](DiscountsApi.md#orders_get_discount_line) | **GET** /orders/{id}/discount_lines/{discount_lines_id} | Get Discount
-[**orders_get_discount_lines**](DiscountsApi.md#orders_get_discount_lines) | **GET** /orders/{id}/discount_lines | Get a List of Discount
+[**orders_get_discount_lines**](DiscountsApi.md#orders_get_discount_lines) | **GET** /orders/{id}/discount_lines | Get a List of Discounts
 [**orders_update_discount_lines**](DiscountsApi.md#orders_update_discount_lines) | **PUT** /orders/{id}/discount_lines/{discount_lines_id} | Update Discount
 
 
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 Create Discount
 
-Create discount lines for an existing orden
+Create discount lines for an existing order
 
 ### Example
 
@@ -104,7 +104,7 @@ Name | Type | Description  | Notes
 
 Delete Discount
 
-Delete an existing discount lines for an existing orden
+Delete an existing discount line for an existing order
 
 ### Example
 
@@ -192,7 +192,7 @@ Name | Type | Description  | Notes
 
 Get Discount
 
-Get an existing discount lines for an existing orden
+Get an existing discount line for an existing order
 
 ### Example
 
@@ -270,7 +270,6 @@ Name | Type | Description  | Notes
 **200** | successful |  -  |
 **401** | authentication error |  -  |
 **404** | not found entity |  -  |
-**422** | parameter validation error |  -  |
 **500** | internal server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -278,9 +277,9 @@ Name | Type | Description  | Notes
 # **orders_get_discount_lines**
 > GetOrderDiscountLinesResponse orders_get_discount_lines(id, accept_language=accept_language, x_child_company_id=x_child_company_id, limit=limit, search=search, next=next, previous=previous)
 
-Get a List of Discount
+Get a List of Discounts
 
-Get discount lines for an existing orden
+Get discount lines for an existing order
 
 ### Example
 
@@ -321,7 +320,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     previous = 'previous_example' # str | previous page (optional)
 
     try:
-        # Get a List of Discount
+        # Get a List of Discounts
         api_response = api_instance.orders_get_discount_lines(id, accept_language=accept_language, x_child_company_id=x_child_company_id, limit=limit, search=search, next=next, previous=previous)
         print("The response of DiscountsApi->orders_get_discount_lines:\n")
         pprint(api_response)
@@ -372,7 +371,7 @@ Name | Type | Description  | Notes
 
 Update Discount
 
-Update an existing discount lines for an existing orden
+Update an existing discount line for an existing order
 
 ### Example
 

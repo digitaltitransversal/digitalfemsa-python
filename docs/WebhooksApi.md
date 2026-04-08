@@ -5,11 +5,11 @@ All URIs are relative to *https://api.digitalfemsa.io*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_webhook**](WebhooksApi.md#create_webhook) | **POST** /webhooks | Create Webhook
-[**delete_webhook**](WebhooksApi.md#delete_webhook) | **DELETE** /webhooks/{id} | Delete Webhook
-[**get_webhook**](WebhooksApi.md#get_webhook) | **GET** /webhooks/{id} | Get Webhook
+[**delete_webhook**](WebhooksApi.md#delete_webhook) | **DELETE** /webhooks/{id} | Delete webhook
+[**get_webhook**](WebhooksApi.md#get_webhook) | **GET** /webhooks/{id} | Get webhook
 [**get_webhooks**](WebhooksApi.md#get_webhooks) | **GET** /webhooks | Get List of Webhooks
-[**test_webhook**](WebhooksApi.md#test_webhook) | **POST** /webhooks/{id}/test | Test Webhook
-[**update_webhook**](WebhooksApi.md#update_webhook) | **PUT** /webhooks/{id} | Update Webhook
+[**test_webhook**](WebhooksApi.md#test_webhook) | **POST** /webhooks/{id}/test | Test webhook
+[**update_webhook**](WebhooksApi.md#update_webhook) | **PUT** /webhooks/{id} | Update webhook
 
 
 # **create_webhook**
@@ -50,7 +50,7 @@ configuration = digitalfemsa.Configuration(
 with digitalfemsa.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = digitalfemsa.WebhooksApi(api_client)
-    webhook_request = digitalfemsa.WebhookRequest() # WebhookRequest | requested field for webhook
+    webhook_request = digitalfemsa.WebhookRequest() # WebhookRequest | Webhook creation/update request payload.
     accept_language = 'es' # str | Use for knowing which language to use (optional) (default to 'es')
 
     try:
@@ -69,7 +69,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **webhook_request** | [**WebhookRequest**](WebhookRequest.md)| requested field for webhook | 
+ **webhook_request** | [**WebhookRequest**](WebhookRequest.md)| Webhook creation/update request payload. | 
  **accept_language** | **str**| Use for knowing which language to use | [optional] [default to &#39;es&#39;]
 
 ### Return type
@@ -98,7 +98,9 @@ Name | Type | Description  | Notes
 # **delete_webhook**
 > WebhookResponse delete_webhook(id, accept_language=accept_language)
 
-Delete Webhook
+Delete webhook
+
+Deletes a webhook.
 
 ### Example
 
@@ -134,7 +136,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     accept_language = 'es' # str | Use for knowing which language to use (optional) (default to 'es')
 
     try:
-        # Delete Webhook
+        # Delete webhook
         api_response = api_instance.delete_webhook(id, accept_language=accept_language)
         print("The response of WebhooksApi->delete_webhook:\n")
         pprint(api_response)
@@ -169,7 +171,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | successful |  * Date - The date and time that the response was sent <br>  * Content-Type - The format of the response body <br>  * Content-Length - The length of the response body in bytes <br>  * Connection - The type of connection used to transfer the response <br>  |
+**200** | successful |  -  |
 **401** | authentication error |  -  |
 **404** | not found entity |  -  |
 **500** | internal server error |  -  |
@@ -179,7 +181,9 @@ Name | Type | Description  | Notes
 # **get_webhook**
 > WebhookResponse get_webhook(id, accept_language=accept_language, x_child_company_id=x_child_company_id)
 
-Get Webhook
+Get webhook
+
+Retrieves the details of a webhook by its ID.
 
 ### Example
 
@@ -216,7 +220,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     x_child_company_id = '6441b6376b60c3a638da80af' # str | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
     try:
-        # Get Webhook
+        # Get webhook
         api_response = api_instance.get_webhook(id, accept_language=accept_language, x_child_company_id=x_child_company_id)
         print("The response of WebhooksApi->get_webhook:\n")
         pprint(api_response)
@@ -252,7 +256,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | successful |  * Date - The date and time that the response was sent <br>  * Content-Type - The format of the response body <br>  * Content-Length - The length of the response body in bytes <br>  * Connection - The type of connection used to transfer the response <br>  |
+**200** | successful operation |  -  |
 **401** | authentication error |  -  |
 **404** | not found entity |  -  |
 **500** | internal server error |  -  |
@@ -260,7 +264,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_webhooks**
-> GetWebhooksResponse get_webhooks(accept_language=accept_language, x_child_company_id=x_child_company_id, limit=limit, search=search, next=next, previous=previous)
+> GetWebhooksResponse get_webhooks(accept_language=accept_language, x_child_company_id=x_child_company_id, limit=limit, search=search, url=url, next=next, previous=previous)
 
 Get List of Webhooks
 
@@ -300,12 +304,13 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     x_child_company_id = '6441b6376b60c3a638da80af' # str | In the case of a holding company, the company id of the child company to which will process the request. (optional)
     limit = 20 # int | The numbers of items to return, the maximum value is 250 (optional) (default to 20)
     search = 'search_example' # str | General order search, e.g. by mail, reference etc. (optional)
+    url = 'https://api.digitalfemsa.io/webhook' # str | url for webhook filter (optional)
     next = 'next_example' # str | next page (optional)
     previous = 'previous_example' # str | previous page (optional)
 
     try:
         # Get List of Webhooks
-        api_response = api_instance.get_webhooks(accept_language=accept_language, x_child_company_id=x_child_company_id, limit=limit, search=search, next=next, previous=previous)
+        api_response = api_instance.get_webhooks(accept_language=accept_language, x_child_company_id=x_child_company_id, limit=limit, search=search, url=url, next=next, previous=previous)
         print("The response of WebhooksApi->get_webhooks:\n")
         pprint(api_response)
     except Exception as e:
@@ -323,6 +328,7 @@ Name | Type | Description  | Notes
  **x_child_company_id** | **str**| In the case of a holding company, the company id of the child company to which will process the request. | [optional] 
  **limit** | **int**| The numbers of items to return, the maximum value is 250 | [optional] [default to 20]
  **search** | **str**| General order search, e.g. by mail, reference etc. | [optional] 
+ **url** | **str**| url for webhook filter | [optional] 
  **next** | **str**| next page | [optional] 
  **previous** | **str**| previous page | [optional] 
 
@@ -352,9 +358,9 @@ Name | Type | Description  | Notes
 # **test_webhook**
 > WebhookResponse test_webhook(id, accept_language=accept_language)
 
-Test Webhook
+Test webhook
 
-Send a webhook.ping event
+Sends a test event to the specified webhook to verify it can receive events.
 
 ### Example
 
@@ -390,7 +396,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     accept_language = 'es' # str | Use for knowing which language to use (optional) (default to 'es')
 
     try:
-        # Test Webhook
+        # Test webhook
         api_response = api_instance.test_webhook(id, accept_language=accept_language)
         print("The response of WebhooksApi->test_webhook:\n")
         pprint(api_response)
@@ -435,9 +441,9 @@ Name | Type | Description  | Notes
 # **update_webhook**
 > WebhookResponse update_webhook(id, webhook_update_request, accept_language=accept_language, x_child_company_id=x_child_company_id)
 
-Update Webhook
+Update webhook
 
-updates an existing webhook
+Updates an existing webhook.
 
 ### Example
 
@@ -471,12 +477,12 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = digitalfemsa.WebhooksApi(api_client)
     id = '6307a60c41de27127515a575' # str | Identifier of the resource
-    webhook_update_request = digitalfemsa.WebhookUpdateRequest() # WebhookUpdateRequest | requested fields in order to update a webhook
+    webhook_update_request = digitalfemsa.WebhookUpdateRequest() # WebhookUpdateRequest | Webhook update request payload.
     accept_language = 'es' # str | Use for knowing which language to use (optional) (default to 'es')
     x_child_company_id = '6441b6376b60c3a638da80af' # str | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
     try:
-        # Update Webhook
+        # Update webhook
         api_response = api_instance.update_webhook(id, webhook_update_request, accept_language=accept_language, x_child_company_id=x_child_company_id)
         print("The response of WebhooksApi->update_webhook:\n")
         pprint(api_response)
@@ -492,7 +498,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**| Identifier of the resource | 
- **webhook_update_request** | [**WebhookUpdateRequest**](WebhookUpdateRequest.md)| requested fields in order to update a webhook | 
+ **webhook_update_request** | [**WebhookUpdateRequest**](WebhookUpdateRequest.md)| Webhook update request payload. | 
  **accept_language** | **str**| Use for knowing which language to use | [optional] [default to &#39;es&#39;]
  **x_child_company_id** | **str**| In the case of a holding company, the company id of the child company to which will process the request. | [optional] 
 
@@ -514,8 +520,8 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | successful operation |  -  |
-**404** | not found entity |  -  |
 **401** | authentication error |  -  |
+**404** | not found entity |  -  |
 **500** | internal server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

@@ -18,28 +18,45 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
 class TransactionResponse(BaseModel):
     """
-    The Transaction object represents the actions or steps of an order. Statuses can be: unprocessed, pending, available, owen, paid_out, voided, capture, capture_reversal, liquidation, liquidation_reversal, payout, payout_reversal, refund, refund_reversal, chargeback, chargeback_reversal, rounding_adjustment, won_chargeback, transferred, and transferred.
+    Transaction object.
     """ # noqa: E501
-    amount: StrictInt = Field(description="The amount of the transaction.")
-    charge: StrictStr = Field(description="Randomly assigned unique order identifier associated with the charge.")
-    created_at: StrictInt = Field(description="Date and time of creation of the transaction in Unix format.")
-    currency: Annotated[str, Field(strict=True, max_length=3)] = Field(description="The currency of the transaction. It uses the 3-letter code of the [International Standard ISO 4217.](https://es.wikipedia.org/wiki/ISO_4217)")
-    fee: StrictInt = Field(description="The amount to be deducted for taxes and commissions.")
     id: StrictStr = Field(description="Unique identifier of the transaction.")
-    livemode: StrictBool = Field(description="Indicates whether the transaction was created in live mode or test mode.")
-    net: StrictInt = Field(description="The net amount after deducting commissions and taxes.")
     object: StrictStr = Field(description="Object name, which is transaction.")
+    amount: StrictInt = Field(description="The amount of the transaction.")
+    fee: StrictInt = Field(description="The amount to be deducted for taxes and commissions.")
+    net: StrictInt = Field(description="The net amount after deducting commissions and taxes.")
+    currency: Annotated[str, Field(strict=True, max_length=3)] = Field(description="The currency of the transaction. It uses the 3-letter code of ISO 4217.")
     status: StrictStr = Field(description="Code indicating transaction status.")
-    type: StrictStr = Field(description="Transaction Type")
-    __properties: ClassVar[List[str]] = ["amount", "charge", "created_at", "currency", "fee", "id", "livemode", "net", "object", "status", "type"]
+    type: StrictStr = Field(description="Transaction type.")
+    created_at: StrictInt = Field(description="Date and time of creation of the transaction in Unix format.")
+    livemode: StrictBool = Field(description="Indicates whether the transaction was created in live mode or test mode.")
+    charge: Optional[StrictStr] = Field(default=None, description="Charge ID associated with the transaction (present only if the transaction belongs to a charge).")
+    transfer: Optional[StrictStr] = Field(default=None, description="Transfer ID associated with the transaction (present only if the transaction belongs to a transfer).")
+    transferred_at: Optional[StrictInt] = Field(default=None, description="Date and time when the transaction was transferred, in Unix format.")
+    formula: Optional[StrictStr] = Field(default=None, description="Transaction fee formula identifier (if available).")
+    __properties: ClassVar[List[str]] = ["id", "object", "amount", "fee", "net", "currency", "status", "type", "created_at", "livemode", "charge", "transfer", "transferred_at", "formula"]
+
+    @field_validator('status')
+    def status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['unprocessed', 'pending', 'available', 'owing', 'paid_out', 'on_hold', 'retained', 'voided']):
+            raise ValueError("must be one of enum values ('unprocessed', 'pending', 'available', 'owing', 'paid_out', 'on_hold', 'retained', 'voided')")
+        return value
+
+    @field_validator('type')
+    def type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['capture', 'capture_reversal', 'liquidation', 'liquidation_reversal', 'payout', 'payout_reversal', 'refund', 'refund_reversal', 'rounding_adjustment', 'transfer', 'transferred', 'retention', 'temporary_retention', 'cashout_retention', 'cashout_confirmation', 'cashout_cancelation', 'autofund_capture']):
+            raise ValueError("must be one of enum values ('capture', 'capture_reversal', 'liquidation', 'liquidation_reversal', 'payout', 'payout_reversal', 'refund', 'refund_reversal', 'rounding_adjustment', 'transfer', 'transferred', 'retention', 'temporary_retention', 'cashout_retention', 'cashout_confirmation', 'cashout_cancelation', 'autofund_capture')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -80,6 +97,26 @@ class TransactionResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if charge (nullable) is None
+        # and model_fields_set contains the field
+        if self.charge is None and "charge" in self.model_fields_set:
+            _dict['charge'] = None
+
+        # set to None if transfer (nullable) is None
+        # and model_fields_set contains the field
+        if self.transfer is None and "transfer" in self.model_fields_set:
+            _dict['transfer'] = None
+
+        # set to None if transferred_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.transferred_at is None and "transferred_at" in self.model_fields_set:
+            _dict['transferred_at'] = None
+
+        # set to None if formula (nullable) is None
+        # and model_fields_set contains the field
+        if self.formula is None and "formula" in self.model_fields_set:
+            _dict['formula'] = None
+
         return _dict
 
     @classmethod
@@ -92,17 +129,20 @@ class TransactionResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "amount": obj.get("amount"),
-            "charge": obj.get("charge"),
-            "created_at": obj.get("created_at"),
-            "currency": obj.get("currency"),
-            "fee": obj.get("fee"),
             "id": obj.get("id"),
-            "livemode": obj.get("livemode"),
-            "net": obj.get("net"),
             "object": obj.get("object"),
+            "amount": obj.get("amount"),
+            "fee": obj.get("fee"),
+            "net": obj.get("net"),
+            "currency": obj.get("currency"),
             "status": obj.get("status"),
-            "type": obj.get("type")
+            "type": obj.get("type"),
+            "created_at": obj.get("created_at"),
+            "livemode": obj.get("livemode"),
+            "charge": obj.get("charge"),
+            "transfer": obj.get("transfer"),
+            "transferred_at": obj.get("transferred_at"),
+            "formula": obj.get("formula")
         })
         return _obj
 

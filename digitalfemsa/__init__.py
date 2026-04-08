@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.1"
+__version__ = "1.1.0"
 
 # import apis into sdk package
 from digitalfemsa.api.api_keys_api import ApiKeysApi
@@ -58,6 +58,7 @@ from digitalfemsa.models.api_key_update_request import ApiKeyUpdateRequest
 from digitalfemsa.models.balance_common_field import BalanceCommonField
 from digitalfemsa.models.balance_response import BalanceResponse
 from digitalfemsa.models.charge_order_response import ChargeOrderResponse
+from digitalfemsa.models.charge_order_response_channel import ChargeOrderResponseChannel
 from digitalfemsa.models.charge_order_response_payment_method import ChargeOrderResponsePaymentMethod
 from digitalfemsa.models.charge_request import ChargeRequest
 from digitalfemsa.models.charge_request_payment_method import ChargeRequestPaymentMethod
@@ -83,8 +84,6 @@ from digitalfemsa.models.create_customer_payment_methods_request import CreateCu
 from digitalfemsa.models.create_customer_payment_methods_response import CreateCustomerPaymentMethodsResponse
 from digitalfemsa.models.customer import Customer
 from digitalfemsa.models.customer_address import CustomerAddress
-from digitalfemsa.models.customer_antifraud_info import CustomerAntifraudInfo
-from digitalfemsa.models.customer_antifraud_info_response import CustomerAntifraudInfoResponse
 from digitalfemsa.models.customer_fiscal_entities_data_response import CustomerFiscalEntitiesDataResponse
 from digitalfemsa.models.customer_fiscal_entities_request import CustomerFiscalEntitiesRequest
 from digitalfemsa.models.customer_fiscal_entities_response import CustomerFiscalEntitiesResponse
@@ -136,12 +135,11 @@ from digitalfemsa.models.order_discount_lines_request import OrderDiscountLinesR
 from digitalfemsa.models.order_fiscal_entity_address_response import OrderFiscalEntityAddressResponse
 from digitalfemsa.models.order_fiscal_entity_request import OrderFiscalEntityRequest
 from digitalfemsa.models.order_fiscal_entity_response import OrderFiscalEntityResponse
-from digitalfemsa.models.order_next_action_response import OrderNextActionResponse
-from digitalfemsa.models.order_next_action_response_redirect_to_url import OrderNextActionResponseRedirectToUrl
 from digitalfemsa.models.order_refund_request import OrderRefundRequest
 from digitalfemsa.models.order_request import OrderRequest
 from digitalfemsa.models.order_request_customer_info import OrderRequestCustomerInfo
 from digitalfemsa.models.order_response import OrderResponse
+from digitalfemsa.models.order_response_channel import OrderResponseChannel
 from digitalfemsa.models.order_response_charges import OrderResponseCharges
 from digitalfemsa.models.order_response_checkout import OrderResponseCheckout
 from digitalfemsa.models.order_response_customer_info import OrderResponseCustomerInfo
@@ -165,14 +163,12 @@ from digitalfemsa.models.product_data_response import ProductDataResponse
 from digitalfemsa.models.product_order_response import ProductOrderResponse
 from digitalfemsa.models.shipping_order_response import ShippingOrderResponse
 from digitalfemsa.models.shipping_request import ShippingRequest
-from digitalfemsa.models.sms_checkout_request import SmsCheckoutRequest
 from digitalfemsa.models.transaction_response import TransactionResponse
 from digitalfemsa.models.transfer_destination_response import TransferDestinationResponse
 from digitalfemsa.models.transfer_method_response import TransferMethodResponse
 from digitalfemsa.models.transfer_response import TransferResponse
 from digitalfemsa.models.transfers_response import TransfersResponse
 from digitalfemsa.models.update_customer import UpdateCustomer
-from digitalfemsa.models.update_customer_antifraud_info import UpdateCustomerAntifraudInfo
 from digitalfemsa.models.update_customer_fiscal_entities_response import UpdateCustomerFiscalEntitiesResponse
 from digitalfemsa.models.update_customer_payment_methods_response import UpdateCustomerPaymentMethodsResponse
 from digitalfemsa.models.update_order_discount_lines_request import UpdateOrderDiscountLinesRequest

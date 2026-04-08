@@ -25,9 +25,9 @@ from typing_extensions import Self
 
 class CustomerPaymentMethodRequest(BaseModel):
     """
-    Contains details of the payment methods that the customer has active or has used in Femsa
+    Payment method data to attach to a customer.
     """ # noqa: E501
-    type: StrictStr = Field(description="Type of payment method")
+    type: StrictStr = Field(description="Type of payment method.")
     __properties: ClassVar[List[str]] = ["type"]
 
     model_config = ConfigDict(

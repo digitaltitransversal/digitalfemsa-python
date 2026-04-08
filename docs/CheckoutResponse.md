@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **id** | **str** |  | 
 **livemode** | **bool** |  | 
 **metadata** | **Dict[str, object]** |  | [optional] 
-**name** | **str** | Reason for charge | 
+**name** | **str** | Payment link name | 
 **needs_shipping_contact** | **bool** |  | [optional] 
 **object** | **str** |  | 
 **paid_payments_count** | **int** |  | [optional] 

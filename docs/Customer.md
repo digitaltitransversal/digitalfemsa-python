@@ -1,23 +1,20 @@
 # Customer
 
-a customer
+Customer create request.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**antifraud_info** | [**CustomerAntifraudInfo**](CustomerAntifraudInfo.md) |  | [optional] 
-**corporate** | **bool** | It is a value that allows identifying if the email is corporate or not. | [optional] [default to False]
-**custom_reference** | **str** | It is an undefined value. | [optional] 
-**email** | **str** | An email address is a series of customizable characters followed by a universal Internet symbol, the at symbol (@), the name of a host server, and a web domain ending (.mx, .com, .org, . net, etc). | 
-**default_payment_source_id** | **str** | It is a parameter that allows to identify in the response, the Femsa ID of a payment method (payment_id) | [optional] 
-**default_shipping_contact_id** | **str** | It is a parameter that allows to identify in the response, the Femsa ID of the shipping address (shipping_contact) | [optional] 
-**fiscal_entities** | [**List[CustomerFiscalEntitiesRequest]**](CustomerFiscalEntitiesRequest.md) |  | [optional] 
-**metadata** | **Dict[str, object]** |  | [optional] 
-**name** | **str** | Client&#39;s name | 
-**payment_sources** | [**List[CustomerPaymentMethodsRequest]**](CustomerPaymentMethodsRequest.md) | Contains details of the payment methods that the customer has active or has used in Femsa | [optional] 
-**phone** | **str** | Is the customer&#39;s phone number | 
-**shipping_contacts** | [**List[CustomerShippingContacts]**](CustomerShippingContacts.md) | Contains the detail of the shipping addresses that the client has active or has used in Femsa | [optional] 
+**name** | **str** | Customer&#39;s name. | 
+**email** | **str** | Customer email address. | 
+**phone** | **str** | Customer phone number. | [optional] 
+**corporate** | **bool** | Indicates whether the customer email is corporate. | [optional] [default to False]
+**custom_reference** | **str** | Merchant-defined reference used to identify the customer in your system. | [optional] 
+**metadata** | **Dict[str, object]** | Arbitrary metadata associated with the customer. | [optional] 
+**payment_sources** | [**List[CustomerPaymentMethodsRequest]**](CustomerPaymentMethodsRequest.md) | Customer payment sources to be created with the customer (optional). | [optional] 
+**fiscal_entities** | [**List[CustomerFiscalEntitiesRequest]**](CustomerFiscalEntitiesRequest.md) | Customer fiscal entities to be created with the customer (optional). | [optional] 
+**shipping_contacts** | [**List[CustomerShippingContacts]**](CustomerShippingContacts.md) | Customer shipping contacts to be created with the customer (optional). | [optional] 
 
 ## Example
 

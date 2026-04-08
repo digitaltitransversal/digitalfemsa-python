@@ -46,7 +46,7 @@ class TaxesApi:
     def orders_create_taxes(
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
-        order_tax_request: Annotated[OrderTaxRequest, Field(description="requested field for a taxes")],
+        order_tax_request: Annotated[OrderTaxRequest, Field(description="Request body for creating a tax line.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -64,11 +64,11 @@ class TaxesApi:
     ) -> UpdateOrderTaxResponse:
         """Create Tax
 
-        Create new taxes for an existing orden
+        Creates a new tax line for an existing order. The tax line is added to the order identified by `id`. The response returns the created tax line.
 
         :param id: Identifier of the resource (required)
         :type id: str
-        :param order_tax_request: requested field for a taxes (required)
+        :param order_tax_request: Request body for creating a tax line. (required)
         :type order_tax_request: OrderTaxRequest
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -111,6 +111,7 @@ class TaxesApi:
             '200': "UpdateOrderTaxResponse",
             '401': "Error",
             '404': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -128,7 +129,7 @@ class TaxesApi:
     def orders_create_taxes_with_http_info(
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
-        order_tax_request: Annotated[OrderTaxRequest, Field(description="requested field for a taxes")],
+        order_tax_request: Annotated[OrderTaxRequest, Field(description="Request body for creating a tax line.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -146,11 +147,11 @@ class TaxesApi:
     ) -> ApiResponse[UpdateOrderTaxResponse]:
         """Create Tax
 
-        Create new taxes for an existing orden
+        Creates a new tax line for an existing order. The tax line is added to the order identified by `id`. The response returns the created tax line.
 
         :param id: Identifier of the resource (required)
         :type id: str
-        :param order_tax_request: requested field for a taxes (required)
+        :param order_tax_request: Request body for creating a tax line. (required)
         :type order_tax_request: OrderTaxRequest
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -193,6 +194,7 @@ class TaxesApi:
             '200': "UpdateOrderTaxResponse",
             '401': "Error",
             '404': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -210,7 +212,7 @@ class TaxesApi:
     def orders_create_taxes_without_preload_content(
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
-        order_tax_request: Annotated[OrderTaxRequest, Field(description="requested field for a taxes")],
+        order_tax_request: Annotated[OrderTaxRequest, Field(description="Request body for creating a tax line.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -228,11 +230,11 @@ class TaxesApi:
     ) -> RESTResponseType:
         """Create Tax
 
-        Create new taxes for an existing orden
+        Creates a new tax line for an existing order. The tax line is added to the order identified by `id`. The response returns the created tax line.
 
         :param id: Identifier of the resource (required)
         :type id: str
-        :param order_tax_request: requested field for a taxes (required)
+        :param order_tax_request: Request body for creating a tax line. (required)
         :type order_tax_request: OrderTaxRequest
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -275,6 +277,7 @@ class TaxesApi:
             '200': "UpdateOrderTaxResponse",
             '401': "Error",
             '404': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -389,7 +392,7 @@ class TaxesApi:
     ) -> UpdateOrderTaxResponse:
         """Delete Tax
 
-        Delete taxes for an existing orden
+        Deletes an existing tax line from an order. The tax line identified by `tax_id` belongs to the order identified by `id`. The response includes the deleted resource with `deleted: true`.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -435,8 +438,8 @@ class TaxesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UpdateOrderTaxResponse",
             '401': "Error",
-            '422': "Error",
             '404': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -472,7 +475,7 @@ class TaxesApi:
     ) -> ApiResponse[UpdateOrderTaxResponse]:
         """Delete Tax
 
-        Delete taxes for an existing orden
+        Deletes an existing tax line from an order. The tax line identified by `tax_id` belongs to the order identified by `id`. The response includes the deleted resource with `deleted: true`.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -518,8 +521,8 @@ class TaxesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UpdateOrderTaxResponse",
             '401': "Error",
-            '422': "Error",
             '404': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -555,7 +558,7 @@ class TaxesApi:
     ) -> RESTResponseType:
         """Delete Tax
 
-        Delete taxes for an existing orden
+        Deletes an existing tax line from an order. The tax line identified by `tax_id` belongs to the order identified by `id`. The response includes the deleted resource with `deleted: true`.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -601,8 +604,8 @@ class TaxesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UpdateOrderTaxResponse",
             '401': "Error",
-            '422': "Error",
             '404': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -687,7 +690,7 @@ class TaxesApi:
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
         tax_id: Annotated[StrictStr, Field(description="identifier")],
-        update_order_tax_request: Annotated[UpdateOrderTaxRequest, Field(description="requested field for taxes")],
+        update_order_tax_request: Annotated[UpdateOrderTaxRequest, Field(description="Request body for updating a tax line.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -705,13 +708,13 @@ class TaxesApi:
     ) -> UpdateOrderTaxResponse:
         """Update Tax
 
-        Update taxes for an existing orden
+        Updates an existing tax line for an order. The tax line identified by `tax_id` belongs to the order identified by `id`. Only the fields provided in the request body are updated.
 
         :param id: Identifier of the resource (required)
         :type id: str
         :param tax_id: identifier (required)
         :type tax_id: str
-        :param update_order_tax_request: requested field for taxes (required)
+        :param update_order_tax_request: Request body for updating a tax line. (required)
         :type update_order_tax_request: UpdateOrderTaxRequest
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -754,8 +757,8 @@ class TaxesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UpdateOrderTaxResponse",
             '401': "Error",
-            '422': "Error",
             '404': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -774,7 +777,7 @@ class TaxesApi:
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
         tax_id: Annotated[StrictStr, Field(description="identifier")],
-        update_order_tax_request: Annotated[UpdateOrderTaxRequest, Field(description="requested field for taxes")],
+        update_order_tax_request: Annotated[UpdateOrderTaxRequest, Field(description="Request body for updating a tax line.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -792,13 +795,13 @@ class TaxesApi:
     ) -> ApiResponse[UpdateOrderTaxResponse]:
         """Update Tax
 
-        Update taxes for an existing orden
+        Updates an existing tax line for an order. The tax line identified by `tax_id` belongs to the order identified by `id`. Only the fields provided in the request body are updated.
 
         :param id: Identifier of the resource (required)
         :type id: str
         :param tax_id: identifier (required)
         :type tax_id: str
-        :param update_order_tax_request: requested field for taxes (required)
+        :param update_order_tax_request: Request body for updating a tax line. (required)
         :type update_order_tax_request: UpdateOrderTaxRequest
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -841,8 +844,8 @@ class TaxesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UpdateOrderTaxResponse",
             '401': "Error",
-            '422': "Error",
             '404': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -861,7 +864,7 @@ class TaxesApi:
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
         tax_id: Annotated[StrictStr, Field(description="identifier")],
-        update_order_tax_request: Annotated[UpdateOrderTaxRequest, Field(description="requested field for taxes")],
+        update_order_tax_request: Annotated[UpdateOrderTaxRequest, Field(description="Request body for updating a tax line.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -879,13 +882,13 @@ class TaxesApi:
     ) -> RESTResponseType:
         """Update Tax
 
-        Update taxes for an existing orden
+        Updates an existing tax line for an order. The tax line identified by `tax_id` belongs to the order identified by `id`. Only the fields provided in the request body are updated.
 
         :param id: Identifier of the resource (required)
         :type id: str
         :param tax_id: identifier (required)
         :type tax_id: str
-        :param update_order_tax_request: requested field for taxes (required)
+        :param update_order_tax_request: Request body for updating a tax line. (required)
         :type update_order_tax_request: UpdateOrderTaxRequest
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -928,8 +931,8 @@ class TaxesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UpdateOrderTaxResponse",
             '401': "Error",
-            '422': "Error",
             '404': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(

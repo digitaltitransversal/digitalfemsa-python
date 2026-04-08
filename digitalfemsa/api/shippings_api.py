@@ -45,7 +45,7 @@ class ShippingsApi:
     def orders_create_shipping(
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
-        shipping_request: Annotated[ShippingRequest, Field(description="requested field for a shipping")],
+        shipping_request: Annotated[ShippingRequest, Field(description="Request body for creating or updating a shipping line.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -63,11 +63,11 @@ class ShippingsApi:
     ) -> ShippingOrderResponse:
         """Create Shipping
 
-        Create new shipping for an existing orden
+        Creates a new shipping line for an existing order. The shipping line is added to the order identified by `id`. The response returns the created shipping line.
 
         :param id: Identifier of the resource (required)
         :type id: str
-        :param shipping_request: requested field for a shipping (required)
+        :param shipping_request: Request body for creating or updating a shipping line. (required)
         :type shipping_request: ShippingRequest
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -110,6 +110,7 @@ class ShippingsApi:
             '200': "ShippingOrderResponse",
             '401': "Error",
             '404': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -127,7 +128,7 @@ class ShippingsApi:
     def orders_create_shipping_with_http_info(
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
-        shipping_request: Annotated[ShippingRequest, Field(description="requested field for a shipping")],
+        shipping_request: Annotated[ShippingRequest, Field(description="Request body for creating or updating a shipping line.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -145,11 +146,11 @@ class ShippingsApi:
     ) -> ApiResponse[ShippingOrderResponse]:
         """Create Shipping
 
-        Create new shipping for an existing orden
+        Creates a new shipping line for an existing order. The shipping line is added to the order identified by `id`. The response returns the created shipping line.
 
         :param id: Identifier of the resource (required)
         :type id: str
-        :param shipping_request: requested field for a shipping (required)
+        :param shipping_request: Request body for creating or updating a shipping line. (required)
         :type shipping_request: ShippingRequest
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -192,6 +193,7 @@ class ShippingsApi:
             '200': "ShippingOrderResponse",
             '401': "Error",
             '404': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -209,7 +211,7 @@ class ShippingsApi:
     def orders_create_shipping_without_preload_content(
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
-        shipping_request: Annotated[ShippingRequest, Field(description="requested field for a shipping")],
+        shipping_request: Annotated[ShippingRequest, Field(description="Request body for creating or updating a shipping line.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -227,11 +229,11 @@ class ShippingsApi:
     ) -> RESTResponseType:
         """Create Shipping
 
-        Create new shipping for an existing orden
+        Creates a new shipping line for an existing order. The shipping line is added to the order identified by `id`. The response returns the created shipping line.
 
         :param id: Identifier of the resource (required)
         :type id: str
-        :param shipping_request: requested field for a shipping (required)
+        :param shipping_request: Request body for creating or updating a shipping line. (required)
         :type shipping_request: ShippingRequest
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -274,6 +276,7 @@ class ShippingsApi:
             '200': "ShippingOrderResponse",
             '401': "Error",
             '404': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -388,7 +391,7 @@ class ShippingsApi:
     ) -> ShippingOrderResponse:
         """Delete Shipping
 
-        Delete shipping
+        Deletes an existing shipping line from an order. The shipping line identified by `shipping_id` belongs to the order identified by `id`.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -436,7 +439,6 @@ class ShippingsApi:
             '401': "Error",
             '404': "Error",
             '422': "Error",
-            '428': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -472,7 +474,7 @@ class ShippingsApi:
     ) -> ApiResponse[ShippingOrderResponse]:
         """Delete Shipping
 
-        Delete shipping
+        Deletes an existing shipping line from an order. The shipping line identified by `shipping_id` belongs to the order identified by `id`.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -520,7 +522,6 @@ class ShippingsApi:
             '401': "Error",
             '404': "Error",
             '422': "Error",
-            '428': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -556,7 +557,7 @@ class ShippingsApi:
     ) -> RESTResponseType:
         """Delete Shipping
 
-        Delete shipping
+        Deletes an existing shipping line from an order. The shipping line identified by `shipping_id` belongs to the order identified by `id`.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -604,7 +605,6 @@ class ShippingsApi:
             '401': "Error",
             '404': "Error",
             '422': "Error",
-            '428': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -689,7 +689,7 @@ class ShippingsApi:
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
         shipping_id: Annotated[StrictStr, Field(description="identifier")],
-        shipping_request: Annotated[ShippingRequest, Field(description="requested field for a shipping")],
+        shipping_request: Annotated[ShippingRequest, Field(description="Request body for creating or updating a shipping line.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -707,13 +707,13 @@ class ShippingsApi:
     ) -> ShippingOrderResponse:
         """Update Shipping
 
-        Update existing shipping for an existing orden
+        Updates an existing shipping line for an order. The shipping line identified by `shipping_id` belongs to the order identified by `id`. Only the fields provided in the request body are updated.
 
         :param id: Identifier of the resource (required)
         :type id: str
         :param shipping_id: identifier (required)
         :type shipping_id: str
-        :param shipping_request: requested field for a shipping (required)
+        :param shipping_request: Request body for creating or updating a shipping line. (required)
         :type shipping_request: ShippingRequest
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -776,7 +776,7 @@ class ShippingsApi:
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
         shipping_id: Annotated[StrictStr, Field(description="identifier")],
-        shipping_request: Annotated[ShippingRequest, Field(description="requested field for a shipping")],
+        shipping_request: Annotated[ShippingRequest, Field(description="Request body for creating or updating a shipping line.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -794,13 +794,13 @@ class ShippingsApi:
     ) -> ApiResponse[ShippingOrderResponse]:
         """Update Shipping
 
-        Update existing shipping for an existing orden
+        Updates an existing shipping line for an order. The shipping line identified by `shipping_id` belongs to the order identified by `id`. Only the fields provided in the request body are updated.
 
         :param id: Identifier of the resource (required)
         :type id: str
         :param shipping_id: identifier (required)
         :type shipping_id: str
-        :param shipping_request: requested field for a shipping (required)
+        :param shipping_request: Request body for creating or updating a shipping line. (required)
         :type shipping_request: ShippingRequest
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -863,7 +863,7 @@ class ShippingsApi:
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
         shipping_id: Annotated[StrictStr, Field(description="identifier")],
-        shipping_request: Annotated[ShippingRequest, Field(description="requested field for a shipping")],
+        shipping_request: Annotated[ShippingRequest, Field(description="Request body for creating or updating a shipping line.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -881,13 +881,13 @@ class ShippingsApi:
     ) -> RESTResponseType:
         """Update Shipping
 
-        Update existing shipping for an existing orden
+        Updates an existing shipping line for an order. The shipping line identified by `shipping_id` belongs to the order identified by `id`. Only the fields provided in the request body are updated.
 
         :param id: Identifier of the resource (required)
         :type id: str
         :param shipping_id: identifier (required)
         :type shipping_id: str
-        :param shipping_request: requested field for a shipping (required)
+        :param shipping_request: Request body for creating or updating a shipping line. (required)
         :type shipping_request: ShippingRequest
         :param accept_language: Use for knowing which language to use
         :type accept_language: str

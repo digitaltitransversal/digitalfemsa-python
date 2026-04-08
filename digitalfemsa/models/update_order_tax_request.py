@@ -26,11 +26,11 @@ from typing_extensions import Self
 
 class UpdateOrderTaxRequest(BaseModel):
     """
-    create new taxes for an existing order
+    Create a new tax line for an existing order.
     """ # noqa: E501
     amount: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=None, description="The amount to be collected for tax in cents")
-    description: Optional[Annotated[str, Field(min_length=2, strict=True)]] = Field(default=None, description="description or tax's name")
-    metadata: Optional[Dict[str, Dict[str, Any]]] = None
+    description: Optional[Annotated[str, Field(min_length=2, strict=True)]] = Field(default=None, description="Description or tax name")
+    metadata: Optional[Dict[str, Any]] = None
     __properties: ClassVar[List[str]] = ["amount", "description", "metadata"]
 
     model_config = ConfigDict(

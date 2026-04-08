@@ -27,7 +27,7 @@ from typing_extensions import Self
 
 class TransfersResponse(BaseModel):
     """
-    A transfer represents the action of sending an amount to a business bank account including the status, amount and method used to make the transfer.
+    A transfer represents the action of sending an amount to a business bank account including the status, amount and destination used to make the transfer.
     """ # noqa: E501
     amount: Optional[StrictInt] = Field(default=None, description="Amount in cents of the transfer.")
     created_at: Optional[StrictInt] = Field(default=None, description="Date and time of creation of the transfer.")

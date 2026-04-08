@@ -4,7 +4,7 @@ All URIs are relative to *https://api.digitalfemsa.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_customer_shipping_contacts**](ShippingContactsApi.md#create_customer_shipping_contacts) | **POST** /customers/{id}/shipping_contacts | Create a shipping contacts
+[**create_customer_shipping_contacts**](ShippingContactsApi.md#create_customer_shipping_contacts) | **POST** /customers/{id}/shipping_contacts | Create a shipping contact
 [**delete_customer_shipping_contacts**](ShippingContactsApi.md#delete_customer_shipping_contacts) | **DELETE** /customers/{id}/shipping_contacts/{shipping_contacts_id} | Delete shipping contacts
 [**update_customer_shipping_contacts**](ShippingContactsApi.md#update_customer_shipping_contacts) | **PUT** /customers/{id}/shipping_contacts/{shipping_contacts_id} | Update shipping contacts
 
@@ -12,9 +12,9 @@ Method | HTTP request | Description
 # **create_customer_shipping_contacts**
 > CustomerShippingContactsResponse create_customer_shipping_contacts(id, customer_shipping_contacts, accept_language=accept_language, x_child_company_id=x_child_company_id)
 
-Create a shipping contacts
+Create a shipping contact
 
-Create a shipping contacts for a customer.
+Creates a new shipping contact for a customer. The shipping contact is associated with the customer identified by `id`.
 
 ### Example
 
@@ -48,12 +48,12 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = digitalfemsa.ShippingContactsApi(api_client)
     id = '6307a60c41de27127515a575' # str | Identifier of the resource
-    customer_shipping_contacts = digitalfemsa.CustomerShippingContacts() # CustomerShippingContacts | requested field for customer shippings contacts
+    customer_shipping_contacts = digitalfemsa.CustomerShippingContacts() # CustomerShippingContacts | Request body for creating or updating a customer shipping contact.
     accept_language = 'es' # str | Use for knowing which language to use (optional) (default to 'es')
     x_child_company_id = '6441b6376b60c3a638da80af' # str | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
     try:
-        # Create a shipping contacts
+        # Create a shipping contact
         api_response = api_instance.create_customer_shipping_contacts(id, customer_shipping_contacts, accept_language=accept_language, x_child_company_id=x_child_company_id)
         print("The response of ShippingContactsApi->create_customer_shipping_contacts:\n")
         pprint(api_response)
@@ -69,7 +69,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**| Identifier of the resource | 
- **customer_shipping_contacts** | [**CustomerShippingContacts**](CustomerShippingContacts.md)| requested field for customer shippings contacts | 
+ **customer_shipping_contacts** | [**CustomerShippingContacts**](CustomerShippingContacts.md)| Request body for creating or updating a customer shipping contact. | 
  **accept_language** | **str**| Use for knowing which language to use | [optional] [default to &#39;es&#39;]
  **x_child_company_id** | **str**| In the case of a holding company, the company id of the child company to which will process the request. | [optional] 
 
@@ -226,7 +226,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     api_instance = digitalfemsa.ShippingContactsApi(api_client)
     id = '6307a60c41de27127515a575' # str | Identifier of the resource
     shipping_contacts_id = '6307a60c41de27127515a575' # str | identifier
-    customer_update_shipping_contacts = digitalfemsa.CustomerUpdateShippingContacts() # CustomerUpdateShippingContacts | requested field for customer update shippings contacts
+    customer_update_shipping_contacts = digitalfemsa.CustomerUpdateShippingContacts() # CustomerUpdateShippingContacts | Request body for updating a customer shipping contact.
     accept_language = 'es' # str | Use for knowing which language to use (optional) (default to 'es')
     x_child_company_id = '6441b6376b60c3a638da80af' # str | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
@@ -248,7 +248,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**| Identifier of the resource | 
  **shipping_contacts_id** | **str**| identifier | 
- **customer_update_shipping_contacts** | [**CustomerUpdateShippingContacts**](CustomerUpdateShippingContacts.md)| requested field for customer update shippings contacts | 
+ **customer_update_shipping_contacts** | [**CustomerUpdateShippingContacts**](CustomerUpdateShippingContacts.md)| Request body for updating a customer shipping contact. | 
  **accept_language** | **str**| Use for knowing which language to use | [optional] [default to &#39;es&#39;]
  **x_child_company_id** | **str**| In the case of a holding company, the company id of the child company to which will process the request. | [optional] 
 

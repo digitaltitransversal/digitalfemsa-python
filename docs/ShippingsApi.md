@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 Create Shipping
 
-Create new shipping for an existing orden
+Creates a new shipping line for an existing order. The shipping line is added to the order identified by `id`. The response returns the created shipping line.
 
 ### Example
 
@@ -48,7 +48,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = digitalfemsa.ShippingsApi(api_client)
     id = '6307a60c41de27127515a575' # str | Identifier of the resource
-    shipping_request = digitalfemsa.ShippingRequest() # ShippingRequest | requested field for a shipping
+    shipping_request = digitalfemsa.ShippingRequest() # ShippingRequest | Request body for creating or updating a shipping line.
     accept_language = 'es' # str | Use for knowing which language to use (optional) (default to 'es')
     x_child_company_id = '6441b6376b60c3a638da80af' # str | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
@@ -69,7 +69,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**| Identifier of the resource | 
- **shipping_request** | [**ShippingRequest**](ShippingRequest.md)| requested field for a shipping | 
+ **shipping_request** | [**ShippingRequest**](ShippingRequest.md)| Request body for creating or updating a shipping line. | 
  **accept_language** | **str**| Use for knowing which language to use | [optional] [default to &#39;es&#39;]
  **x_child_company_id** | **str**| In the case of a holding company, the company id of the child company to which will process the request. | [optional] 
 
@@ -93,6 +93,7 @@ Name | Type | Description  | Notes
 **200** | successful |  -  |
 **401** | authentication error |  -  |
 **404** | not found entity |  -  |
+**422** | parameter validation error |  -  |
 **500** | internal server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -102,7 +103,7 @@ Name | Type | Description  | Notes
 
 Delete Shipping
 
-Delete shipping
+Deletes an existing shipping line from an order. The shipping line identified by `shipping_id` belongs to the order identified by `id`.
 
 ### Example
 
@@ -181,7 +182,6 @@ Name | Type | Description  | Notes
 **401** | authentication error |  -  |
 **404** | not found entity |  -  |
 **422** | parameter validation error |  -  |
-**428** | Precondition Required |  -  |
 **500** | internal server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -191,7 +191,7 @@ Name | Type | Description  | Notes
 
 Update Shipping
 
-Update existing shipping for an existing orden
+Updates an existing shipping line for an order. The shipping line identified by `shipping_id` belongs to the order identified by `id`. Only the fields provided in the request body are updated.
 
 ### Example
 
@@ -226,7 +226,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     api_instance = digitalfemsa.ShippingsApi(api_client)
     id = '6307a60c41de27127515a575' # str | Identifier of the resource
     shipping_id = 'ship_lin_2tQ974hSHcsdeSZHG' # str | identifier
-    shipping_request = digitalfemsa.ShippingRequest() # ShippingRequest | requested field for a shipping
+    shipping_request = digitalfemsa.ShippingRequest() # ShippingRequest | Request body for creating or updating a shipping line.
     accept_language = 'es' # str | Use for knowing which language to use (optional) (default to 'es')
     x_child_company_id = '6441b6376b60c3a638da80af' # str | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
@@ -248,7 +248,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**| Identifier of the resource | 
  **shipping_id** | **str**| identifier | 
- **shipping_request** | [**ShippingRequest**](ShippingRequest.md)| requested field for a shipping | 
+ **shipping_request** | [**ShippingRequest**](ShippingRequest.md)| Request body for creating or updating a shipping line. | 
  **accept_language** | **str**| Use for knowing which language to use | [optional] [default to &#39;es&#39;]
  **x_child_company_id** | **str**| In the case of a holding company, the company id of the child company to which will process the request. | [optional] 
 
