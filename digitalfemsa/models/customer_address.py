@@ -32,7 +32,7 @@ class CustomerAddress(BaseModel):
     postal_code: StrictStr
     city: StrictStr
     state: Optional[StrictStr] = None
-    country: Optional[StrictStr] = Field(default=None, description="this field follows the [ISO 3166-1 alpha-2 standard](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)")
+    country: StrictStr = Field(description="this field follows the [ISO 3166-1 alpha-2 standard](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)")
     residential: Optional[StrictBool] = False
     external_number: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["street1", "street2", "postal_code", "city", "state", "country", "residential", "external_number"]

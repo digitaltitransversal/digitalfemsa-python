@@ -20,7 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from digitalfemsa.models.customer_antifraud_info import CustomerAntifraudInfo
+from typing_extensions import Annotated
 from digitalfemsa.models.customer_fiscal_entities_request import CustomerFiscalEntitiesRequest
 from digitalfemsa.models.customer_payment_methods_request import CustomerPaymentMethodsRequest
 from digitalfemsa.models.customer_shipping_contacts import CustomerShippingContacts
@@ -29,21 +29,18 @@ from typing_extensions import Self
 
 class Customer(BaseModel):
     """
-    a customer
+    Customer create request.
     """ # noqa: E501
-    antifraud_info: Optional[CustomerAntifraudInfo] = None
-    corporate: Optional[StrictBool] = Field(default=False, description="It is a value that allows identifying if the email is corporate or not.")
-    custom_reference: Optional[StrictStr] = Field(default=None, description="It is an undefined value.")
-    email: StrictStr = Field(description="An email address is a series of customizable characters followed by a universal Internet symbol, the at symbol (@), the name of a host server, and a web domain ending (.mx, .com, .org, . net, etc).")
-    default_payment_source_id: Optional[StrictStr] = Field(default=None, description="It is a parameter that allows to identify in the response, the Femsa ID of a payment method (payment_id)")
-    default_shipping_contact_id: Optional[StrictStr] = Field(default=None, description="It is a parameter that allows to identify in the response, the Femsa ID of the shipping address (shipping_contact)")
-    fiscal_entities: Optional[List[CustomerFiscalEntitiesRequest]] = None
-    metadata: Optional[Dict[str, Any]] = None
-    name: StrictStr = Field(description="Client's name")
-    payment_sources: Optional[List[CustomerPaymentMethodsRequest]] = Field(default=None, description="Contains details of the payment methods that the customer has active or has used in Femsa")
-    phone: StrictStr = Field(description="Is the customer's phone number")
-    shipping_contacts: Optional[List[CustomerShippingContacts]] = Field(default=None, description="Contains the detail of the shipping addresses that the client has active or has used in Femsa")
-    __properties: ClassVar[List[str]] = ["antifraud_info", "corporate", "custom_reference", "email", "default_payment_source_id", "default_shipping_contact_id", "fiscal_entities", "metadata", "name", "payment_sources", "phone", "shipping_contacts"]
+    name: StrictStr = Field(description="Customer's name.")
+    email: StrictStr = Field(description="Customer email address.")
+    phone: Optional[Annotated[str, Field(strict=True, max_length=19)]] = Field(default=None, description="Customer phone number.")
+    corporate: Optional[StrictBool] = Field(default=False, description="Indicates whether the customer email is corporate.")
+    custom_reference: Optional[StrictStr] = Field(default=None, description="Merchant-defined reference used to identify the customer in your system.")
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Arbitrary metadata associated with the customer.")
+    payment_sources: Optional[List[CustomerPaymentMethodsRequest]] = Field(default=None, description="Customer payment sources to be created with the customer (optional).")
+    fiscal_entities: Optional[List[CustomerFiscalEntitiesRequest]] = Field(default=None, description="Customer fiscal entities to be created with the customer (optional).")
+    shipping_contacts: Optional[List[CustomerShippingContacts]] = Field(default=None, description="Customer shipping contacts to be created with the customer (optional).")
+    __properties: ClassVar[List[str]] = ["name", "email", "phone", "corporate", "custom_reference", "metadata", "payment_sources", "fiscal_entities", "shipping_contacts"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,16 +81,6 @@ class Customer(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of antifraud_info
-        if self.antifraud_info:
-            _dict['antifraud_info'] = self.antifraud_info.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in fiscal_entities (list)
-        _items = []
-        if self.fiscal_entities:
-            for _item in self.fiscal_entities:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['fiscal_entities'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in payment_sources (list)
         _items = []
         if self.payment_sources:
@@ -101,6 +88,13 @@ class Customer(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['payment_sources'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in fiscal_entities (list)
+        _items = []
+        if self.fiscal_entities:
+            for _item in self.fiscal_entities:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['fiscal_entities'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in shipping_contacts (list)
         _items = []
         if self.shipping_contacts:
@@ -108,10 +102,10 @@ class Customer(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['shipping_contacts'] = _items
-        # set to None if antifraud_info (nullable) is None
+        # set to None if phone (nullable) is None
         # and model_fields_set contains the field
-        if self.antifraud_info is None and "antifraud_info" in self.model_fields_set:
-            _dict['antifraud_info'] = None
+        if self.phone is None and "phone" in self.model_fields_set:
+            _dict['phone'] = None
 
         return _dict
 
@@ -125,17 +119,14 @@ class Customer(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "antifraud_info": CustomerAntifraudInfo.from_dict(obj["antifraud_info"]) if obj.get("antifraud_info") is not None else None,
+            "name": obj.get("name"),
+            "email": obj.get("email"),
+            "phone": obj.get("phone"),
             "corporate": obj.get("corporate") if obj.get("corporate") is not None else False,
             "custom_reference": obj.get("custom_reference"),
-            "email": obj.get("email"),
-            "default_payment_source_id": obj.get("default_payment_source_id"),
-            "default_shipping_contact_id": obj.get("default_shipping_contact_id"),
-            "fiscal_entities": [CustomerFiscalEntitiesRequest.from_dict(_item) for _item in obj["fiscal_entities"]] if obj.get("fiscal_entities") is not None else None,
             "metadata": obj.get("metadata"),
-            "name": obj.get("name"),
             "payment_sources": [CustomerPaymentMethodsRequest.from_dict(_item) for _item in obj["payment_sources"]] if obj.get("payment_sources") is not None else None,
-            "phone": obj.get("phone"),
+            "fiscal_entities": [CustomerFiscalEntitiesRequest.from_dict(_item) for _item in obj["fiscal_entities"]] if obj.get("fiscal_entities") is not None else None,
             "shipping_contacts": [CustomerShippingContacts.from_dict(_item) for _item in obj["shipping_contacts"]] if obj.get("shipping_contacts") is not None else None
         })
         return _obj

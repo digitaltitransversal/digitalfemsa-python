@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **object** | **str** | Object type, in this case is list | 
 **next_page_url** | **str** | URL of the next page. | [optional] 
 **previous_page_url** | **str** | Url of the previous page. | [optional] 
-**data** | [**List[CustomerResponse]**](CustomerResponse.md) |  | [optional] 
+**data** | [**List[CustomerResponse]**](CustomerResponse.md) | Customers | [optional] 
 
 ## Example
 

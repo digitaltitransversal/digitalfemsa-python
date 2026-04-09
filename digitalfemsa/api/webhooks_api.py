@@ -46,7 +46,7 @@ class WebhooksApi:
     @validate_call
     def create_webhook(
         self,
-        webhook_request: Annotated[WebhookRequest, Field(description="requested field for webhook")],
+        webhook_request: Annotated[WebhookRequest, Field(description="Webhook creation/update request payload.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         _request_timeout: Union[
             None,
@@ -65,7 +65,7 @@ class WebhooksApi:
 
         What we do at Femsa translates into events. For example, an event of interest to us occurs at the time a payment is successfully processed. At that moment we will be interested in doing several things: Send an email to the buyer, generate an invoice, start the process of shipping the product, etc.
 
-        :param webhook_request: requested field for webhook (required)
+        :param webhook_request: Webhook creation/update request payload. (required)
         :type webhook_request: WebhookRequest
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -119,7 +119,7 @@ class WebhooksApi:
     @validate_call
     def create_webhook_with_http_info(
         self,
-        webhook_request: Annotated[WebhookRequest, Field(description="requested field for webhook")],
+        webhook_request: Annotated[WebhookRequest, Field(description="Webhook creation/update request payload.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         _request_timeout: Union[
             None,
@@ -138,7 +138,7 @@ class WebhooksApi:
 
         What we do at Femsa translates into events. For example, an event of interest to us occurs at the time a payment is successfully processed. At that moment we will be interested in doing several things: Send an email to the buyer, generate an invoice, start the process of shipping the product, etc.
 
-        :param webhook_request: requested field for webhook (required)
+        :param webhook_request: Webhook creation/update request payload. (required)
         :type webhook_request: WebhookRequest
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -192,7 +192,7 @@ class WebhooksApi:
     @validate_call
     def create_webhook_without_preload_content(
         self,
-        webhook_request: Annotated[WebhookRequest, Field(description="requested field for webhook")],
+        webhook_request: Annotated[WebhookRequest, Field(description="Webhook creation/update request payload.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         _request_timeout: Union[
             None,
@@ -211,7 +211,7 @@ class WebhooksApi:
 
         What we do at Femsa translates into events. For example, an event of interest to us occurs at the time a payment is successfully processed. At that moment we will be interested in doing several things: Send an email to the buyer, generate an invoice, start the process of shipping the product, etc.
 
-        :param webhook_request: requested field for webhook (required)
+        :param webhook_request: Webhook creation/update request payload. (required)
         :type webhook_request: WebhookRequest
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -353,8 +353,9 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> WebhookResponse:
-        """Delete Webhook
+        """Delete webhook
 
+        Deletes a webhook.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -426,8 +427,9 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[WebhookResponse]:
-        """Delete Webhook
+        """Delete webhook
 
+        Deletes a webhook.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -499,8 +501,9 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Delete Webhook
+        """Delete webhook
 
+        Deletes a webhook.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -633,8 +636,9 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> WebhookResponse:
-        """Get Webhook
+        """Get webhook
 
+        Retrieves the details of a webhook by its ID.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -710,8 +714,9 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[WebhookResponse]:
-        """Get Webhook
+        """Get webhook
 
+        Retrieves the details of a webhook by its ID.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -787,8 +792,9 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get Webhook
+        """Get webhook
 
+        Retrieves the details of a webhook by its ID.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -915,6 +921,7 @@ class WebhooksApi:
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=250, strict=True, ge=1)]], Field(description="The numbers of items to return, the maximum value is 250")] = None,
         search: Annotated[Optional[StrictStr], Field(description="General order search, e.g. by mail, reference etc.")] = None,
+        url: Annotated[Optional[StrictStr], Field(description="url for webhook filter")] = None,
         next: Annotated[Optional[StrictStr], Field(description="next page")] = None,
         previous: Annotated[Optional[StrictStr], Field(description="previous page")] = None,
         _request_timeout: Union[
@@ -942,6 +949,8 @@ class WebhooksApi:
         :type limit: int
         :param search: General order search, e.g. by mail, reference etc.
         :type search: str
+        :param url: url for webhook filter
+        :type url: str
         :param next: next page
         :type next: str
         :param previous: previous page
@@ -973,6 +982,7 @@ class WebhooksApi:
             x_child_company_id=x_child_company_id,
             limit=limit,
             search=search,
+            url=url,
             next=next,
             previous=previous,
             _request_auth=_request_auth,
@@ -1004,6 +1014,7 @@ class WebhooksApi:
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=250, strict=True, ge=1)]], Field(description="The numbers of items to return, the maximum value is 250")] = None,
         search: Annotated[Optional[StrictStr], Field(description="General order search, e.g. by mail, reference etc.")] = None,
+        url: Annotated[Optional[StrictStr], Field(description="url for webhook filter")] = None,
         next: Annotated[Optional[StrictStr], Field(description="next page")] = None,
         previous: Annotated[Optional[StrictStr], Field(description="previous page")] = None,
         _request_timeout: Union[
@@ -1031,6 +1042,8 @@ class WebhooksApi:
         :type limit: int
         :param search: General order search, e.g. by mail, reference etc.
         :type search: str
+        :param url: url for webhook filter
+        :type url: str
         :param next: next page
         :type next: str
         :param previous: previous page
@@ -1062,6 +1075,7 @@ class WebhooksApi:
             x_child_company_id=x_child_company_id,
             limit=limit,
             search=search,
+            url=url,
             next=next,
             previous=previous,
             _request_auth=_request_auth,
@@ -1093,6 +1107,7 @@ class WebhooksApi:
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=250, strict=True, ge=1)]], Field(description="The numbers of items to return, the maximum value is 250")] = None,
         search: Annotated[Optional[StrictStr], Field(description="General order search, e.g. by mail, reference etc.")] = None,
+        url: Annotated[Optional[StrictStr], Field(description="url for webhook filter")] = None,
         next: Annotated[Optional[StrictStr], Field(description="next page")] = None,
         previous: Annotated[Optional[StrictStr], Field(description="previous page")] = None,
         _request_timeout: Union[
@@ -1120,6 +1135,8 @@ class WebhooksApi:
         :type limit: int
         :param search: General order search, e.g. by mail, reference etc.
         :type search: str
+        :param url: url for webhook filter
+        :type url: str
         :param next: next page
         :type next: str
         :param previous: previous page
@@ -1151,6 +1168,7 @@ class WebhooksApi:
             x_child_company_id=x_child_company_id,
             limit=limit,
             search=search,
+            url=url,
             next=next,
             previous=previous,
             _request_auth=_request_auth,
@@ -1177,6 +1195,7 @@ class WebhooksApi:
         x_child_company_id,
         limit,
         search,
+        url,
         next,
         previous,
         _request_auth,
@@ -1206,6 +1225,10 @@ class WebhooksApi:
         if search is not None:
             
             _query_params.append(('search', search))
+            
+        if url is not None:
+            
+            _query_params.append(('url', url))
             
         if next is not None:
             
@@ -1273,9 +1296,9 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> WebhookResponse:
-        """Test Webhook
+        """Test webhook
 
-        Send a webhook.ping event
+        Sends a test event to the specified webhook to verify it can receive events.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -1347,9 +1370,9 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[WebhookResponse]:
-        """Test Webhook
+        """Test webhook
 
-        Send a webhook.ping event
+        Sends a test event to the specified webhook to verify it can receive events.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -1421,9 +1444,9 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Test Webhook
+        """Test webhook
 
-        Send a webhook.ping event
+        Sends a test event to the specified webhook to verify it can receive events.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -1541,7 +1564,7 @@ class WebhooksApi:
     def update_webhook(
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
-        webhook_update_request: Annotated[WebhookUpdateRequest, Field(description="requested fields in order to update a webhook")],
+        webhook_update_request: Annotated[WebhookUpdateRequest, Field(description="Webhook update request payload.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -1557,13 +1580,13 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> WebhookResponse:
-        """Update Webhook
+        """Update webhook
 
-        updates an existing webhook
+        Updates an existing webhook.
 
         :param id: Identifier of the resource (required)
         :type id: str
-        :param webhook_update_request: requested fields in order to update a webhook (required)
+        :param webhook_update_request: Webhook update request payload. (required)
         :type webhook_update_request: WebhookUpdateRequest
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -1604,8 +1627,8 @@ class WebhooksApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhookResponse",
-            '404': "Error",
             '401': "Error",
+            '404': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -1623,7 +1646,7 @@ class WebhooksApi:
     def update_webhook_with_http_info(
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
-        webhook_update_request: Annotated[WebhookUpdateRequest, Field(description="requested fields in order to update a webhook")],
+        webhook_update_request: Annotated[WebhookUpdateRequest, Field(description="Webhook update request payload.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -1639,13 +1662,13 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[WebhookResponse]:
-        """Update Webhook
+        """Update webhook
 
-        updates an existing webhook
+        Updates an existing webhook.
 
         :param id: Identifier of the resource (required)
         :type id: str
-        :param webhook_update_request: requested fields in order to update a webhook (required)
+        :param webhook_update_request: Webhook update request payload. (required)
         :type webhook_update_request: WebhookUpdateRequest
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -1686,8 +1709,8 @@ class WebhooksApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhookResponse",
-            '404': "Error",
             '401': "Error",
+            '404': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -1705,7 +1728,7 @@ class WebhooksApi:
     def update_webhook_without_preload_content(
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
-        webhook_update_request: Annotated[WebhookUpdateRequest, Field(description="requested fields in order to update a webhook")],
+        webhook_update_request: Annotated[WebhookUpdateRequest, Field(description="Webhook update request payload.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -1721,13 +1744,13 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Update Webhook
+        """Update webhook
 
-        updates an existing webhook
+        Updates an existing webhook.
 
         :param id: Identifier of the resource (required)
         :type id: str
-        :param webhook_update_request: requested fields in order to update a webhook (required)
+        :param webhook_update_request: Webhook update request payload. (required)
         :type webhook_update_request: WebhookUpdateRequest
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -1768,8 +1791,8 @@ class WebhooksApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebhookResponse",
-            '404': "Error",
             '401': "Error",
+            '404': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(

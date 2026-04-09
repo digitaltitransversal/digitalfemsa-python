@@ -1,17 +1,16 @@
 # CheckoutOrderTemplateCustomerInfo
 
-It is the information of the customer who will be created when receiving a new payment.
+Customer information used when creating the order.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**customer_id** | **str** |  | 
 **name** | **str** |  | 
 **email** | **str** |  | 
-**phone** | **str** |  | 
+**phone** | **str** |  | [optional] 
 **corporate** | **bool** |  | [optional] 
-**object** | **str** |  | [optional] 
-**customer_id** | **str** |  | 
 
 ## Example
 

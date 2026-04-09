@@ -5,15 +5,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**antifraud_info** | **Dict[str, object]** |  | [optional] 
-**description** | **str** |  | [optional] 
-**sku** | **str** |  | [optional] 
 **name** | **str** |  | [optional] 
 **unit_price** | **int** |  | [optional] 
 **quantity** | **int** |  | [optional] 
-**tags** | **List[str]** |  | [optional] 
+**sku** | **str** |  | [optional] 
 **brand** | **str** |  | [optional] 
-**metadata** | **Dict[str, str]** |  | [optional] 
+**description** | **str** |  | [optional] 
+**tags** | **List[str]** |  | [optional] 
+**metadata** | **Dict[str, object]** |  | [optional] 
 
 ## Example
 

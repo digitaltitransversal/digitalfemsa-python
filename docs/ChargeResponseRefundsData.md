@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **id** | **str** |  | 
 **object** | **str** |  | 
 **status** | **str** | refund status | [optional] 
+**payout_id** | **str** |  | [optional] 
+**reference** | **str** | payout reference for oxxo stores | [optional] 
 
 ## Example
 

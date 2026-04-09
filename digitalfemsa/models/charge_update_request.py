@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class ChargeUpdateRequest(BaseModel):
     """
-    requested field for update a charge
+    Request body to update a charge. Only `reference_id` can be updated.
     """ # noqa: E501
     reference_id: Optional[StrictStr] = Field(default=None, description="custom reference id")
     __properties: ClassVar[List[str]] = ["reference_id"]

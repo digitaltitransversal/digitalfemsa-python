@@ -62,7 +62,7 @@ class TransactionsApi:
     ) -> TransactionResponse:
         """Get transaction
 
-        Get the details of a transaction
+        Retrieves the details of a transaction by its ID.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -140,7 +140,7 @@ class TransactionsApi:
     ) -> ApiResponse[TransactionResponse]:
         """Get transaction
 
-        Get the details of a transaction
+        Retrieves the details of a transaction by its ID.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -218,7 +218,7 @@ class TransactionsApi:
     ) -> RESTResponseType:
         """Get transaction
 
-        Get the details of a transaction
+        Retrieves the details of a transaction by its ID.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -363,9 +363,9 @@ class TransactionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetTransactionsResponse:
-        """Get List transactions
+        """List transactions
 
-        Get transaction details in the form of a list
+        Returns a paginated list of transactions (ledger movements).  A transaction is a movement that represents the financial impact of payment operations, including amounts, fees, and net values. Transactions can be linked to a charge and may be linked to a transfer (payout) when they are included in a payout.  If you need payout-level information (destination, statement reference/description, payout status), use GET /transfers. 
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -464,9 +464,9 @@ class TransactionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetTransactionsResponse]:
-        """Get List transactions
+        """List transactions
 
-        Get transaction details in the form of a list
+        Returns a paginated list of transactions (ledger movements).  A transaction is a movement that represents the financial impact of payment operations, including amounts, fees, and net values. Transactions can be linked to a charge and may be linked to a transfer (payout) when they are included in a payout.  If you need payout-level information (destination, statement reference/description, payout status), use GET /transfers. 
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -565,9 +565,9 @@ class TransactionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get List transactions
+        """List transactions
 
-        Get transaction details in the form of a list
+        Returns a paginated list of transactions (ledger movements).  A transaction is a movement that represents the financial impact of payment operations, including amounts, fees, and net values. Transactions can be linked to a charge and may be linked to a transfer (payout) when they are included in a payout.  If you need payout-level information (destination, statement reference/description, payout status), use GET /transfers. 
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str

@@ -32,11 +32,12 @@ class ShippingOrderResponse(BaseModel):
     carrier: Optional[StrictStr] = Field(default=None, description="Carrier name for the shipment")
     tracking_number: Optional[StrictStr] = Field(default=None, description="Tracking number can be used to track the shipment")
     method: Optional[StrictStr] = Field(default=None, description="Method of shipment")
+    description: Optional[StrictStr] = Field(default=None, description="Shipping line description")
     metadata: Optional[Dict[str, Any]] = Field(default=None, description="Hash where the user can send additional information for each 'shipping'.")
     id: Optional[StrictStr] = None
     object: Optional[StrictStr] = None
     parent_id: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["amount", "carrier", "tracking_number", "method", "metadata", "id", "object", "parent_id"]
+    __properties: ClassVar[List[str]] = ["amount", "carrier", "tracking_number", "method", "description", "metadata", "id", "object", "parent_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,6 +94,7 @@ class ShippingOrderResponse(BaseModel):
             "carrier": obj.get("carrier"),
             "tracking_number": obj.get("tracking_number"),
             "method": obj.get("method"),
+            "description": obj.get("description"),
             "metadata": obj.get("metadata"),
             "id": obj.get("id"),
             "object": obj.get("object"),

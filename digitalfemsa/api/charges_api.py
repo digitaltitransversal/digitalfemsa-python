@@ -50,9 +50,9 @@ class ChargesApi:
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=250, strict=True, ge=1)]], Field(description="The numbers of items to return, the maximum value is 250")] = None,
-        search: Annotated[Optional[StrictStr], Field(description="General order search, e.g. by mail, reference etc.")] = None,
         next: Annotated[Optional[StrictStr], Field(description="next page")] = None,
         previous: Annotated[Optional[StrictStr], Field(description="previous page")] = None,
+        search: Annotated[Optional[StrictStr], Field(description="General order search, e.g. by mail, reference etc.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -66,8 +66,9 @@ class ChargesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetChargesResponse:
-        """Get A List of Charges
+        """List charges
 
+        Retrieves a paginated list of charges for the authenticated account.  Use the pagination parameters (`limit`, `next_page`, `previous_page`) to navigate through results. Use `search` to filter charges (for example by id or reference). 
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -75,12 +76,12 @@ class ChargesApi:
         :type x_child_company_id: str
         :param limit: The numbers of items to return, the maximum value is 250
         :type limit: int
-        :param search: General order search, e.g. by mail, reference etc.
-        :type search: str
         :param next: next page
         :type next: str
         :param previous: previous page
         :type previous: str
+        :param search: General order search, e.g. by mail, reference etc.
+        :type search: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -107,9 +108,9 @@ class ChargesApi:
             accept_language=accept_language,
             x_child_company_id=x_child_company_id,
             limit=limit,
-            search=search,
             next=next,
             previous=previous,
+            search=search,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -118,6 +119,7 @@ class ChargesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GetChargesResponse",
+            '401': "Error",
             '422': "Error",
             '500': "Error",
         }
@@ -138,9 +140,9 @@ class ChargesApi:
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=250, strict=True, ge=1)]], Field(description="The numbers of items to return, the maximum value is 250")] = None,
-        search: Annotated[Optional[StrictStr], Field(description="General order search, e.g. by mail, reference etc.")] = None,
         next: Annotated[Optional[StrictStr], Field(description="next page")] = None,
         previous: Annotated[Optional[StrictStr], Field(description="previous page")] = None,
+        search: Annotated[Optional[StrictStr], Field(description="General order search, e.g. by mail, reference etc.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -154,8 +156,9 @@ class ChargesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetChargesResponse]:
-        """Get A List of Charges
+        """List charges
 
+        Retrieves a paginated list of charges for the authenticated account.  Use the pagination parameters (`limit`, `next_page`, `previous_page`) to navigate through results. Use `search` to filter charges (for example by id or reference). 
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -163,12 +166,12 @@ class ChargesApi:
         :type x_child_company_id: str
         :param limit: The numbers of items to return, the maximum value is 250
         :type limit: int
-        :param search: General order search, e.g. by mail, reference etc.
-        :type search: str
         :param next: next page
         :type next: str
         :param previous: previous page
         :type previous: str
+        :param search: General order search, e.g. by mail, reference etc.
+        :type search: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -195,9 +198,9 @@ class ChargesApi:
             accept_language=accept_language,
             x_child_company_id=x_child_company_id,
             limit=limit,
-            search=search,
             next=next,
             previous=previous,
+            search=search,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -206,6 +209,7 @@ class ChargesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GetChargesResponse",
+            '401': "Error",
             '422': "Error",
             '500': "Error",
         }
@@ -226,9 +230,9 @@ class ChargesApi:
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=250, strict=True, ge=1)]], Field(description="The numbers of items to return, the maximum value is 250")] = None,
-        search: Annotated[Optional[StrictStr], Field(description="General order search, e.g. by mail, reference etc.")] = None,
         next: Annotated[Optional[StrictStr], Field(description="next page")] = None,
         previous: Annotated[Optional[StrictStr], Field(description="previous page")] = None,
+        search: Annotated[Optional[StrictStr], Field(description="General order search, e.g. by mail, reference etc.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -242,8 +246,9 @@ class ChargesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get A List of Charges
+        """List charges
 
+        Retrieves a paginated list of charges for the authenticated account.  Use the pagination parameters (`limit`, `next_page`, `previous_page`) to navigate through results. Use `search` to filter charges (for example by id or reference). 
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -251,12 +256,12 @@ class ChargesApi:
         :type x_child_company_id: str
         :param limit: The numbers of items to return, the maximum value is 250
         :type limit: int
-        :param search: General order search, e.g. by mail, reference etc.
-        :type search: str
         :param next: next page
         :type next: str
         :param previous: previous page
         :type previous: str
+        :param search: General order search, e.g. by mail, reference etc.
+        :type search: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -283,9 +288,9 @@ class ChargesApi:
             accept_language=accept_language,
             x_child_company_id=x_child_company_id,
             limit=limit,
-            search=search,
             next=next,
             previous=previous,
+            search=search,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -294,6 +299,7 @@ class ChargesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GetChargesResponse",
+            '401': "Error",
             '422': "Error",
             '500': "Error",
         }
@@ -309,9 +315,9 @@ class ChargesApi:
         accept_language,
         x_child_company_id,
         limit,
-        search,
         next,
         previous,
+        search,
         _request_auth,
         _content_type,
         _headers,
@@ -336,10 +342,6 @@ class ChargesApi:
             
             _query_params.append(('limit', limit))
             
-        if search is not None:
-            
-            _query_params.append(('search', search))
-            
         if next is not None:
             
             _query_params.append(('next', next))
@@ -347,6 +349,10 @@ class ChargesApi:
         if previous is not None:
             
             _query_params.append(('previous', previous))
+            
+        if search is not None:
+            
+            _query_params.append(('search', search))
             
         # process the header parameters
         if accept_language is not None:
@@ -408,9 +414,9 @@ class ChargesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ChargeOrderResponse:
-        """Create charge
+        """Create a charge for an order
 
-        Create charge for an existing orden
+        Creates a new charge associated with an existing order.  Notes: - The charge is created for the order identified by the path parameter `id`. - Depending on the payment method, the charge may be created in a non-final status (for example, pending). - If the order does not meet the required conditions, the API may respond with **428 Precondition Required**. 
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -457,6 +463,7 @@ class ChargesApi:
             '200': "ChargeOrderResponse",
             '401': "Error",
             '404': "Error",
+            '422': "Error",
             '428': "Error",
             '500': "Error",
         }
@@ -491,9 +498,9 @@ class ChargesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ChargeOrderResponse]:
-        """Create charge
+        """Create a charge for an order
 
-        Create charge for an existing orden
+        Creates a new charge associated with an existing order.  Notes: - The charge is created for the order identified by the path parameter `id`. - Depending on the payment method, the charge may be created in a non-final status (for example, pending). - If the order does not meet the required conditions, the API may respond with **428 Precondition Required**. 
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -540,6 +547,7 @@ class ChargesApi:
             '200': "ChargeOrderResponse",
             '401': "Error",
             '404': "Error",
+            '422': "Error",
             '428': "Error",
             '500': "Error",
         }
@@ -574,9 +582,9 @@ class ChargesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Create charge
+        """Create a charge for an order
 
-        Create charge for an existing orden
+        Creates a new charge associated with an existing order.  Notes: - The charge is created for the order identified by the path parameter `id`. - Depending on the payment method, the charge may be created in a non-final status (for example, pending). - If the order does not meet the required conditions, the API may respond with **428 Precondition Required**. 
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -623,6 +631,7 @@ class ChargesApi:
             '200': "ChargeOrderResponse",
             '401': "Error",
             '404': "Error",
+            '422': "Error",
             '428': "Error",
             '500': "Error",
         }
@@ -738,6 +747,7 @@ class ChargesApi:
     ) -> ChargeResponse:
         """Update a charge
 
+        Updates an existing charge. Only `reference_id` can be updated.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -819,6 +829,7 @@ class ChargesApi:
     ) -> ApiResponse[ChargeResponse]:
         """Update a charge
 
+        Updates an existing charge. Only `reference_id` can be updated.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -900,6 +911,7 @@ class ChargesApi:
     ) -> RESTResponseType:
         """Update a charge
 
+        Updates an existing charge. Only `reference_id` can be updated.
 
         :param id: Identifier of the resource (required)
         :type id: str

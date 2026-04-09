@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class WebhookKeyDeleteResponse(BaseModel):
     """
-    webhook keys model
+    Represents a webhook signing key after it has been deleted.
     """ # noqa: E501
     active: Optional[StrictBool] = Field(default=None, description="Indicates if the webhook key is active")
     created_at: Optional[StrictInt] = Field(default=None, description="Unix timestamp in seconds with the creation date of the webhook key")

@@ -4,21 +4,21 @@ All URIs are relative to *https://api.digitalfemsa.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_customer**](CustomersApi.md#create_customer) | **POST** /customers | Create customer
+[**create_customer**](CustomersApi.md#create_customer) | **POST** /customers | Create a customer
 [**create_customer_fiscal_entities**](CustomersApi.md#create_customer_fiscal_entities) | **POST** /customers/{id}/fiscal_entities | Create Fiscal Entity
 [**delete_customer_by_id**](CustomersApi.md#delete_customer_by_id) | **DELETE** /customers/{id} | Delete Customer
 [**get_customer_by_id**](CustomersApi.md#get_customer_by_id) | **GET** /customers/{id} | Get Customer
 [**get_customers**](CustomersApi.md#get_customers) | **GET** /customers | Get a list of customers
 [**update_customer**](CustomersApi.md#update_customer) | **PUT** /customers/{id} | Update customer
-[**update_customer_fiscal_entities**](CustomersApi.md#update_customer_fiscal_entities) | **PUT** /customers/{id}/fiscal_entities/{fiscal_entities_id} | Update  Fiscal Entity
+[**update_customer_fiscal_entities**](CustomersApi.md#update_customer_fiscal_entities) | **PUT** /customers/{id}/fiscal_entities/{fiscal_entities_id} | Update Fiscal Entity
 
 
 # **create_customer**
 > CustomerResponse create_customer(customer, accept_language=accept_language, x_child_company_id=x_child_company_id)
 
-Create customer
+Create a customer
 
-The purpose of business is to create and keep a customer, you will learn what elements you need to create a customer. 
+Creates a new customer for the authenticated company.  Use customers to store and reuse buyer information (for example name, email, phone, and addresses). The created customer can be referenced later when creating orders and other resources. 
 
 ### Example
 
@@ -56,7 +56,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     x_child_company_id = '6441b6376b60c3a638da80af' # str | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
     try:
-        # Create customer
+        # Create a customer
         api_response = api_instance.create_customer(customer, accept_language=accept_language, x_child_company_id=x_child_company_id)
         print("The response of CustomersApi->create_customer:\n")
         pprint(api_response)
@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | successful operation |  * Date - The date and time that the response was sent <br>  * Content-Type - The format of the response body <br>  * Content-Length - The length of the response body in bytes <br>  * Connection - The type of connection used to transfer the response <br>  |
+**200** | successful operation |  -  |
 **401** | authentication error |  -  |
 **402** | payment required error |  -  |
 **422** | parameter validation error |  -  |
@@ -105,7 +105,7 @@ Name | Type | Description  | Notes
 
 Create Fiscal Entity
 
-Create Fiscal entity resource that corresponds to a customer ID.
+Create a fiscal entity resource for a given customer ID.
 
 ### Example
 
@@ -365,7 +365,7 @@ Name | Type | Description  | Notes
 
 Get a list of customers
 
-The purpose of business is to create and maintain a client, you will learn what elements you need to obtain a list of clients, which can be paged.
+Returns a paginated list of customers for the authenticated company.  Use the [search] parameter to filter results. 
 
 ### Example
 
@@ -444,8 +444,10 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | successful operation |  * Date - The date and time that the response was sent <br>  * Content-Type - The format of the response body <br>  * Content-Length - The length of the response body in bytes <br>  * Connection - The type of connection used to transfer the response <br>  |
+**200** | successful operation |  -  |
 **401** | authentication error |  -  |
+**402** | payment required error |  -  |
+**422** | parameter validation error |  -  |
 **500** | internal server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -542,7 +544,7 @@ Name | Type | Description  | Notes
 # **update_customer_fiscal_entities**
 > UpdateCustomerFiscalEntitiesResponse update_customer_fiscal_entities(id, fiscal_entities_id, customer_update_fiscal_entities_request, accept_language=accept_language, x_child_company_id=x_child_company_id)
 
-Update  Fiscal Entity
+Update Fiscal Entity
 
 Update Fiscal Entity resource that corresponds to a customer ID.
 
@@ -579,12 +581,12 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     api_instance = digitalfemsa.CustomersApi(api_client)
     id = '6307a60c41de27127515a575' # str | Identifier of the resource
     fiscal_entities_id = 'fis_ent_2tQ8HkkfbauaKP9Ho' # str | identifier
-    customer_update_fiscal_entities_request = digitalfemsa.CustomerUpdateFiscalEntitiesRequest() # CustomerUpdateFiscalEntitiesRequest | requested field for customer update fiscal entities
+    customer_update_fiscal_entities_request = digitalfemsa.CustomerUpdateFiscalEntitiesRequest() # CustomerUpdateFiscalEntitiesRequest | Request body for updating a customer fiscal entity.
     accept_language = 'es' # str | Use for knowing which language to use (optional) (default to 'es')
     x_child_company_id = '6441b6376b60c3a638da80af' # str | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
     try:
-        # Update  Fiscal Entity
+        # Update Fiscal Entity
         api_response = api_instance.update_customer_fiscal_entities(id, fiscal_entities_id, customer_update_fiscal_entities_request, accept_language=accept_language, x_child_company_id=x_child_company_id)
         print("The response of CustomersApi->update_customer_fiscal_entities:\n")
         pprint(api_response)
@@ -601,7 +603,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**| Identifier of the resource | 
  **fiscal_entities_id** | **str**| identifier | 
- **customer_update_fiscal_entities_request** | [**CustomerUpdateFiscalEntitiesRequest**](CustomerUpdateFiscalEntitiesRequest.md)| requested field for customer update fiscal entities | 
+ **customer_update_fiscal_entities_request** | [**CustomerUpdateFiscalEntitiesRequest**](CustomerUpdateFiscalEntitiesRequest.md)| Request body for updating a customer fiscal entity. | 
  **accept_language** | **str**| Use for knowing which language to use | [optional] [default to &#39;es&#39;]
  **x_child_company_id** | **str**| In the case of a holding company, the company id of the child company to which will process the request. | [optional] 
 

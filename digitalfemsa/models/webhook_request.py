@@ -26,7 +26,7 @@ from typing_extensions import Self
 
 class WebhookRequest(BaseModel):
     """
-    a webhook
+    Parameters used to create or update a webhook.
     """ # noqa: E501
     url: Annotated[str, Field(strict=True)] = Field(description="Here you must place the URL of your Webhook remember that you must program what you will do with the events received. Also do not forget to handle the HTTPS protocol for greater security.")
     synchronous: StrictBool = Field(description="It is a value that allows to decide if the events will be synchronous or asynchronous. We recommend asynchronous = false")

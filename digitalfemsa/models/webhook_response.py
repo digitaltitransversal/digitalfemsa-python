@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class WebhookResponse(BaseModel):
     """
-    webhooks model
+    Represents a webhook endpoint configured to receive event notifications.
     """ # noqa: E501
     deleted: Optional[StrictBool] = None
     development_enabled: Optional[StrictBool] = None

@@ -1,6 +1,6 @@
 # WebhookKeyDeleteResponse
 
-webhook keys model
+Represents a webhook signing key after it has been deleted.
 
 ## Properties
 

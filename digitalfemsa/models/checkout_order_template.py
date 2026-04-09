@@ -28,12 +28,12 @@ from typing_extensions import Self
 
 class CheckoutOrderTemplate(BaseModel):
     """
-    It maintains the attributes with which the order will be created when receiving a new payment.
+    Attributes used to create the order when a new payment is received.
     """ # noqa: E501
-    currency: Annotated[str, Field(strict=True, max_length=3)] = Field(description="It is the currency in which the order will be created. It must be a valid ISO 4217 currency code.")
+    currency: Annotated[str, Field(strict=True, max_length=3)] = Field(description="ISO 4217 currency code for the order.")
     customer_info: Optional[CheckoutOrderTemplateCustomerInfo] = None
-    line_items: List[Product] = Field(description="They are the products to buy. Each contains the \"unit price\" and \"quantity\" parameters that are used to calculate the total amount of the order.")
-    metadata: Optional[Dict[str, Any]] = Field(default=None, description="It is a set of key-value pairs that you can attach to the order. It can be used to store additional information about the order in a structured format.")
+    line_items: List[Product] = Field(description="Products to buy. Each contains unit price and quantity used to calculate the order total.")
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Arbitrary key-value data attached to the order for internal use.")
     __properties: ClassVar[List[str]] = ["currency", "customer_info", "line_items", "metadata"]
 
     model_config = ConfigDict(

@@ -66,7 +66,7 @@ class OrdersApi:
     ) -> OrderResponse:
         """Cancel Order
 
-        Cancel an order that has been previously created.
+        Cancels an existing order. This operation marks the order as cancelled and prevents further processing depending on its current state. If the order cannot be cancelled (for example, due to its status or related charge constraints), the API returns an error response.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -146,7 +146,7 @@ class OrdersApi:
     ) -> ApiResponse[OrderResponse]:
         """Cancel Order
 
-        Cancel an order that has been previously created.
+        Cancels an existing order. This operation marks the order as cancelled and prevents further processing depending on its current state. If the order cannot be cancelled (for example, due to its status or related charge constraints), the API returns an error response.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -226,7 +226,7 @@ class OrdersApi:
     ) -> RESTResponseType:
         """Cancel Order
 
-        Cancel an order that has been previously created.
+        Cancels an existing order. This operation marks the order as cancelled and prevents further processing depending on its current state. If the order cannot be cancelled (for example, due to its status or related charge constraints), the API returns an error response.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -369,7 +369,7 @@ class OrdersApi:
     ) -> OrderResponse:
         """Create order
 
-        Create a new order.
+        Creates a new order (products + amounts + customer data).  Minimum required fields: - `currency` - `line_items` - `customer_info`  About `customer_info`: - You can reference an existing customer using `customer_info.customer_id`, or - You can provide customer details at minimum `customer_info.name` and `customer_info.email` to create the order with customer context.  How to create the order: - Create an order only (no payment): send only the order data. - Create an order and create the first payment charge: include `charges`. - Create an order with a checkout configuration (for a hosted payment flow): include `checkout`.  Important rules: - You cannot send `charges` and `checkout` in the same request (they are mutually exclusive). - If you send `shipping_contact_id` and/or `fiscal_entity_id`, you must also send `customer_info.customer_id` so the API can validate those IDs against that customer. 
 
         :param order_request: requested field for order (required)
         :type order_request: OrderRequest
@@ -411,9 +411,9 @@ class OrdersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OrderResponse",
-            '422': "Error",
             '401': "Error",
             '402': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -448,7 +448,7 @@ class OrdersApi:
     ) -> ApiResponse[OrderResponse]:
         """Create order
 
-        Create a new order.
+        Creates a new order (products + amounts + customer data).  Minimum required fields: - `currency` - `line_items` - `customer_info`  About `customer_info`: - You can reference an existing customer using `customer_info.customer_id`, or - You can provide customer details at minimum `customer_info.name` and `customer_info.email` to create the order with customer context.  How to create the order: - Create an order only (no payment): send only the order data. - Create an order and create the first payment charge: include `charges`. - Create an order with a checkout configuration (for a hosted payment flow): include `checkout`.  Important rules: - You cannot send `charges` and `checkout` in the same request (they are mutually exclusive). - If you send `shipping_contact_id` and/or `fiscal_entity_id`, you must also send `customer_info.customer_id` so the API can validate those IDs against that customer. 
 
         :param order_request: requested field for order (required)
         :type order_request: OrderRequest
@@ -490,9 +490,9 @@ class OrdersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OrderResponse",
-            '422': "Error",
             '401': "Error",
             '402': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -527,7 +527,7 @@ class OrdersApi:
     ) -> RESTResponseType:
         """Create order
 
-        Create a new order.
+        Creates a new order (products + amounts + customer data).  Minimum required fields: - `currency` - `line_items` - `customer_info`  About `customer_info`: - You can reference an existing customer using `customer_info.customer_id`, or - You can provide customer details at minimum `customer_info.name` and `customer_info.email` to create the order with customer context.  How to create the order: - Create an order only (no payment): send only the order data. - Create an order and create the first payment charge: include `charges`. - Create an order with a checkout configuration (for a hosted payment flow): include `checkout`.  Important rules: - You cannot send `charges` and `checkout` in the same request (they are mutually exclusive). - If you send `shipping_contact_id` and/or `fiscal_entity_id`, you must also send `customer_info.customer_id` so the API can validate those IDs against that customer. 
 
         :param order_request: requested field for order (required)
         :type order_request: OrderRequest
@@ -569,9 +569,9 @@ class OrdersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OrderResponse",
-            '422': "Error",
             '401': "Error",
             '402': "Error",
+            '422': "Error",
             '500': "Error",
         }
         response_data = self.api_client.call_api(
@@ -682,7 +682,7 @@ class OrdersApi:
     ) -> OrderResponse:
         """Get Order
 
-        Info for a specific order
+        Returns the full details of an Order by its ID. The response follows the standard Order representation, including nested previews (for example `charges`, `line_items`, `shipping_lines`, `tax_lines`, and `discount_lines`) when available.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -760,7 +760,7 @@ class OrdersApi:
     ) -> ApiResponse[OrderResponse]:
         """Get Order
 
-        Info for a specific order
+        Returns the full details of an Order by its ID. The response follows the standard Order representation, including nested previews (for example `charges`, `line_items`, `shipping_lines`, `tax_lines`, and `discount_lines`) when available.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -838,7 +838,7 @@ class OrdersApi:
     ) -> RESTResponseType:
         """Get Order
 
-        Info for a specific order
+        Returns the full details of an Order by its ID. The response follows the standard Order representation, including nested previews (for example `charges`, `line_items`, `shipping_lines`, `tax_lines`, and `discount_lines`) when available.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -982,7 +982,7 @@ class OrdersApi:
     ) -> GetOrdersResponse:
         """Get a list of Orders
 
-        Get order details in the form of a list
+        Returns a paginated list of orders created in your account. Use pagination parameters to navigate through results, and `search` to filter by supported criteria. 
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -1071,7 +1071,7 @@ class OrdersApi:
     ) -> ApiResponse[GetOrdersResponse]:
         """Get a list of Orders
 
-        Get order details in the form of a list
+        Returns a paginated list of orders created in your account. Use pagination parameters to navigate through results, and `search` to filter by supported criteria. 
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -1160,7 +1160,7 @@ class OrdersApi:
     ) -> RESTResponseType:
         """Get a list of Orders
 
-        Get order details in the form of a list
+        Returns a paginated list of orders created in your account. Use pagination parameters to navigate through results, and `search` to filter by supported criteria. 
 
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -1327,7 +1327,7 @@ class OrdersApi:
     ) -> OrderResponse:
         """Cancel Refund
 
-        A refunded order describes the items, amount, and reason an order is being refunded.
+        Cancels a refund previously created for an order. This operation is only available when the refund is still cancellable according to its current status and the payment method rules. If the refund cannot be cancelled, the API returns an error response.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -1411,7 +1411,7 @@ class OrdersApi:
     ) -> ApiResponse[OrderResponse]:
         """Cancel Refund
 
-        A refunded order describes the items, amount, and reason an order is being refunded.
+        Cancels a refund previously created for an order. This operation is only available when the refund is still cancellable according to its current status and the payment method rules. If the refund cannot be cancelled, the API returns an error response.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -1495,7 +1495,7 @@ class OrdersApi:
     ) -> RESTResponseType:
         """Cancel Refund
 
-        A refunded order describes the items, amount, and reason an order is being refunded.
+        Cancels a refund previously created for an order. This operation is only available when the refund is still cancellable according to its current status and the payment method rules. If the refund cannot be cancelled, the API returns an error response.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -1645,7 +1645,7 @@ class OrdersApi:
     ) -> OrderResponse:
         """Refund Order
 
-        A refunded order describes the items, amount, and reason an order is being refunded.
+        Creates a refund for an order. This operation is used to refund a previously paid order (fully or partially, depending on the request body). The API will validate the order and its related charges before processing the refund. If the refund cannot be created due to business rules or state, an error response is returned.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -1729,7 +1729,7 @@ class OrdersApi:
     ) -> ApiResponse[OrderResponse]:
         """Refund Order
 
-        A refunded order describes the items, amount, and reason an order is being refunded.
+        Creates a refund for an order. This operation is used to refund a previously paid order (fully or partially, depending on the request body). The API will validate the order and its related charges before processing the refund. If the refund cannot be created due to business rules or state, an error response is returned.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -1813,7 +1813,7 @@ class OrdersApi:
     ) -> RESTResponseType:
         """Refund Order
 
-        A refunded order describes the items, amount, and reason an order is being refunded.
+        Creates a refund for an order. This operation is used to refund a previously paid order (fully or partially, depending on the request body). The API will validate the order and its related charges before processing the refund. If the refund cannot be created due to business rules or state, an error response is returned.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -1960,7 +1960,7 @@ class OrdersApi:
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
-        order_capture_request: Annotated[Optional[OrderCaptureRequest], Field(description="requested fields for capture order")] = None,
+        order_capture_request: Annotated[Optional[OrderCaptureRequest], Field(description="Requested fields for capturing an order")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1976,7 +1976,7 @@ class OrdersApi:
     ) -> OrderResponse:
         """Capture Order
 
-        Processes an order that has been previously authorized.
+        Captures (finalizes) an order that has been previously authorized. Use this endpoint to capture a specific amount. The captured amount must be greater than 0 and must comply with the order and charge constraints enforced by the API.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -1984,7 +1984,7 @@ class OrdersApi:
         :type accept_language: str
         :param x_child_company_id: In the case of a holding company, the company id of the child company to which will process the request.
         :type x_child_company_id: str
-        :param order_capture_request: requested fields for capture order
+        :param order_capture_request: Requested fields for capturing an order
         :type order_capture_request: OrderCaptureRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2043,7 +2043,7 @@ class OrdersApi:
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
-        order_capture_request: Annotated[Optional[OrderCaptureRequest], Field(description="requested fields for capture order")] = None,
+        order_capture_request: Annotated[Optional[OrderCaptureRequest], Field(description="Requested fields for capturing an order")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2059,7 +2059,7 @@ class OrdersApi:
     ) -> ApiResponse[OrderResponse]:
         """Capture Order
 
-        Processes an order that has been previously authorized.
+        Captures (finalizes) an order that has been previously authorized. Use this endpoint to capture a specific amount. The captured amount must be greater than 0 and must comply with the order and charge constraints enforced by the API.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -2067,7 +2067,7 @@ class OrdersApi:
         :type accept_language: str
         :param x_child_company_id: In the case of a holding company, the company id of the child company to which will process the request.
         :type x_child_company_id: str
-        :param order_capture_request: requested fields for capture order
+        :param order_capture_request: Requested fields for capturing an order
         :type order_capture_request: OrderCaptureRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2126,7 +2126,7 @@ class OrdersApi:
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
-        order_capture_request: Annotated[Optional[OrderCaptureRequest], Field(description="requested fields for capture order")] = None,
+        order_capture_request: Annotated[Optional[OrderCaptureRequest], Field(description="Requested fields for capturing an order")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2142,7 +2142,7 @@ class OrdersApi:
     ) -> RESTResponseType:
         """Capture Order
 
-        Processes an order that has been previously authorized.
+        Captures (finalizes) an order that has been previously authorized. Use this endpoint to capture a specific amount. The captured amount must be greater than 0 and must comply with the order and charge constraints enforced by the API.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -2150,7 +2150,7 @@ class OrdersApi:
         :type accept_language: str
         :param x_child_company_id: In the case of a holding company, the company id of the child company to which will process the request.
         :type x_child_company_id: str
-        :param order_capture_request: requested fields for capture order
+        :param order_capture_request: Requested fields for capturing an order
         :type order_capture_request: OrderCaptureRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2301,9 +2301,9 @@ class OrdersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OrderResponse:
-        """Update Order
+        """Update order
 
-        Update an existing Order.
+        Updates an existing order by its ID.  Orders are the central resource in the API. Updating an order may also update related order sub-resources when they are included in the request payload, according to server-side validations.  Only fields supported by the API can be modified. 
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -2380,9 +2380,9 @@ class OrdersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[OrderResponse]:
-        """Update Order
+        """Update order
 
-        Update an existing Order.
+        Updates an existing order by its ID.  Orders are the central resource in the API. Updating an order may also update related order sub-resources when they are included in the request payload, according to server-side validations.  Only fields supported by the API can be modified. 
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -2459,9 +2459,9 @@ class OrdersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Update Order
+        """Update order
 
-        Update an existing Order.
+        Updates an existing order by its ID.  Orders are the central resource in the API. Updating an order may also update related order sub-resources when they are included in the request payload, according to server-side validations.  Only fields supported by the API can be modified. 
 
         :param id: Identifier of the resource (required)
         :type id: str

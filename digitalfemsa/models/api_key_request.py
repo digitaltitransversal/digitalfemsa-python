@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,9 +27,16 @@ class ApiKeyRequest(BaseModel):
     """
     ApiKeyRequest
     """ # noqa: E501
-    description: Optional[StrictStr] = Field(default=None, description="A name or brief explanation of what this api key is used for")
-    role: StrictStr
+    description: Optional[StrictStr] = Field(default=None, description="A name or brief explanation of what this API key is used for.")
+    role: StrictStr = Field(description="Defines the type of API key to create. Only \"private\" is supported for creation. A \"public\" API key already exists by default per company/environment. ")
     __properties: ClassVar[List[str]] = ["description", "role"]
+
+    @field_validator('role')
+    def role_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['private']):
+            raise ValueError("must be one of enum values ('private')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

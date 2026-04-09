@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** | Type of payment method | 
-**expires_at** | **int** |  | [optional] 
+**type** | **str** | Type of payment method. | 
+**expires_at** | **int** | Expiration date as unix timestamp (seconds). | [optional] 
 
 ## Example
 

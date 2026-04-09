@@ -66,7 +66,7 @@ class PaymentMethodsApi:
     ) -> CreateCustomerPaymentMethodsResponse:
         """Create Payment Method
 
-        Create a payment method for a customer.
+        Creates a new payment method for a customer. The payment method is associated with the customer identified by `id`. The accepted fields depend on the payment method `type`.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -149,7 +149,7 @@ class PaymentMethodsApi:
     ) -> ApiResponse[CreateCustomerPaymentMethodsResponse]:
         """Create Payment Method
 
-        Create a payment method for a customer.
+        Creates a new payment method for a customer. The payment method is associated with the customer identified by `id`. The accepted fields depend on the payment method `type`.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -232,7 +232,7 @@ class PaymentMethodsApi:
     ) -> RESTResponseType:
         """Create Payment Method
 
-        Create a payment method for a customer.
+        Creates a new payment method for a customer. The payment method is associated with the customer identified by `id`. The accepted fields depend on the payment method `type`.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -394,7 +394,7 @@ class PaymentMethodsApi:
     ) -> UpdateCustomerPaymentMethodsResponse:
         """Delete Payment Method
 
-        Delete an existing payment method
+        Deletes a specific payment method of a customer. After deletion, the payment method can no longer be used for future payments.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -477,7 +477,7 @@ class PaymentMethodsApi:
     ) -> ApiResponse[UpdateCustomerPaymentMethodsResponse]:
         """Delete Payment Method
 
-        Delete an existing payment method
+        Deletes a specific payment method of a customer. After deletion, the payment method can no longer be used for future payments.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -560,7 +560,7 @@ class PaymentMethodsApi:
     ) -> RESTResponseType:
         """Delete Payment Method
 
-        Delete an existing payment method
+        Deletes a specific payment method of a customer. After deletion, the payment method can no longer be used for future payments.
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -1057,7 +1057,7 @@ class PaymentMethodsApi:
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
         payment_method_id: Annotated[StrictStr, Field(description="Identifier of the payment method")],
-        update_payment_methods: Annotated[UpdatePaymentMethods, Field(description="requested field for customer payment methods")],
+        update_payment_methods: Annotated[UpdatePaymentMethods, Field(description="Request body for updating a customer payment method.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -1075,13 +1075,13 @@ class PaymentMethodsApi:
     ) -> UpdateCustomerPaymentMethodsResponse:
         """Update Payment Method
 
-        Gets a payment Method that corresponds to a customer ID.
+        Updates a specific payment method of a customer. Use this endpoint to modify the payment method identified by `payment_method_id` for the customer identified by `id`. The fields that can be updated depend on the payment method `type`.
 
         :param id: Identifier of the resource (required)
         :type id: str
         :param payment_method_id: Identifier of the payment method (required)
         :type payment_method_id: str
-        :param update_payment_methods: requested field for customer payment methods (required)
+        :param update_payment_methods: Request body for updating a customer payment method. (required)
         :type update_payment_methods: UpdatePaymentMethods
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -1144,7 +1144,7 @@ class PaymentMethodsApi:
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
         payment_method_id: Annotated[StrictStr, Field(description="Identifier of the payment method")],
-        update_payment_methods: Annotated[UpdatePaymentMethods, Field(description="requested field for customer payment methods")],
+        update_payment_methods: Annotated[UpdatePaymentMethods, Field(description="Request body for updating a customer payment method.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -1162,13 +1162,13 @@ class PaymentMethodsApi:
     ) -> ApiResponse[UpdateCustomerPaymentMethodsResponse]:
         """Update Payment Method
 
-        Gets a payment Method that corresponds to a customer ID.
+        Updates a specific payment method of a customer. Use this endpoint to modify the payment method identified by `payment_method_id` for the customer identified by `id`. The fields that can be updated depend on the payment method `type`.
 
         :param id: Identifier of the resource (required)
         :type id: str
         :param payment_method_id: Identifier of the payment method (required)
         :type payment_method_id: str
-        :param update_payment_methods: requested field for customer payment methods (required)
+        :param update_payment_methods: Request body for updating a customer payment method. (required)
         :type update_payment_methods: UpdatePaymentMethods
         :param accept_language: Use for knowing which language to use
         :type accept_language: str
@@ -1231,7 +1231,7 @@ class PaymentMethodsApi:
         self,
         id: Annotated[StrictStr, Field(description="Identifier of the resource")],
         payment_method_id: Annotated[StrictStr, Field(description="Identifier of the payment method")],
-        update_payment_methods: Annotated[UpdatePaymentMethods, Field(description="requested field for customer payment methods")],
+        update_payment_methods: Annotated[UpdatePaymentMethods, Field(description="Request body for updating a customer payment method.")],
         accept_language: Annotated[Optional[StrictStr], Field(description="Use for knowing which language to use")] = None,
         x_child_company_id: Annotated[Optional[StrictStr], Field(description="In the case of a holding company, the company id of the child company to which will process the request.")] = None,
         _request_timeout: Union[
@@ -1249,13 +1249,13 @@ class PaymentMethodsApi:
     ) -> RESTResponseType:
         """Update Payment Method
 
-        Gets a payment Method that corresponds to a customer ID.
+        Updates a specific payment method of a customer. Use this endpoint to modify the payment method identified by `payment_method_id` for the customer identified by `id`. The fields that can be updated depend on the payment method `type`.
 
         :param id: Identifier of the resource (required)
         :type id: str
         :param payment_method_id: Identifier of the payment method (required)
         :type payment_method_id: str
-        :param update_payment_methods: requested field for customer payment methods (required)
+        :param update_payment_methods: Request body for updating a customer payment method. (required)
         :type update_payment_methods: UpdatePaymentMethods
         :param accept_language: Use for knowing which language to use
         :type accept_language: str

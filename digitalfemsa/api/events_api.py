@@ -63,7 +63,7 @@ class EventsApi:
     ) -> EventResponse:
         """Get Event
 
-        Returns a single event
+        Returns a single event by its ID, including its payload (`data`) and webhook delivery information. The `webhook_status` indicates whether webhook notifications were applicable and their overall status. The [webhook_logs]) array contains delivery attempts (it can be empty when webhook notifications are not applicable or no attempts were created). 
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -141,7 +141,7 @@ class EventsApi:
     ) -> ApiResponse[EventResponse]:
         """Get Event
 
-        Returns a single event
+        Returns a single event by its ID, including its payload (`data`) and webhook delivery information. The `webhook_status` indicates whether webhook notifications were applicable and their overall status. The [webhook_logs]) array contains delivery attempts (it can be empty when webhook notifications are not applicable or no attempts were created). 
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -219,7 +219,7 @@ class EventsApi:
     ) -> RESTResponseType:
         """Get Event
 
-        Returns a single event
+        Returns a single event by its ID, including its payload (`data`) and webhook delivery information. The `webhook_status` indicates whether webhook notifications were applicable and their overall status. The [webhook_logs]) array contains delivery attempts (it can be empty when webhook notifications are not applicable or no attempts were created). 
 
         :param id: Identifier of the resource (required)
         :type id: str
@@ -704,7 +704,7 @@ class EventsApi:
     ) -> EventsResendResponse:
         """Resend Event
 
-        Try to send an event
+        Triggers a new delivery attempt for a specific webhook log associated with the given event. Use this endpoint to retry failed webhook deliveries (for example, non-2xx responses or timeouts). The response returns the updated webhook log with the latest attempt metadata. 
 
         :param event_id: event identifier (required)
         :type event_id: str
@@ -782,7 +782,7 @@ class EventsApi:
     ) -> ApiResponse[EventsResendResponse]:
         """Resend Event
 
-        Try to send an event
+        Triggers a new delivery attempt for a specific webhook log associated with the given event. Use this endpoint to retry failed webhook deliveries (for example, non-2xx responses or timeouts). The response returns the updated webhook log with the latest attempt metadata. 
 
         :param event_id: event identifier (required)
         :type event_id: str
@@ -860,7 +860,7 @@ class EventsApi:
     ) -> RESTResponseType:
         """Resend Event
 
-        Try to send an event
+        Triggers a new delivery attempt for a specific webhook log associated with the given event. Use this endpoint to retry failed webhook deliveries (for example, non-2xx responses or timeouts). The response returns the updated webhook log with the latest attempt metadata. 
 
         :param event_id: event identifier (required)
         :type event_id: str
