@@ -77,7 +77,7 @@ class ApiClient:
         'lang': 'python',
         'lang_version': platform.python_version(),
         'uname': f"{uname.system} {uname.release} {uname.machine}",
-        'sdk_version': '1.1.0',
+        'sdk_version': '1.1.1',
     }
     _pool = None
 
@@ -99,7 +99,7 @@ class ApiClient:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'App/v2 PythonBindings/1.1.0'
+        self.user_agent = 'App/v2 PythonBindings/1.1.1'
         self.digitialfemsa_user_agent = self._format_user_agent(self.data)
         self.client_side_validation = configuration.client_side_validation
 
