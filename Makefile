@@ -17,7 +17,7 @@ python:
 
 update-version:
 	@if [ -z "$(VERSION)" ]; then \
-		echo "Usage: make update-version VERSION=1.1.0"; \
+		echo "Usage: make update-version VERSION=1.1.1"; \
 		exit 1; \
 	fi
 	@echo "Updating version to $(VERSION)..."

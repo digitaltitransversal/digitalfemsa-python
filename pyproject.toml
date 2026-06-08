@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "digitalfemsa"
-version = "1.1.0"
+version = "1.1.1"
 description = "Femsa API"
 authors = ["Engineering Femsa <engineering@femsa.com>"]
 license = "MIT-LICENSE"
@@ -12,13 +12,13 @@ include = ["digitalfemsa/py.typed"]
 [tool.poetry.dependencies]
 python = "^3.7"
 
-urllib3 = ">=2.6.3"
+urllib3 = ">=2.7.0"
 python-dateutil = ">=2.8.2"
 pydantic = ">=2"
 typing-extensions = ">=4.7.1"
 
 [tool.poetry.dev-dependencies]
-pytest = ">=7.2.1"
+pytest = ">=9.0.3"
 tox = ">=3.9.0"
 flake8 = ">=4.0.0"
 types-python-dateutil = ">=2.8.19.14"
