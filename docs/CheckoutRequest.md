@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **failure_url** | **str** | Redirection url back to the site in case of failed payment, applies only to HostedPayment. | [optional] 
 **name** | **str** | Reason for payment | [optional] 
 **on_demand_enabled** | **bool** |  | [optional] 
+**redirection_time** | **int** | Number of seconds to wait before redirecting to the success URL | [optional] 
 **success_url** | **str** | Redirection url back to the site in case of successful payment, applies only to HostedPayment | [optional] 
 **type** | **str** | This field represents the type of checkout | [optional] 
 
