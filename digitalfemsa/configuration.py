@@ -71,7 +71,7 @@ class Configuration:
                  ) -> None:
         """Constructor
         """
-        self._base_path = "https://api.digitalfemsa.io" if host is None else host
+        self._base_path = "https://api.stg.digitalfemsa.io" if host is None else host
         """Default Base url
         """
         self.server_index = 0 if server_index is None and host is None else server_index
@@ -389,7 +389,7 @@ class Configuration:
         """
         return [
             {
-                'url': "https://api.digitalfemsa.io",
+                'url': "https://api.stg.digitalfemsa.io",
                 'description': "Femsa main server",
             }
         ]
