@@ -9,7 +9,7 @@ python:
 	rm -rf digitalfemsa/models && \
 	docker run --rm \
     -v ${PWD}:/local openapitools/openapi-generator-cli:v7.5.0 generate \
-	-i https://raw.githubusercontent.com/digitalfemsa/openapi/main/_build/api.yaml \
+	-i https://raw.githubusercontent.com/digitaltitransversal/openapi/refs/heads/main/_build/api.yaml \
 	-g python \
 	-o /local \
 	-c /local/config-python.json \
@@ -17,7 +17,7 @@ python:
 
 update-version:
 	@if [ -z "$(VERSION)" ]; then \
-		echo "Usage: make update-version VERSION=1.1.1"; \
+		echo "Usage: make update-version VERSION=1.2.0"; \
 		exit 1; \
 	fi
 	@echo "Updating version to $(VERSION)..."

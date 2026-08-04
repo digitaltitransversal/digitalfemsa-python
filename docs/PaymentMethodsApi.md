@@ -49,7 +49,7 @@ with digitalfemsa.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = digitalfemsa.PaymentMethodsApi(api_client)
     id = '6307a60c41de27127515a575' # str | Identifier of the resource
-    create_customer_payment_methods_request = {"type":"oxxo_recurrent","expires_at":1553273553} # CreateCustomerPaymentMethodsRequest | requested field for customer payment methods
+    create_customer_payment_methods_request = {type=oxxo_recurrent, expires_at=1553273553} # CreateCustomerPaymentMethodsRequest | requested field for customer payment methods
     accept_language = 'es' # str | Use for knowing which language to use (optional) (default to 'es')
     x_child_company_id = '6441b6376b60c3a638da80af' # str | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 

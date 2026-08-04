@@ -62,12 +62,14 @@ class ApiClient:
         'datetime': datetime.datetime,
         'object': object,
     }
+
+    uname = platform.uname()
+    
     data = {
       'lang': 'python',
       'lang_version': platform.python_version(),
-      'publisher': 'digitalfemsa',
-      'bindings_version': '{{packageVersion}}',
-      'uname': platform.uname()
+      'uname': f"{uname.system} {uname.release} {uname.machine}",
+      'sdk_version': '{{packageVersion}}'
     }
     _pool = None
 
@@ -90,8 +92,17 @@ class ApiClient:
         self.cookie = cookie
         # Set default User-Agent.
         self.user_agent = '{{{httpUserAgent}}}{{^httpUserAgent}}OpenAPI-Generator/{{{packageVersion}}}/python{{/httpUserAgent}}'
-        self.digitialfemsa_user_agent = json.dumps(self.data)
+        self.digitialfemsa_user_agent = self._format_user_agent(self.data)
         self.client_side_validation = configuration.client_side_validation
+
+    @staticmethod
+    def _format_user_agent(data: dict) -> str:
+        parts = []
+        for k, v in data.items():
+            if isinstance(v, str) and " " in v:
+                v = f'"{v}"'
+            parts.append(f"{k}={v}")
+        return "; ".join(parts)
 
 {{#asyncio}}
     async def __aenter__(self):

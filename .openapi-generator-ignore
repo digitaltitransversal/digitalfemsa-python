@@ -17,3 +17,8 @@ appveyor.yml
 .openapi-generator/
 .openapi-generator
 .github/workflows/python.yml
+requirements.txt
+test-requirements.txt
+api_client.py
+setup.py
+pyptoject.toml
