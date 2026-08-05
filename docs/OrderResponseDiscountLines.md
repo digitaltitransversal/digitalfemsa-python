@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **has_more** | **bool** | Indicates if there are more pages to be requested | 
 **object** | **str** | Object type, in this case is list | 
-**data** | [**List[DiscountLinesDataResponse]**](DiscountLinesDataResponse.md) |  | [optional] 
+**data** | [**List[DiscountLinesResponse]**](DiscountLinesResponse.md) |  | [optional] 
 
 ## Example
 

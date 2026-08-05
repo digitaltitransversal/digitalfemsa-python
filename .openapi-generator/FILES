@@ -47,7 +47,6 @@ digitalfemsa/models/charge_response_payment_method.py
 digitalfemsa/models/charge_response_refunds.py
 digitalfemsa/models/charge_response_refunds_data.py
 digitalfemsa/models/charge_update_request.py
-digitalfemsa/models/charges_data_response.py
 digitalfemsa/models/checkout.py
 digitalfemsa/models/checkout_order_template.py
 digitalfemsa/models/checkout_order_template_customer_info.py
@@ -86,7 +85,6 @@ digitalfemsa/models/customers_response.py
 digitalfemsa/models/delete_api_keys_response.py
 digitalfemsa/models/details.py
 digitalfemsa/models/details_error.py
-digitalfemsa/models/discount_lines_data_response.py
 digitalfemsa/models/discount_lines_response.py
 digitalfemsa/models/email_checkout_request.py
 digitalfemsa/models/error.py
@@ -187,7 +185,6 @@ docs/ChargeResponseRefunds.md
 docs/ChargeResponseRefundsData.md
 docs/ChargeUpdateRequest.md
 docs/ChargesApi.md
-docs/ChargesDataResponse.md
 docs/Checkout.md
 docs/CheckoutOrderTemplate.md
 docs/CheckoutOrderTemplateCustomerInfo.md
@@ -228,7 +225,6 @@ docs/CustomersResponse.md
 docs/DeleteApiKeysResponse.md
 docs/Details.md
 docs/DetailsError.md
-docs/DiscountLinesDataResponse.md
 docs/DiscountLinesResponse.md
 docs/DiscountsApi.md
 docs/EmailCheckoutRequest.md
@@ -321,9 +317,6 @@ docs/WebhookResponse.md
 docs/WebhookUpdateRequest.md
 docs/WebhooksApi.md
 pyproject.toml
-requirements.txt
 setup.cfg
-setup.py
-test-requirements.txt
 test/__init__.py
 tox.ini

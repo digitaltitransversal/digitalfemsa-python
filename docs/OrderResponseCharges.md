@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **has_more** | **bool** | Indicates if there are more pages to be requested | 
 **object** | **str** | Object type, in this case is list | 
-**data** | [**List[ChargesDataResponse]**](ChargesDataResponse.md) |  | [optional] 
+**data** | [**List[ChargeResponse]**](ChargeResponse.md) |  | [optional] 
 
 ## Example
 
